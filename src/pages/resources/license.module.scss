@@ -1,0 +1,31 @@
+@import 'theme/variables.scss';
+
+.license {
+	max-width: 960px;
+	margin: 0 auto;
+	padding: 4rem 0 6rem;
+	font-family: $fontFamilySecondary;
+
+	a {
+		color: $primary;
+		text-decoration: underline;
+	}
+
+	@media screen and (max-width: $screenMedium) {
+		padding: $spacingSmall 0;
+	}
+}
+
+// The CC BY-SA 4.0 plain text is hard-wrapped at ~72 columns and uses
+// indentation for its sub-clauses, so it is rendered verbatim in a <pre>.
+// `pre-wrap` keeps that formatting while still letting long lines reflow on
+// narrow screens instead of forcing a horizontal scroll on the page.
+.legalText {
+	white-space: pre-wrap;
+	overflow-x: auto;
+	font-size: $fontSizeSmall;
+	line-height: 1.5;
+	background: $gray-bg-l1;
+	padding: $spacingSmall;
+	border-radius: 4px;
+}

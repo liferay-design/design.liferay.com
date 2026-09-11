@@ -1,45 +1,14 @@
----
-title: 'CC BY SA 4.0 License'
-description: 'Liferay Design CYA'
-order: 99
----
+import { Container, Flex, Heading, Link, Text } from 'components/atoms'
+import { SEO } from 'components/molecules'
+import { MainLayout } from 'components/templates'
+import React from 'react'
+import styles from './license.module.scss'
 
-_Unless otherwise specified, all content on this site is governed by a CC BY SA 4.0 license._
+const CC_BY_SA_URL = 'https://creativecommons.org/licenses/by-sa/4.0/'
 
-## Quick Summary
-
-### Summary
-
-Creative Commons Attribution-ShareAlike license in International version 4, that allows to do what they want with your work as long as they share the work under the same licence.
-
-### Attribution
-
-You must give credit to the original author of the work, including a URI or hyperlink to the work, this Public license and a copyright notice.
-
-#### Attribution information revoke
-
-Author can request to remove any attribution given information.
-
-### Tivoization
-
-You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
-
-### Disclaimer of warranties
-
-Disclaimer of warranties is optional.
-
-If separately undertaken, shared material must retain a notice to Disclaimer of warranties.
-
-Otherwise, Disclaimer of warranties, is taken by default, providing the work as-is and as-available.
-
-### Liable
-
-Liable follows the same rules as Disclaimer of warranties, providing, by default, protection from defamation for the creator.
-
-### Revoke
-
-The licensor cannot revoke these freedoms as long as you follow the license terms.
-
+// The verbatim plain-text CC BY-SA 4.0 license, kept as-is (hard wrapping and
+// indentation included) so it stays byte-for-byte the canonical text.
+const LICENSE_TEXT = `
 Attribution-ShareAlike 4.0 International
 
 =======================================================================
@@ -459,3 +428,83 @@ the avoidance of doubt, this paragraph does not form part of the
 public licenses.
 
 Creative Commons may be contacted at creativecommons.org.
+`
+
+const License = () => (
+	<MainLayout section="Resources">
+		<SEO
+			description="Liferay Design CYA"
+			pageTitle="Design.Liferay | CC BY SA 4.0 License"
+		/>
+		<Container background="white">
+			<Flex direction="column" className={styles.license}>
+				<Heading level={1}>CC BY SA 4.0 License</Heading>
+
+				<Text type="p" style="italic">
+					Unless otherwise specified, all content on this site is governed by a{' '}
+					<Link to={CC_BY_SA_URL}>CC BY SA 4.0 license</Link>.
+				</Text>
+
+				<Heading level={2}>Quick Summary</Heading>
+
+				<Heading level={3}>Summary</Heading>
+				<Text type="p">
+					Creative Commons Attribution-ShareAlike license in International
+					version 4, that allows to do what they want with your work as long as
+					they share the work under the same licence.
+				</Text>
+
+				<Heading level={3}>Attribution</Heading>
+				<Text type="p">
+					You must give credit to the original author of the work, including a
+					URI or hyperlink to the work, this Public license and a copyright
+					notice.
+				</Text>
+
+				<Heading level={4}>Attribution information revoke</Heading>
+				<Text type="p">
+					Author can request to remove any attribution given information.
+				</Text>
+
+				<Heading level={3}>Tivoization</Heading>
+				<Text type="p">
+					You may not apply legal terms or technological measures that legally
+					restrict others from doing anything the license permits.
+				</Text>
+
+				<Heading level={3}>Disclaimer of warranties</Heading>
+				<Text type="p">Disclaimer of warranties is optional.</Text>
+				<Text type="p">
+					If separately undertaken, shared material must retain a notice to
+					Disclaimer of warranties.
+				</Text>
+				<Text type="p">
+					Otherwise, Disclaimer of warranties, is taken by default, providing
+					the work as-is and as-available.
+				</Text>
+
+				<Heading level={3}>Liable</Heading>
+				<Text type="p">
+					Liable follows the same rules as Disclaimer of warranties, providing,
+					by default, protection from defamation for the creator.
+				</Text>
+
+				<Heading level={3}>Revoke</Heading>
+				<Text type="p">
+					The licensor cannot revoke these freedoms as long as you follow the
+					license terms.
+				</Text>
+
+				<Heading level={2}>Full license text</Heading>
+				<Text type="p">
+					The canonical version of this license is published at{' '}
+					<Link to={CC_BY_SA_URL}>{CC_BY_SA_URL}</Link>.
+				</Text>
+
+				<pre className={styles.legalText}>{LICENSE_TEXT}</pre>
+			</Flex>
+		</Container>
+	</MainLayout>
+)
+
+export default License
