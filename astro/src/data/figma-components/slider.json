@@ -1,0 +1,60 @@
+{
+	"name": "Slider",
+	"slug": "slider",
+	"order": 370,
+	"description": "A Slider allows the user to select values in a linear range of values.",
+	"status": "documented",
+	"figma": {
+		"fileKey": "YNNkt9Xd6ImDtEvIz4tETF",
+		"fileName": "Lexicon Components",
+		"pageNodeId": "329:8939",
+		"componentSetNodeId": "552:4606"
+	},
+	"links": {
+		"clay": "https://clayui.com/docs/components/slider.html",
+		"guidelines": "/lexicon/core-components/slider"
+	},
+	"screenshot": "/images/lexicon/figma/slider.png",
+	"playgroundImage": "/images/lexicon/figma/slider-playground.png",
+	"variantCount": 21,
+	"properties": [
+		{
+			"name": "State",
+			"values": [
+				"Default",
+				"Active",
+				"Disabled"
+			]
+		},
+		{
+			"name": "Value",
+			"values": [
+				"0",
+				"10",
+				"30",
+				"50",
+				"70",
+				"90",
+				"100"
+			]
+		}
+	],
+	"tokens": {
+		"Border Radius/rounded-md": "4",
+		"Color/Light/light": "#f1f2f5",
+		"Color/Secondary/secondary": "#6b6c7e",
+		"14/Semibold": "Font(family: \"SF Pro Text\", style: Semibold, size: 14, weight: 600, lineHeight: 1.5, letterSpacing: 0)",
+		"Color/Light/white": "#ffffff",
+		"Shadow/Slider": "Effect(type: DROP_SHADOW, color: #27283333, offset: (0, 1), radius: 4, spread: 0)",
+		"Color/Primary/primary": "#0b5fff",
+		"Color/Dark/dark-d2": "#111116",
+		"14/Regular": "Font(family: \"SF Pro Text\", style: Regular, size: 14, weight: 400, lineHeight: 1.5, letterSpacing: 0)",
+		"Spacing/spacing-4": "12",
+		"Border Radius/rounded-lg": "8",
+		"Tooltip Shadow": "Effect(type: DROP_SHADOW, color: #27283333, offset: (0, 2), radius: 4, spread: 0)",
+		"Opacity/translucent-1": "40",
+		"Opacity/translucent-0": "100",
+		"Color/Light/light-l1": "#f7f8f9",
+		"Color/Primary/primary-l1": "#80acff"
+	}
+}

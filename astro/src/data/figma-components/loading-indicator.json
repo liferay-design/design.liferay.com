@@ -1,0 +1,48 @@
+{
+	"name": "Loading Indicator",
+	"slug": "loading-indicator",
+	"order": 240,
+	"description": "A toolbar is a set of actions related to a specific context that are grouped into a horizontal bar.",
+	"status": "documented",
+	"figma": {
+		"fileKey": "YNNkt9Xd6ImDtEvIz4tETF",
+		"fileName": "Lexicon Components",
+		"pageNodeId": "1:16",
+		"componentSetNodeId": "494:4654"
+	},
+	"links": {
+		"clay": "https://clayui.com/docs/components/loading-indicator.html",
+		"guidelines": "/lexicon/core-components/loading-indicator"
+	},
+	"screenshot": "/images/lexicon/figma/loading-indicator.png",
+	"playgroundImage": "/images/lexicon/figma/loading-indicator-playground.png",
+	"variantCount": 8,
+	"properties": [
+		{
+			"name": "Type",
+			"values": [
+				"Primary",
+				"Secondary"
+			]
+		},
+		{
+			"name": "Size",
+			"values": [
+				"Large",
+				"Medium",
+				"Small",
+				"XS"
+			]
+		},
+		{
+			"name": "Dark Mode",
+			"values": [
+				"False",
+				"True"
+			]
+		}
+	],
+	"tokens": {
+		"Color/Primary/primary": "#0b5fff"
+	}
+}

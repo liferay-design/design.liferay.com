@@ -1,0 +1,41 @@
+{
+	"name": "Table",
+	"slug": "table",
+	"order": 400,
+	"description": "A table is a specific pattern for comparing datasets in a very direct and analytical way.",
+	"status": "documented",
+	"figma": {
+		"fileKey": "YNNkt9Xd6ImDtEvIz4tETF",
+		"fileName": "Lexicon Components",
+		"pageNodeId": "1:24",
+		"componentSetNodeId": "3902:9953"
+	},
+	"links": {
+		"clay": "https://clayui.com/docs/components/table.html"
+	},
+	"screenshot": "/images/lexicon/figma/table.png",
+	"playgroundImage": "/images/lexicon/figma/table-playground.png",
+	"variantCount": 3,
+	"properties": [
+		{
+			"name": "Type",
+			"values": [
+				"Header Title",
+				"Empty",
+				"Icon"
+			]
+		}
+	],
+	"tokens": {
+		"Color/Secondary/secondary": "#6b6c7e",
+		"14/Semibold": "Font(family: \"SF Pro Text\", style: Semibold, size: 14, weight: 600, lineHeight: 1.5, letterSpacing: 0)",
+		"Spacing/spacing-3": "8",
+		"Spacing/spacing-5": "16",
+		"Spacing/spacing-6": "20",
+		"Color/Secondary/secondary-l2": "#cdced9",
+		"Border Radius/rounded-lg": "8",
+		"Spacing/spacing-4": "12",
+		"Color/Light/light-l1": "#f7f8f9",
+		"Color/Primary/primary-l1": "#80acff"
+	}
+}

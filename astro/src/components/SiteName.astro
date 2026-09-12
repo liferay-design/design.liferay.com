@@ -1,0 +1,49 @@
+---
+// Port of atoms/SiteName — "Design.Liferay / Section" wordmark with the
+// little accent underline bar.
+import Link from './Link.astro'
+interface Props {
+	section?: string
+	dark?: boolean
+	underlineColor?: string
+}
+const { section, dark, underlineColor } = Astro.props
+const lower = section ? section.toLowerCase() : undefined
+---
+
+<div class:list={['site-name', { dark }]}>
+	<Link to="/">Design.Liferay</Link>
+	{section && <Link to={'/' + lower}> / {section}</Link>}
+	<span class="bar" style={underlineColor ? `background:${underlineColor}` : undefined}></span>
+</div>
+
+<style>
+	.site-name {
+		font-size: var(--fs-3);
+		font-weight: 600;
+		padding-bottom: 0;
+		line-height: 1.6;
+		position: relative;
+	}
+	.site-name :global(a) {
+		color: var(--c-white);
+	}
+	.site-name :global(a:hover) {
+		color: var(--c-primary-l2);
+	}
+	.site-name.dark :global(a) {
+		color: var(--c-black);
+	}
+	.site-name.dark :global(a:hover) {
+		color: var(--c-primary);
+	}
+	.bar {
+		position: absolute;
+		left: 0;
+		width: 1.8rem;
+		height: 3px;
+		background: var(--c-primary);
+		display: block;
+		margin-top: 1rem;
+	}
+</style>

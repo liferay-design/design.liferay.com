@@ -1,0 +1,184 @@
+---
+// Port of molecules/FancyFooter — the animated "living mural" fixed to the
+// bottom of the viewport. SVG markup copied verbatim (JSX attrs -> HTML),
+// SCSS loops expanded to explicit CSS.
+---
+
+<div class="fancy-footer" aria-hidden="true">
+	<svg viewBox="0 0 1440 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<defs>
+			<clipPath id="clip0"><path d="M0 0h1440v720H0z"></path></clipPath>
+			<clipPath id="clip1"><path transform="rotate(-180 240 120)" d="M0 0h240v240H0z"></path></clipPath>
+			<clipPath id="clip2"><path transform="rotate(-180 720 240)" d="M0 0h240v240H0z"></path></clipPath>
+			<clipPath id="clip3"><path transform="rotate(-90 960 -240)" d="M0 0h240v240H0z"></path></clipPath>
+			<clipPath id="clip4"><path transform="translate(960 480)" d="M0 0h240v240H0z"></path></clipPath>
+			<pattern id="dots" x="0" y="0" width=".083" height=".083"><circle fill="#353747" cx="8.3" cy="8.3" r="2"></circle></pattern>
+			<pattern id="blueDots" x="0" y="0" width=".2" height=".2"><circle fill="#0058ff" cx="20" cy="20" r="4"></circle></pattern>
+		</defs>
+		<g clip-path="url(#clip0)">
+			<path fill="#13141F" d="M0 0h1440v720H0z"></path>
+			<path fill="#fff" d="M0 240h240v240H0zM240 480h240v240H240zM960 480h480v240H960zM480 240h720v240H480z"></path>
+			<path fill="#232225" d="M0 480h240v240H0zM240 0h240v240H240zM480 480h240v240H480z"></path>
+			<path fill="#0058FF" d="M720 480h240v240H720zM960 0h240v240H960z"></path>
+			<path d="M480 480v240H240c0-132.548 107.452-240 240-240z" fill="#EEE" class="pie" data-seq="1"></path>
+			<path d="M960 480h240v240c-132.55 0-240-107.452-240-240z" fill="#C4C4C4" class="pie" data-seq="2"></path>
+			<path d="M1440 240h-240v480c132.55 0 240-107.452 240-240V240z" fill="#232225" class="pie" data-seq="3"></path>
+			<path d="M720 480c-132.548 0-240-107.452-240-240S587.452 0 720 0s240 107.452 240 240H720v240z" fill="#232225" class="pie" data-seq="4"></path>
+			<path d="M240 480H0V240c132.548 0 240 107.452 240 240z" fill="#0058FF" class="pie" data-seq="5"></path>
+			<circle cx="120" cy="120" r="60" fill="#232225" class="breathe" data-seq="1"></circle>
+			<circle cx="840" cy="600" r="48" fill="#232225" class="breathe" data-seq="2"></circle>
+			<path d="M600 240c0-66.274 53.726-120 120-120v240c-66.274 0-120-53.726-120-120z" fill="#0058FF" class="pie" data-seq="6"></path>
+			<path d="M840 240H720V120c66.274 0 120 53.726 120 120z" fill="#0084FF" class="beacon"></path>
+			<path d="M80 480H0v-80c44.183 0 80 35.817 80 80z" fill="#232225" class="pie" data-seq="7"></path>
+			<g class="stroke">
+				<path class="primaryStroke lineFlow" data-seq="1" pathLength="1" d="M130 120h110"></path>
+				<path class="whiteStroke lineFlow" data-seq="2" pathLength="1" d="M1310 360h-110M350 120H240M1310 600h-110"></path>
+				<path class="darkStroke lineFlow" data-seq="3" pathLength="1" d="M1090 600h110M1090 360h110"></path>
+				<path class="primaryStroke lineFlow" data-seq="4" pathLength="1" d="M360 350V240"></path>
+				<circle cx="120" cy="120" r="9" class="whiteStroke node" data-seq="1"></circle>
+				<circle cx="360" cy="360" r="9" class="whiteStroke node" data-seq="3"></circle>
+				<circle cx="360" cy="120" r="9" class="primaryStroke node" data-seq="2"></circle>
+				<circle cx="1320" cy="360" r="9" class="primaryStroke node" data-seq="5"></circle>
+				<circle cx="1080" cy="360" r="9" class="primaryStroke node" data-seq="4"></circle>
+				<circle cx="1320" cy="600" r="9" class="primaryStroke node" data-seq="7"></circle>
+				<circle cx="1080" cy="600" r="9" class="primaryStroke node" data-seq="6"></circle>
+				<g clip-path="url(#clip1)"><circle cx="240" cy="240" r="120" transform="rotate(-180 240 240)" stroke="#fff" pathLength="1" class="arcDraw" data-seq="1"></circle></g>
+				<g clip-path="url(#clip2)"><circle cx="1200" cy="480" r="120" transform="rotate(-180 1200 480)" stroke="#fff" pathLength="1" class="arcDraw" data-seq="2"></circle></g>
+				<g clip-path="url(#clip3)"><circle cx="1200" cy="480" r="120" transform="rotate(-90 1200 480)" stroke="#fff" pathLength="1" class="arcDraw" data-seq="3"></circle></g>
+				<g clip-path="url(#clip4)"><circle cx="1200" cy="480" r="120" stroke="#232225" pathLength="1" class="arcDraw" data-seq="4"></circle></g>
+			</g>
+			<g fill="#0058FF">
+				<rect x="232" y="112" width="16" height="16" class="miniSquare" data-seq="1"></rect>
+				<rect x="352" y="232" width="16" height="16" class="miniSquare" data-seq="2"></rect>
+				<rect x="1192" y="352" width="16" height="16" class="miniSquare" data-seq="3"></rect>
+				<rect x="1312" y="472" width="16" height="16" class="miniSquare" data-seq="4"></rect>
+				<rect x="1192" y="592" width="16" height="16" class="miniSquare" data-seq="5"></rect>
+				<rect x="1072" y="472" width="16" height="16" class="miniSquare" data-seq="6"></rect>
+			</g>
+			<g fill="#0058ff" class="dotCircle">
+				<rect x="40" y="520" width="150" height="150" fill="url(#blueDots)"></rect>
+				<circle cx="120" cy="510" r="4"></circle>
+				<circle cx="150" cy="510" r="4"></circle>
+				<circle cx="90" cy="510" r="4"></circle>
+				<circle cx="30" cy="570" r="4"></circle>
+				<circle cx="30" cy="600" r="4"></circle>
+				<circle cx="30" cy="630" r="4"></circle>
+				<circle cx="210" cy="570" r="4"></circle>
+				<circle cx="210" cy="600" r="4"></circle>
+				<circle cx="210" cy="630" r="4"></circle>
+				<circle cx="120" cy="690" r="4"></circle>
+				<circle cx="150" cy="690" r="4"></circle>
+				<circle cx="90" cy="690" r="4"></circle>
+			</g>
+			<path d="M736 360L 1056 360" stroke="#13141F" stroke-width="6" stroke-dasharray="3 12" class="dashMarch"></path>
+			<rect x="1204" y="36" fill="url(#dots)" width="240" height="200" class="dotsDrift"></rect>
+		</g>
+	</svg>
+</div>
+
+<style>
+	.fancy-footer {
+		width: 100%;
+		height: 50vh;
+		bottom: 0;
+		position: fixed;
+		z-index: -10;
+	}
+	.fancy-footer svg {
+		object-fit: cover;
+		position: absolute;
+		bottom: 0;
+	}
+	.stroke { stroke-width: 6; }
+	.primaryStroke { stroke: var(--c-primary); }
+	.whiteStroke { stroke: var(--c-white); }
+	.darkStroke { stroke: var(--c-black); }
+
+	@media screen and (max-width: 448px) {
+		.fancy-footer svg { height: 80vh; }
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		.pie {
+			transform-box: view-box;
+			animation: pieBreathe 5s ease-in-out infinite alternate;
+		}
+		.pie[data-seq='1'] { transform-origin: 480px 720px; animation-delay: 0s; }
+		.pie[data-seq='2'] { transform-origin: 1200px 480px; animation-delay: -0.7s; }
+		.pie[data-seq='3'] { transform-origin: 1320px 480px; animation-delay: -1.4s; }
+		.pie[data-seq='4'] { transform-origin: 720px 240px; animation-delay: -2.1s; }
+		.pie[data-seq='5'] { transform-origin: 0px 480px; animation-delay: -2.8s; }
+		.pie[data-seq='6'] { transform-origin: 720px 240px; animation-delay: -3.5s; }
+		.pie[data-seq='7'] { transform-origin: 0px 480px; animation-delay: -4.2s; }
+
+		.beacon { animation: beaconGlow 4s ease-in-out infinite alternate; }
+
+		.node {
+			transform-box: fill-box;
+			transform-origin: center;
+			animation: nodePulse 6s ease-in-out infinite;
+		}
+		.node[data-seq='1'] { animation-delay: 0s; }
+		.node[data-seq='2'] { animation-delay: 0.35s; }
+		.node[data-seq='3'] { animation-delay: 0.7s; }
+		.node[data-seq='4'] { animation-delay: 1.05s; }
+		.node[data-seq='5'] { animation-delay: 1.4s; }
+		.node[data-seq='6'] { animation-delay: 1.75s; }
+		.node[data-seq='7'] { animation-delay: 2.1s; }
+
+		.lineFlow {
+			stroke-dasharray: 0.82 0.18;
+			animation: lineFlow 3.5s linear infinite;
+		}
+		.lineFlow[data-seq='1'] { animation-delay: 0s; }
+		.lineFlow[data-seq='2'] { animation-delay: -0.9s; }
+		.lineFlow[data-seq='3'] { animation-delay: -1.8s; }
+		.lineFlow[data-seq='4'] { animation-delay: -2.7s; }
+
+		.arcDraw {
+			stroke-dasharray: 0.88 0.12;
+			animation: lineFlow 7s linear infinite;
+		}
+		.arcDraw[data-seq='1'] { animation-delay: 0s; }
+		.arcDraw[data-seq='2'] { animation-delay: -1.75s; }
+		.arcDraw[data-seq='3'] { animation-delay: -3.5s; }
+		.arcDraw[data-seq='4'] { animation-delay: -5.25s; }
+
+		.miniSquare {
+			transform-box: fill-box;
+			transform-origin: center;
+			animation: quarterTurn 5s ease-in-out infinite;
+		}
+		.miniSquare[data-seq='1'] { animation-delay: 0s; }
+		.miniSquare[data-seq='2'] { animation-delay: 0.8s; }
+		.miniSquare[data-seq='3'] { animation-delay: 1.6s; }
+		.miniSquare[data-seq='4'] { animation-delay: 2.4s; }
+		.miniSquare[data-seq='5'] { animation-delay: 3.2s; }
+		.miniSquare[data-seq='6'] { animation-delay: 4s; }
+
+		.breathe {
+			transform-box: fill-box;
+			transform-origin: center;
+			animation: breathe 4s ease-in-out infinite alternate;
+		}
+		.breathe[data-seq='2'] { animation-delay: -2s; }
+
+		.dashMarch { animation: dashMarch 1.8s linear infinite; }
+		.dotCircle {
+			transform-box: fill-box;
+			transform-origin: center;
+			animation: gentleFloat 4.5s ease-in-out infinite alternate;
+		}
+		.dotsDrift { animation: dotsBreathe 4.5s ease-in-out infinite alternate; }
+
+		@keyframes pieBreathe { from { transform: scale(1); } to { transform: scale(1.035); } }
+		@keyframes beaconGlow { from { fill: #0084ff; } to { fill: #3db5ff; } }
+		@keyframes nodePulse { 0%,30%,100% { transform: scale(1); } 15% { transform: scale(1.45); } }
+		@keyframes lineFlow { to { stroke-dashoffset: -1; } }
+		@keyframes quarterTurn { 0%,78% { transform: rotate(0deg); } 100% { transform: rotate(90deg); } }
+		@keyframes breathe { from { transform: scale(1); } to { transform: scale(1.09); } }
+		@keyframes dashMarch { to { stroke-dashoffset: -15; } }
+		@keyframes gentleFloat { from { transform: translateY(2px); } to { transform: translateY(-6px); } }
+		@keyframes dotsBreathe { from { opacity: 0.5; } to { opacity: 1; } }
+	}
+</style>

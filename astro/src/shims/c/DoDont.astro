@@ -1,0 +1,17 @@
+---
+const { good, bad, avoid } = Astro.props
+---
+<div class="dodont">
+	{good && <figure><img src={good} alt="" loading="lazy" /><figcaption class="do">Do</figcaption></figure>}
+	{bad && <figure><img src={bad} alt="" loading="lazy" /><figcaption class="dont">Don't</figcaption></figure>}
+	{avoid && <figure><img src={avoid} alt="" loading="lazy" /><figcaption class="avoid">Avoid</figcaption></figure>}
+</div>
+<style>
+	.dodont { display: flex; justify-content: space-between; width: 100%; gap: 2rem; padding: 2rem 0 4rem; }
+	.dodont figure { flex: 1; margin: 0; }
+	.dodont img { width: 100%; }
+	figcaption { font-weight: var(--fw-black); font-size: 1.2rem; margin-top: 0.5rem; }
+	.do { color: var(--c-success); }
+	.dont { color: var(--c-error); }
+	.avoid { color: var(--c-warning); }
+</style>

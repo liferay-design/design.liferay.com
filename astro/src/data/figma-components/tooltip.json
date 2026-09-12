@@ -1,0 +1,49 @@
+{
+	"name": "Tooltip",
+	"slug": "tooltip",
+	"order": 430,
+	"description": "A tooltip help give users more context about what will happen when interacting with actions and features.",
+	"status": "documented",
+	"figma": {
+		"fileKey": "YNNkt9Xd6ImDtEvIz4tETF",
+		"fileName": "Lexicon Components",
+		"pageNodeId": "1:21",
+		"componentSetNodeId": "742:540"
+	},
+	"links": {
+		"clay": "https://clayui.com/docs/components/tooltip.html",
+		"guidelines": "/lexicon/core-components/popovers-tooltips"
+	},
+	"screenshot": "/images/lexicon/figma/tooltip.png",
+	"playgroundImage": "/images/lexicon/figma/tooltip-playground.png",
+	"variantCount": 12,
+	"properties": [
+		{
+			"name": "Pointing",
+			"values": [
+				"Bottom ↓ Right ↘",
+				"Bottom ↓ Center ↓",
+				"Bottom ↓ Left ↙",
+				"Left ← Bottom ↙",
+				"Left ← Center ←",
+				"Left ← Top ↖",
+				"Top ↑ Left ↖",
+				"Top ↑ Center ↑",
+				"Top ↑ Right ↗",
+				"Right → Top ↗",
+				"Right → Center →",
+				"Right → Bottom ↘"
+			]
+		}
+	],
+	"tokens": {
+		"Color/Dark/dark-d2": "#111116",
+		"Color/Light/white": "#ffffff",
+		"14/Regular": "Font(family: \"SF Pro Text\", style: Regular, size: 14, weight: 400, lineHeight: 1.5, letterSpacing: 0)",
+		"Spacing/spacing-4": "12",
+		"Border Radius/rounded-lg": "8",
+		"Tooltip Shadow": "Effect(type: DROP_SHADOW, color: #27283333, offset: (0, 2), radius: 4, spread: 0)",
+		"Color/Light/light-l1": "#f7f8f9",
+		"Color/Primary/primary-l1": "#80acff"
+	}
+}

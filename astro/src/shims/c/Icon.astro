@@ -1,0 +1,22 @@
+---
+import { getIcon } from '@lib/icons'
+import { sxToStyle } from '@lib/sx'
+const { name, sx, style, class: className, height, width, color } = Astro.props
+const svg = getIcon(name)
+const s = [
+	'display:inline-flex',
+	'line-height:0',
+	`--icon-w:${width || height || '1em'}`,
+	`--icon-h:${height || width || '1em'}`,
+	color ? `color:${color}` : '',
+	sxToStyle(sx),
+	style,
+]
+	.filter(Boolean)
+	.join(';')
+---
+{svg ? <span class:list={['icon', className]} style={s} aria-hidden="true" set:html={svg} /> : <span />}
+
+<style>
+	.icon :global(svg) { width: var(--icon-w, 1em); height: var(--icon-h, 1em); fill: currentColor; }
+</style>

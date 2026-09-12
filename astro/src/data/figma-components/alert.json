@@ -1,0 +1,92 @@
+{
+	"name": "Alert",
+	"slug": "alert",
+	"order": 10,
+	"description": "An alert captures the attention of the user in an intrusive way, it will interrupt the users' flow in favor of important text messages from the system.",
+	"status": "documented",
+	"figma": {
+		"fileKey": "YNNkt9Xd6ImDtEvIz4tETF",
+		"fileName": "Lexicon Components",
+		"pageNodeId": "1:4",
+		"componentSetNodeId": "92:1961"
+	},
+	"links": {
+		"clay": "https://clayui.com/docs/components/alert",
+		"guidelines": "/lexicon/core-components/alerts"
+	},
+	"screenshot": "/images/lexicon/figma/alert.png",
+	"properties": [
+		{
+			"name": "Variant",
+			"values": [
+				"Vertical",
+				"Inline",
+				"Feedback"
+			]
+		},
+		{
+			"name": "Type",
+			"values": [
+				"Toast",
+				"Embedded",
+				"Stripe",
+				"Simple"
+			]
+		},
+		{
+			"name": "Validation",
+			"values": [
+				"Info",
+				"Warning",
+				"Success",
+				"Danger"
+			]
+		}
+	],
+	"variantCount": 28,
+	"anatomy": [
+		{
+			"part": "Status icon",
+			"description": "Identifies the message type at a glance."
+		},
+		{
+			"part": "Type text",
+			"description": "Semi-bold keyword naming the message type."
+		},
+		{
+			"part": "Description text",
+			"description": "The message body; can span multiple lines and contain links."
+		},
+		{
+			"part": "Close button",
+			"description": "Dismisses the alert. Optional depending on the use."
+		}
+	],
+	"tokens": {
+		"Color/Info/info": "#2e5aac",
+		"Color/Info/info-l1": "#89a7e0",
+		"Color/Info/info-l2": "#eef2fa",
+		"Color/Warning/warning": "#b95000",
+		"Color/Warning/warning-l1": "#ff8f39",
+		"Color/Warning/warning-l2": "#fff4ec",
+		"Color/Success/success": "#287d3c",
+		"Color/Success/success-l1": "#5aca75",
+		"Color/Success/success-l2": "#edf9f0",
+		"Color/Danger/danger": "#da1414",
+		"Color/Danger/danger-l1": "#f48989",
+		"Color/Danger/danger-l2": "#feefef",
+		"Color/Light/white": "#ffffff",
+		"Color/Light/light-l1": "#f7f8f9",
+		"Color/Primary/primary-l1": "#80acff",
+		"Spacing/spacing-1": "2",
+		"Spacing/spacing-2": "4",
+		"Spacing/spacing-3": "8",
+		"Spacing/spacing-4": "12",
+		"Spacing/spacing-5": "16",
+		"Spacing/spacing-8": "32",
+		"Border Radius/rounded-lg": "8",
+		"Shadow/Alert": "Effect(type: DROP_SHADOW, color: #27283333, offset: (0, 8), radius: 16, spread: 0)",
+		"14/Regular": "Font(family: \"SF Pro Text\", style: Regular, size: 14, weight: 400, lineHeight: 1.5, letterSpacing: 0)"
+	},
+	"playgroundImage": "/images/lexicon/figma/alert-playground.png"
+}

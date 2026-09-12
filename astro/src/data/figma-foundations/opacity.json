@@ -1,0 +1,18 @@
+{
+	"name": "Opacity",
+	"slug": "opacity",
+	"order": 50,
+	"description": "Translucency tokens for overlays, disabled states and scrims.",
+	"figma": {
+		"fileKey": "uJmaBABXsx9voFQEdn20Di",
+		"fileName": "Lexicon Foundations",
+		"pageNodeId": "245:3"
+	},
+	"tokens": {
+		"Opacity/translucent-0": "100",
+		"Opacity/translucent-1": "40",
+		"Opacity/translucent-2": "8",
+		"Opacity/translucent-3": "6",
+		"Opacity/translucent-4": "4"
+	}
+}

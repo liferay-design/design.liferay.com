@@ -1,0 +1,56 @@
+{
+	"name": "Input: Search",
+	"slug": "input-search",
+	"order": 180,
+	"description": "This frame contains the actual components and variants, any change applied to these components will propagate to the entire design system.",
+	"status": "documented",
+	"figma": {
+		"fileKey": "YNNkt9Xd6ImDtEvIz4tETF",
+		"fileName": "Lexicon Components",
+		"pageNodeId": "332:1404",
+		"componentSetNodeId": "342:1973"
+	},
+	"screenshot": "/images/lexicon/figma/input-search.png",
+	"playgroundImage": "/images/lexicon/figma/input-search-playground.png",
+	"variantCount": 8,
+	"properties": [
+		{
+			"name": "Size",
+			"values": [
+				"Regular",
+				"Small"
+			]
+		},
+		{
+			"name": "Type",
+			"values": [
+				"Auto",
+				"Manual"
+			]
+		},
+		{
+			"name": "State",
+			"values": [
+				"Default",
+				"Focus"
+			]
+		}
+	],
+	"tokens": {
+		"Color/Secondary/secondary": "#6b6c7e",
+		"16/Regular": "Font(family: \"SF Pro Text\", style: Regular, size: 16, weight: 400, lineHeight: 1.5, letterSpacing: 0)",
+		"Spacing/spacing-3": "8",
+		"Spacing/spacing-5": "16",
+		"Border Radius/rounded-lg": "8",
+		"Color/Light/light": "#f1f2f5",
+		"Color/Secondary/secondary-l3": "#e7e7ed",
+		"Color/Dark/dark": "#272833",
+		"Color/Light/white": "#ffffff",
+		"Color/Primary/primary-l3": "#f0f5ff",
+		"Color/Primary/primary-l2": "#b3cdff",
+		"14/Regular": "Font(family: \"SF Pro Text\", style: Regular, size: 14, weight: 400, lineHeight: 1.5, letterSpacing: 0)",
+		"Spacing/spacing-4": "12",
+		"Color/Light/light-l1": "#f7f8f9",
+		"Color/Primary/primary-l1": "#80acff"
+	}
+}

@@ -1,0 +1,68 @@
+{
+	"name": "Sticker",
+	"slug": "sticker",
+	"order": 380,
+	"description": "A Sticker is a visual element used to identify and classify content. It can include images, icons, or small acronyms.",
+	"status": "documented",
+	"figma": {
+		"fileKey": "YNNkt9Xd6ImDtEvIz4tETF",
+		"fileName": "Lexicon Components",
+		"pageNodeId": "1:23",
+		"componentSetNodeId": "225:3717"
+	},
+	"links": {
+		"clay": "https://clayui.com/docs/components/sticker.html",
+		"guidelines": "/lexicon/core-components/stickers"
+	},
+	"screenshot": "/images/lexicon/figma/sticker.png",
+	"playgroundImage": "/images/lexicon/figma/sticker-playground.png",
+	"variantCount": 36,
+	"properties": [
+		{
+			"name": "Type",
+			"values": [
+				"Image",
+				"Icon",
+				"Outline"
+			]
+		},
+		{
+			"name": "Size",
+			"values": [
+				"16",
+				"24",
+				"32",
+				"40",
+				"48",
+				"80"
+			]
+		},
+		{
+			"name": "Rounded",
+			"values": [
+				"False",
+				"True"
+			]
+		}
+	],
+	"tokens": {
+		"Border Radius/rounded-lg": "8",
+		"Image/Landscape": "",
+		"Border Radius/rounded-full": "999",
+		"Secondary/$secondary": "#6B6C7E",
+		"Color/Secondary/secondary": "#6b6c7e",
+		"Color/Light/white": "#ffffff",
+		"Spacing/spacing-6": "20",
+		"Color/Light/light-d1": "#e2e4ea",
+		"Color/Charts/Purple/purple": "#aa33ff",
+		"10/Semibold": "Font(family: \"SF Pro Text\", style: Semibold, size: 10, weight: 600, lineHeight: 1.5, letterSpacing: 0)",
+		"Color/Charts/Purple/purple-l5": "#f2e5ff",
+		"12/Bold": "Font(family: \"SF Pro Text\", style: Bold, size: 12, weight: 700, lineHeight: 1.25, letterSpacing: 0)",
+		"16/Bold": "Font(family: \"SF Pro Text\", style: Bold, size: 16, weight: 700, lineHeight: 1.5, letterSpacing: 0)",
+		"20/Bold": "Font(family: \"SF Pro Text\", style: Bold, size: 20, weight: 700, lineHeight: 1.25, letterSpacing: 0)",
+		"24/Bold": "Font(family: \"SF Pro Text\", style: Bold, size: 24, weight: 700, lineHeight: 1.25, letterSpacing: 0)",
+		"40/Bold": "Font(family: \"SF Pro Text\", style: Bold, size: 40, weight: 700, lineHeight: 1.25, letterSpacing: 0)",
+		"Color/Light/light-l1": "#f7f8f9",
+		"Color/Primary/primary-l1": "#80acff"
+	}
+}

@@ -1,0 +1,56 @@
+{
+	"name": "List",
+	"slug": "list",
+	"order": 230,
+	"description": "Lists are a visual representation of a dataset, based on groups of related content, that is organized vertically.",
+	"status": "documented",
+	"figma": {
+		"fileKey": "YNNkt9Xd6ImDtEvIz4tETF",
+		"fileName": "Lexicon Components",
+		"pageNodeId": "1:15",
+		"componentSetNodeId": "395:7892"
+	},
+	"links": {
+		"clay": "https://clayui.com/docs/components/list.html"
+	},
+	"screenshot": "/images/lexicon/figma/list.png",
+	"playgroundImage": "/images/lexicon/figma/list-playground.png",
+	"variantCount": 9,
+	"properties": [
+		{
+			"name": "State",
+			"values": [
+				"Default",
+				"Hover",
+				"Active"
+			]
+		},
+		{
+			"name": "Position",
+			"values": [
+				"Top",
+				"Middle",
+				"Bottom"
+			]
+		}
+	],
+	"tokens": {
+		"Spacing/spacing-4": "12",
+		"Spacing/spacing-3": "8",
+		"Border Radius/rounded-lg": "8",
+		"Color/Light/white": "#ffffff",
+		"Color/Dark/dark": "#272833",
+		"14/Semibold-Underline": "Font(family: \"SF Pro Text\", style: Semibold, size: 14, weight: 600, lineHeight: 1.5, letterSpacing: 0)",
+		"Color/Secondary/secondary": "#6b6c7e",
+		"14/Regular": "Font(family: \"SF Pro Text\", style: Regular, size: 14, weight: 400, lineHeight: 1.5, letterSpacing: 0)",
+		"Spacing/spacing-1": "2",
+		"Spacing/spacing-2": "4",
+		"Border Radius/rounded-md": "4",
+		"Color/Success/success-l1": "#5aca75",
+		"Spacing/spacing-5": "16",
+		"Color/Secondary/secondary-l3": "#e7e7ed",
+		"Color/Primary/primary-l3": "#f0f5ff",
+		"Color/Light/light-l1": "#f7f8f9",
+		"Color/Primary/primary-l1": "#80acff"
+	}
+}

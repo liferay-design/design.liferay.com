@@ -1,0 +1,36 @@
+{
+	"name": "Side Panel",
+	"slug": "side-panel",
+	"order": 360,
+	"description": "The side panel allows the user to navigate the items of a table by viewing and editing the detail without leaving the current the page.",
+	"status": "documented",
+	"figma": {
+		"fileKey": "YNNkt9Xd6ImDtEvIz4tETF",
+		"fileName": "Lexicon Components",
+		"pageNodeId": "4664:238"
+	},
+	"playgroundImage": "/images/lexicon/figma/side-panel-playground.png",
+	"screenshot": "/images/lexicon/figma/side-panel.png",
+	"tokens": {
+		"Color/Dark/dark": "#272833",
+		"16/Bold": "Font(family: \"SF Pro Text\", style: Bold, size: 16, weight: 700, lineHeight: 1.5, letterSpacing: 0)",
+		"Color/Secondary/secondary": "#6b6c7e",
+		"Spacing/spacing-3": "8",
+		"Border Radius/rounded-lg": "8",
+		"Light/$white": "#FFFFFF",
+		"14/Bold": "Font(family: \"SF Pro Text\", style: Bold, size: 14, weight: 700, lineHeight: 1.25, letterSpacing: 0)",
+		"Border Radius/rounded-md": "4",
+		"Color/Charts/Pink/pink-l4": "#ffb2de",
+		"Color/Charts/Pink/pink": "#e50082",
+		"Color/Light/white": "#ffffff",
+		"16/Semibold": "Font(family: \"SF Pro Text\", style: Semibold, size: 16, weight: 600, lineHeight: 1.5, letterSpacing: 0)",
+		"Spacing/spacing-5": "16",
+		"Color/Secondary/secondary-l0": "#9393a4",
+		"Color/Primary/primary": "#0b5fff",
+		"Spacing/spacing-7": "24",
+		"Color/Secondary/secondary-l3": "#e7e7ed",
+		"Shadow/Popover": "Effect(type: DROP_SHADOW, color: #27283329, offset: (0, 8), radius: 16, spread: 0)",
+		"Color/Light/light-l1": "#f7f8f9",
+		"Color/Primary/primary-l1": "#80acff"
+	}
+}

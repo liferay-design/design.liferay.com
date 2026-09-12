@@ -1,0 +1,42 @@
+{
+	"name": "Date Picker",
+	"slug": "date-picker",
+	"order": 120,
+	"description": "Date picker let users select a date and time for a form.",
+	"status": "documented",
+	"figma": {
+		"fileKey": "YNNkt9Xd6ImDtEvIz4tETF",
+		"fileName": "Lexicon Components",
+		"pageNodeId": "1:32",
+		"componentSetNodeId": "279:3460"
+	},
+	"links": {
+		"clay": "https://clayui.com/docs/components/date-picker.html"
+	},
+	"screenshot": "/images/lexicon/figma/date-picker.png",
+	"playgroundImage": "/images/lexicon/figma/date-picker-playground.png",
+	"variantCount": 5,
+	"properties": [
+		{
+			"name": "State",
+			"values": [
+				"Default",
+				"Hover",
+				"Active",
+				"Disabled",
+				"Focus"
+			]
+		}
+	],
+	"tokens": {
+		"Light/$white": "#FFFFFF",
+		"Secondary/$secondary": "#6B6C7E",
+		"Color/Light/light": "#f1f2f5",
+		"Color/Primary/primary": "#0b5fff",
+		"Color/Light/white": "#ffffff",
+		"Color/Secondary/secondary-l1": "#a7a9bc",
+		"Border Radius/rounded-full": "999",
+		"Color/Light/light-l1": "#f7f8f9",
+		"Color/Primary/primary-l1": "#80acff"
+	}
+}

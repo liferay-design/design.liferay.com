@@ -1,0 +1,127 @@
+{
+	"name": "Button",
+	"slug": "button",
+	"order": 60,
+	"description": "This frame contains the actual components and variants, any change applied to these components will propagate to the entire design system.",
+	"status": "documented",
+	"figma": {
+		"fileKey": "YNNkt9Xd6ImDtEvIz4tETF",
+		"fileName": "Lexicon Components",
+		"pageNodeId": "1:5",
+		"componentSetNodeId": "145:26649"
+	},
+	"links": {
+		"clay": "https://clayui.com/docs/components/button",
+		"guidelines": "/lexicon/core-components/buttons"
+	},
+	"screenshot": "/images/lexicon/figma/button.png",
+	"properties": [
+		{
+			"name": "Type",
+			"values": [
+				"Primary",
+				"Action",
+				"Action Outline",
+				"Secondary",
+				"Localizable",
+				"Borderless",
+				"Link"
+			]
+		},
+		{
+			"name": "Size",
+			"values": [
+				"Regular",
+				"Small",
+				"XS"
+			]
+		},
+		{
+			"name": "Validation",
+			"values": [
+				"-",
+				"Success",
+				"Warning",
+				"Danger",
+				"Info"
+			]
+		},
+		{
+			"name": "State",
+			"values": [
+				"Default",
+				"Hover",
+				"Active",
+				"Disabled",
+				"Focus"
+			]
+		},
+		{
+			"name": "Rounded",
+			"values": [
+				"False",
+				"True"
+			]
+		},
+		{
+			"name": "Icon Only",
+			"values": [
+				"False",
+				"True"
+			]
+		}
+	],
+	"variantCount": 730,
+	"anatomy": [
+		{
+			"part": "Container",
+			"description": "Background and border that define the button type and state."
+		},
+		{
+			"part": "Label",
+			"description": "Action text. Hidden when Icon Only is true."
+		},
+		{
+			"part": "Icon",
+			"description": "Optional leading icon, or the only content when Icon Only is true."
+		}
+	],
+	"tokens": {
+		"Color/Primary/primary": "#0b5fff",
+		"Color/Primary/primary-d1": "#0053f0",
+		"Color/Primary/primary-d2": "#004ad7",
+		"Color/Primary/primary-l1": "#80acff",
+		"Color/Secondary/secondary": "#6b6c7e",
+		"Color/Secondary/secondary-l0": "#9393a4",
+		"Color/Info/info": "#2e5aac",
+		"Color/Info/info-d1": "#294f98",
+		"Color/Info/info-d2": "#234584",
+		"Color/Success/success": "#287d3c",
+		"Color/Success/success-d1": "#226a33",
+		"Color/Success/success-d2": "#1c5629",
+		"Color/Warning/warning": "#b95000",
+		"Color/Warning/warning-d1": "#9f4500",
+		"Color/Warning/warning-d2": "#863a00",
+		"Color/Danger/danger": "#da1414",
+		"Color/Danger/danger-d1": "#c31212",
+		"Color/Danger/danger-d2": "#ab1010",
+		"Color/Dark/dark": "#272833",
+		"Color/Light/white": "#ffffff",
+		"Color/Light/light": "#f1f2f5",
+		"Color/Light/light-l1": "#f7f8f9",
+		"Spacing/spacing-3": "8",
+		"Spacing/spacing-4": "12",
+		"Spacing/spacing-5": "16",
+		"Border Radius/rounded-md": "4",
+		"Border Radius/rounded-lg": "8",
+		"Border Radius/rounded-full": "999",
+		"Opacity/translucent-1": "40",
+		"16/Semibold": "Font(family: \"SF Pro Text\", style: Semibold, size: 16, weight: 600, lineHeight: 1.5, letterSpacing: 0)",
+		"14/Semibold": "Font(family: \"SF Pro Text\", style: Semibold, size: 14, weight: 600, lineHeight: 1.5, letterSpacing: 0)",
+		"12/Semibold": "Font(family: \"SF Pro Text\", style: Semibold, size: 12, weight: 600, lineHeight: 1.5, letterSpacing: 0)",
+		"16/Regular": "Font(family: \"SF Pro Text\", style: Regular, size: 16, weight: 400, lineHeight: 1.5, letterSpacing: 0)",
+		"14/Regular": "Font(family: \"SF Pro Text\", style: Regular, size: 14, weight: 400, lineHeight: 1.5, letterSpacing: 0)",
+		"12/Regular": "Font(family: \"SF Pro Text\", style: Regular, size: 12, weight: 400, lineHeight: 1.5, letterSpacing: 0)"
+	},
+	"playgroundImage": "/images/lexicon/figma/button-playground.png"
+}

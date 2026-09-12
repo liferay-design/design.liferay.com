@@ -1,0 +1,52 @@
+---
+import { getCollection } from 'astro:content'
+import MainLayout from '@layouts/MainLayout.astro'
+import Container from '@components/Container.astro'
+import CardDefault from '@components/CardDefault.astro'
+import { avatarPath, cleanId, kebab, minRead } from '@lib/helpers'
+
+export async function getStaticPaths() {
+	const articles = await getCollection('articles', ({ data }) => data.publish !== false)
+	const byTag = new Map<string, { label: string; posts: typeof articles }>()
+	for (const post of articles) {
+		for (const tag of post.data.tags || []) {
+			const k = kebab(tag)
+			if (!byTag.has(k)) byTag.set(k, { label: tag, posts: [] })
+			byTag.get(k)!.posts.push(post)
+		}
+	}
+	return [...byTag.entries()].map(([tag, { label, posts }]) => ({
+		params: { tag },
+		props: {
+			label,
+			posts: posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()),
+		},
+	}))
+}
+
+const { label, posts } = Astro.props
+---
+
+<MainLayout section="Articles" pageTitle={`Design.Liferay | ${label}`} description={`Posts tagged ${label}`}>
+	<Container>
+		<h1 class="tag-title">{label}</h1>
+		<div class="grid-three">
+			{
+				posts.map(post => (
+					<CardDefault
+						avatarImage
+						imageURL={post.data.featuredImage}
+						link={`/articles/${cleanId(post.id)}`}
+						title={post.data.title}
+						subtitle={`${minRead(post.body)} Min Read`}
+						avatarImageURL={avatarPath(post.data.author)}
+					/>
+				))
+			}
+		</div>
+	</Container>
+</MainLayout>
+
+<style>
+	.tag-title { color: var(--c-white); padding-bottom: 4rem; text-transform: capitalize; }
+</style>

@@ -1,0 +1,57 @@
+{
+	"name": "Toggle Switch",
+	"slug": "toggle-switch",
+	"order": 420,
+	"description": "The toggle switch provides users with boolean selection and activation tools for cases with real time feedback in the interface.",
+	"status": "documented",
+	"figma": {
+		"fileKey": "YNNkt9Xd6ImDtEvIz4tETF",
+		"fileName": "Lexicon Components",
+		"pageNodeId": "85:2299",
+		"componentSetNodeId": "596:1387"
+	},
+	"links": {
+		"clay": "https://clayui.com/docs/components/toggle-switch.html"
+	},
+	"screenshot": "/images/lexicon/figma/toggle-switch.png",
+	"playgroundImage": "/images/lexicon/figma/toggle-switch-playground.png",
+	"variantCount": 12,
+	"properties": [
+		{
+			"name": "Size",
+			"values": [
+				"Regular",
+				"Small"
+			]
+		},
+		{
+			"name": "Checked",
+			"values": [
+				"True",
+				"False"
+			]
+		},
+		{
+			"name": "Disabled",
+			"values": [
+				"False",
+				"True",
+				"Not Localizable"
+			]
+		}
+	],
+	"tokens": {
+		"Border Radius/rounded-full": "999",
+		"Color/Light/white": "#ffffff",
+		"Color/Primary/primary": "#0b5fff",
+		"Spacing/spacing-4": "12",
+		"Color/Secondary/secondary-l1": "#a7a9bc",
+		"Opacity/translucent-1": "40",
+		"Opacity/translucent-0": "100",
+		"Color/Secondary/secondary-l0": "#9393a4",
+		"14/Regular": "Font(family: \"SF Pro Text\", style: Regular, size: 14, weight: 400, lineHeight: 1.5, letterSpacing: 0)",
+		"12/Regular": "Font(family: \"SF Pro Text\", style: Regular, size: 12, weight: 400, lineHeight: 1.5, letterSpacing: 0)",
+		"Color/Light/light-l1": "#f7f8f9",
+		"Color/Primary/primary-l1": "#80acff"
+	}
+}

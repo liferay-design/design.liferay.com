@@ -1,0 +1,43 @@
+---
+// Port of templates/MainLayout — the chrome for Home + listing pages:
+// topographic dark background, Navbar, content, Footer + the fixed FancyFooter
+// mural revealed by the trailing 100vh of scroll space.
+import BaseLayout from './BaseLayout.astro'
+import Navbar from '@components/Navbar.astro'
+import Footer from '@components/Footer.astro'
+import FancyFooter from '@components/FancyFooter.astro'
+
+interface Props {
+	section?: string
+	pageTitle: string
+	description?: string
+	previewImage?: string
+	keywords?: string
+	contentType?: string
+}
+const { section, ...seo } = Astro.props
+---
+
+<BaseLayout {...seo}>
+	<div class="page">
+		<Navbar section={section} />
+		<main id="main-content" tabindex="-1">
+			<slot />
+		</main>
+		<Footer />
+	</div>
+	<FancyFooter />
+</BaseLayout>
+
+<style>
+	.page {
+		background-attachment: fixed;
+		background-color: var(--c-background);
+		background-image: url(/images/diamond-bar-topography.png);
+		background-repeat: no-repeat repeat;
+		background-size: 100%;
+		position: relative;
+		/* reveal the fixed FancyFooter mural at the end of the scroll */
+		margin-bottom: 100vh;
+	}
+</style>

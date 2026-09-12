@@ -1,0 +1,39 @@
+{
+	"name": "Input: Group",
+	"slug": "input-group",
+	"order": 170,
+	"description": "An input group includes additional elements to the text field, such as buttons or boxed, that provide more context and structure to users when inserting data.",
+	"status": "documented",
+	"figma": {
+		"fileKey": "YNNkt9Xd6ImDtEvIz4tETF",
+		"fileName": "Lexicon Components",
+		"pageNodeId": "804:14478",
+		"componentSetNodeId": "6512:7021"
+	},
+	"screenshot": "/images/lexicon/figma/input-group.png",
+	"playgroundImage": "/images/lexicon/figma/input-group-playground.png",
+	"variantCount": 2,
+	"properties": [
+		{
+			"name": "Size",
+			"values": [
+				"Regular",
+				"Small"
+			]
+		}
+	],
+	"tokens": {
+		"Color/Secondary/secondary": "#6b6c7e",
+		"16/Regular": "Font(family: \"SF Pro Text\", style: Regular, size: 16, weight: 400, lineHeight: 1.5, letterSpacing: 0)",
+		"Spacing/spacing-2": "4",
+		"Spacing/spacing-5": "16",
+		"Spacing/spacing-3": "8",
+		"Border Radius/rounded-lg": "8",
+		"Color/Light/light": "#f1f2f5",
+		"Color/Secondary/secondary-l3": "#e7e7ed",
+		"14/Regular": "Font(family: \"SF Pro Text\", style: Regular, size: 14, weight: 400, lineHeight: 1.5, letterSpacing: 0)",
+		"Spacing/spacing-4": "12",
+		"Color/Light/light-l1": "#f7f8f9",
+		"Color/Primary/primary-l1": "#80acff"
+	}
+}

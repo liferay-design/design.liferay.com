@@ -1,0 +1,79 @@
+{
+	"name": "Card",
+	"slug": "card",
+	"order": 90,
+	"description": "A card is a specific form of data visualization focused mainly on displaying visual content such as images, icons, and avatars.",
+	"status": "documented",
+	"figma": {
+		"fileKey": "YNNkt9Xd6ImDtEvIz4tETF",
+		"fileName": "Lexicon Components",
+		"pageNodeId": "1:7",
+		"componentSetNodeId": "248:7552"
+	},
+	"links": {
+		"clay": "https://clayui.com/docs/components/card.html",
+		"guidelines": "/lexicon/core-components/cards"
+	},
+	"screenshot": "/images/lexicon/figma/card.png",
+	"playgroundImage": "/images/lexicon/figma/card-playground.png",
+	"variantCount": 28,
+	"properties": [
+		{
+			"name": "Variant",
+			"values": [
+				"Vertical",
+				"Horizontal"
+			]
+		},
+		{
+			"name": "Type",
+			"values": [
+				"Image",
+				"Empty",
+				"Icon",
+				"User",
+				"Navigation",
+				"Folder"
+			]
+		},
+		{
+			"name": "State",
+			"values": [
+				"Default",
+				"Hover",
+				"Active",
+				"Disabled"
+			]
+		}
+	],
+	"tokens": {
+		"Image/Landscape": "",
+		"Color/Light/white": "#ffffff",
+		"Border Radius/rounded-lg": "8",
+		"Spacing/spacing-4": "12",
+		"Border Radius/rounded-md": "4",
+		"Color/Dark/dark": "#272833",
+		"14/Semibold-Underline": "Font(family: \"SF Pro Text\", style: Semibold, size: 14, weight: 600, lineHeight: 1.5, letterSpacing: 0)",
+		"Color/Secondary/secondary": "#6b6c7e",
+		"14/Regular": "Font(family: \"SF Pro Text\", style: Regular, size: 14, weight: 400, lineHeight: 1.5, letterSpacing: 0)",
+		"Spacing/spacing-1": "2",
+		"Spacing/spacing-2": "4",
+		"Color/Success/success-l1": "#5aca75",
+		"Spacing/spacing-3": "8",
+		"Color/Secondary/secondary-l3": "#e7e7ed",
+		"Color/Secondary/secondary-l2": "#cdced9",
+		"Color/Primary/primary-l1": "#80acff",
+		"Shadow/Card-Default": "Effect(type: DROP_SHADOW, color: #2728331A, offset: (0, 0), radius: 12, spread: 0)",
+		"Color/Primary/primary": "#0b5fff",
+		"Spacing/spacing-6": "20",
+		"Border Radius/rounded-full": "999",
+		"Color/Light/light-d1": "#e2e4ea",
+		"Color/Primary/primary-l2": "#b3cdff",
+		"14/Semibold": "Font(family: \"SF Pro Text\", style: Semibold, size: 14, weight: 600, lineHeight: 1.5, letterSpacing: 0)",
+		"Color/Dark/dark-l1": "#30313f",
+		"Color/Light/light-l1": "#f7f8f9",
+		"Color/Secondary/secondary-l1": "#a7a9bc",
+		"Color/Light/light": "#f1f2f5",
+		"Opacity/translucent-1": "40"
+	}
+}

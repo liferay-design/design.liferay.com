@@ -1,0 +1,65 @@
+{
+	"name": "Section",
+	"slug": "section",
+	"order": 350,
+	"description": "A component that groups content to be processed more effectively.",
+	"status": "documented",
+	"figma": {
+		"fileKey": "YNNkt9Xd6ImDtEvIz4tETF",
+		"fileName": "Lexicon Components",
+		"pageNodeId": "1:22",
+		"componentSetNodeId": "549:2930"
+	},
+	"links": {
+		"guidelines": "/lexicon/core-components/section"
+	},
+	"screenshot": "/images/lexicon/figma/section.png",
+	"playgroundImage": "/images/lexicon/figma/section-playground.png",
+	"variantCount": 14,
+	"properties": [
+		{
+			"name": "Size",
+			"values": [
+				"Regular",
+				"Small"
+			]
+		},
+		{
+			"name": "Type",
+			"values": [
+				"Collapsable",
+				"Section"
+			]
+		},
+		{
+			"name": "Variant",
+			"values": [
+				"Closed",
+				"-",
+				"Opened"
+			]
+		},
+		{
+			"name": "State",
+			"values": [
+				"Default",
+				"-",
+				"Hover",
+				"Focus"
+			]
+		}
+	],
+	"tokens": {
+		"Color/Secondary/secondary": "#6b6c7e",
+		"14/Semibold": "Font(family: \"SF Pro Text\", style: Semibold, size: 14, weight: 600, lineHeight: 1.5, letterSpacing: 0)",
+		"Secondary/$secondary": "#6B6C7E",
+		"Spacing/spacing-5": "16",
+		"Color/Secondary/secondary-l2": "#cdced9",
+		"12/Semibold": "Font(family: \"SF Pro Text\", style: Semibold, size: 12, weight: 600, lineHeight: 1.5, letterSpacing: 0)",
+		"Color/Dark/dark": "#272833",
+		"Color/Primary/primary-l0": "#5791ff",
+		"Color/Light/white": "#ffffff",
+		"Color/Light/light-l1": "#f7f8f9",
+		"Color/Primary/primary-l1": "#80acff"
+	}
+}

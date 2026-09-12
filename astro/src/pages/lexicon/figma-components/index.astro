@@ -1,0 +1,97 @@
+---
+import { getCollection } from 'astro:content'
+import BaseLayout from '@layouts/BaseLayout.astro'
+import LexiconSidebar from '@components/LexiconSidebar.astro'
+import Footer from '@components/Footer.astro'
+import { buildSidebarTree } from '@lib/lexicon'
+import { variantPermutations } from '@lib/figma'
+import '@styles/lexicon.css'
+
+const comps = (await getCollection('figmaComponents')).sort((a, b) => {
+	const ao = a.data.order ?? 999
+	const bo = b.data.order ?? 999
+	if (ao !== bo) return ao - bo
+	return a.data.name.localeCompare(b.data.name)
+})
+const tree = await buildSidebarTree()
+const documented = comps.filter(c => c.data.status === 'documented').length
+---
+
+<BaseLayout
+	pageTitle="Figma Components — Lexicon by Design.Liferay"
+	description="Design-system documentation generated from the Lexicon Figma component library: variants, anatomy and design tokens."
+	previewImage="/images/resources/lexicon-cover.png"
+	contentType="article"
+	bodyClass="lexicon-doc"
+>
+	<div class="lexicon-grid lexicon-theme">
+		<LexiconSidebar tree={tree} path="/lexicon/figma-components" />
+		<main id="main-content" tabindex="-1" class="lexicon-main">
+			<div class="lexicon-doc-container">
+				<h1>Figma Components</h1>
+				<p class="lexicon-description">
+					Living documentation generated straight from the Lexicon Figma library — every
+					component's variants, anatomy and design tokens, kept in sync with the source of truth.
+				</p>
+				<p class="fc-index-meta">
+					{comps.length} components · {documented} fully documented
+				</p>
+
+				<div class="fc-grid">
+					{
+						comps.map(c => (
+							<a class="fc-card" href={`/lexicon/figma-components/${c.data.slug}`}>
+								<div class="fc-card-top">
+									<h3>{c.data.name}</h3>
+									{c.data.status === 'documented' ? (
+										<span class="fc-tag ok">{variantPermutations(c.data.properties) || c.data.variantCount || ''} variants</span>
+									) : (
+										<span class="fc-tag pending">stub</span>
+									)}
+								</div>
+								{c.data.description && <p>{c.data.description}</p>}
+								{c.data.properties && c.data.properties.length > 0 && (
+									<span class="fc-card-props">
+										{c.data.properties.map(p => <span class="fc-chip">{p.name}</span>)}
+									</span>
+								)}
+							</a>
+						))
+					}
+				</div>
+			</div>
+			<Footer markdown light />
+		</main>
+	</div>
+</BaseLayout>
+
+<style>
+	.lexicon-grid { display: grid; grid-template-columns: 20rem 1fr; min-height: 100vh; background: #fff; }
+	.lexicon-main { background: #fff; min-width: 0; overflow-x: hidden; }
+	.lexicon-doc-container { max-width: 960px; padding: 2rem 4rem 5rem; margin: 0 auto; }
+	.fc-index-meta { color: var(--c-main-l3); font-size: 0.9rem; margin: 0 0 2rem; }
+
+	.fc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: 1rem; }
+	.fc-card {
+		display: block;
+		border: 1px solid var(--c-main-l6);
+		border-radius: 0.6rem;
+		padding: 1.25rem;
+		background: #fff;
+		transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+	}
+	.fc-card:hover { transform: translateY(-3px); box-shadow: var(--elev-2); border-color: var(--c-primary-l1); }
+	.fc-card-top { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
+	.fc-card h3 { margin: 0; font-family: var(--font-lexicon); font-weight: 700; color: var(--c-main); font-size: 1.05rem; }
+	.fc-card p { margin: 0.5rem 0 0; color: var(--c-main-l3); font-size: 0.85rem; line-height: 1.45; }
+	.fc-tag { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.15rem 0.45rem; border-radius: 0.25rem; white-space: nowrap; }
+	.fc-tag.ok { background: var(--c-success-l2, #edf9f0); color: var(--c-success, #287d3c); }
+	.fc-tag.pending { background: var(--c-main-l6); color: var(--c-main-l3); }
+	.fc-card-props { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.85rem; }
+	.fc-chip { background: var(--c-main-l6); border-radius: 0.25rem; padding: 0.1rem 0.4rem; font-size: 0.7rem; color: var(--c-main-l2); }
+
+	@media screen and (max-width: 768px) {
+		.lexicon-grid { display: block; }
+		.lexicon-doc-container { max-width: none; padding: 4rem 1.25rem 6rem; }
+	}
+</style>

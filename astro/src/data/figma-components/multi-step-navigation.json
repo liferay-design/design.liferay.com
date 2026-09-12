@@ -1,0 +1,55 @@
+{
+	"name": "Multi Step Navigation",
+	"slug": "multi-step-navigation",
+	"order": 270,
+	"description": "A multi step nav, also known as a wizard, is a determinate progress bar used in long processes that divides the main task into subtasks. The wizard lets the user quickly identify their current progress in completing the task and navigate forwards and backwards between steps if needed.",
+	"status": "documented",
+	"figma": {
+		"fileKey": "YNNkt9Xd6ImDtEvIz4tETF",
+		"fileName": "Lexicon Components",
+		"pageNodeId": "329:8933",
+		"componentSetNodeId": "405:8959"
+	},
+	"links": {
+		"clay": "https://clayui.com/docs/components/multi-step-nav.html"
+	},
+	"screenshot": "/images/lexicon/figma/multi-step-navigation.png",
+	"playgroundImage": "/images/lexicon/figma/multi-step-navigation-playground.png",
+	"variantCount": 15,
+	"properties": [
+		{
+			"name": "Step Position",
+			"values": [
+				"First",
+				"Middle",
+				"Last"
+			]
+		},
+		{
+			"name": "Type",
+			"values": [
+				"Number",
+				"Icon"
+			]
+		},
+		{
+			"name": "State",
+			"values": [
+				"Default",
+				"Active",
+				"Done"
+			]
+		}
+	],
+	"tokens": {
+		"Color/Secondary/secondary": "#6b6c7e",
+		"14/Semibold": "Font(family: \"SF Pro Text\", style: Semibold, size: 14, weight: 600, lineHeight: 1.5, letterSpacing: 0)",
+		"Color/Secondary/secondary-l3": "#e7e7ed",
+		"Border Radius/rounded-full": "999",
+		"Spacing/spacing-3": "8",
+		"Color/Light/white": "#ffffff",
+		"Color/Primary/primary": "#0b5fff",
+		"Color/Light/light-l1": "#f7f8f9",
+		"Color/Primary/primary-l1": "#80acff"
+	}
+}

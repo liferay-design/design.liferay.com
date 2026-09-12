@@ -1,0 +1,74 @@
+---
+import '@styles/global.css'
+
+// Combines the old <Helmet>/SEO molecule into the document head.
+interface Props {
+	pageTitle: string
+	description?: string
+	previewImage?: string
+	previewImageAlt?: string
+	keywords?: string
+	twitterHandle?: string
+	canonicalLink?: string
+	contentType?: string
+	bodyClass?: string
+	/** extra <meta>/<link> tags (e.g. Lexicon's twitter:* overrides) */
+}
+
+const {
+	pageTitle,
+	description,
+	previewImage,
+	previewImageAlt,
+	keywords,
+	twitterHandle,
+	canonicalLink,
+	contentType,
+	bodyClass,
+} = Astro.props
+
+const SITE = 'https://design.liferay.com'
+const ogImage = previewImage
+	? SITE + previewImage
+	: SITE + '/images/articles/design-week-team.jpeg'
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" href="/images/favicon.svg" type="image/svg+xml" />
+		<meta name="theme-color" content="#0b5fff" />
+
+		<title>{pageTitle}</title>
+		<meta property="og:title" content={pageTitle} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={ogImage} />
+		<meta property="og:type" content={contentType ?? 'website'} />
+		<meta name="twitter:card" content="summary_large_image" />
+		{previewImageAlt && <meta name="twitter:image:alt" content={previewImageAlt} />}
+		<meta name="twitter:site" content="@liferaydesign" />
+		<meta name="twitter:creator" content={twitterHandle ?? '@liferaydesign'} />
+		<meta
+			name="keyword"
+			content={`${keywords ?? ''}, Liferay, Design, Liferay Design, open source design, `}
+		/>
+		{description && <meta name="description" content={description} />}
+		{canonicalLink && <link rel="canonical" href={canonicalLink} />}
+
+		<!-- Source Code Pro (mono brand) + Source Sans Pro (longform) -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;600;700;900&display=swap"
+			rel="stylesheet"
+		/>
+
+		<slot name="head" />
+	</head>
+	<body class={bodyClass}>
+		<a href="#main-content" class="skip-link">Skip to content</a>
+		<slot />
+	</body>
+</html>

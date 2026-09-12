@@ -1,0 +1,32 @@
+{
+	"name": "Resize Handle",
+	"slug": "resize-handle",
+	"order": 340,
+	"description": "Resize Handle allows users to adjust the width of a resizable area, such as a side panel or vertical navigation, by dragging or using the keyboard. Use it when a layout needs flexible space distribution while keeping clear width limits and accessible resizing behavior.",
+	"status": "documented",
+	"figma": {
+		"fileKey": "YNNkt9Xd6ImDtEvIz4tETF",
+		"fileName": "Lexicon Components",
+		"pageNodeId": "8763:111",
+		"componentSetNodeId": "8763:279"
+	},
+	"screenshot": "/images/lexicon/figma/resize-handle.png",
+	"playgroundImage": "/images/lexicon/figma/resize-handle-playground.png",
+	"variantCount": 3,
+	"properties": [
+		{
+			"name": "State",
+			"values": [
+				"Default",
+				"Hover",
+				"Drag"
+			]
+		}
+	],
+	"tokens": {
+		"Color/Primary/primary": "#0b5fff",
+		"Color/Primary/primary-d2": "#004ad7",
+		"Color/Light/light-l1": "#f7f8f9",
+		"Color/Primary/primary-l1": "#80acff"
+	}
+}

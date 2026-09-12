@@ -1,0 +1,326 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro'
+import Navbar from '@components/Navbar.astro'
+import Footer from '@components/Footer.astro'
+import Icon from '@components/Icon.astro'
+import '@styles/lexicon.css'
+
+const cards = [
+	{ icon: 'what', title: 'Get Started', text: 'An onboarding section as an introduction to the project, its objectives and proposals', to: '/lexicon/get-started' },
+	{ icon: 'principles', title: 'Foundations', text: 'The basic principles and guidelines that lay on the core of the pattern library.', to: '/lexicon/foundations/grid' },
+	{ icon: 'library', title: 'Components', text: 'Explores the list of components and pattern that configure the building blocks of Lexicon system', to: '/lexicon/core-components/alerts' },
+	{ icon: 'folder', title: 'Resources', text: 'A set of tools links and downloads to learn Lexicon and use it in your projects', to: '/lexicon/resources' },
+]
+const socials = [
+	{ name: 'github', url: 'https://github.com/liferay-design' },
+	{ name: 'dribbble', url: 'https://dribbble.com/liferay' },
+	{ name: 'twitter', url: 'https://twitter.com/Liferay_Lexicon' },
+]
+---
+
+<BaseLayout
+	pageTitle="Liferay Lexicon | An Experience Language for Crafting Beautiful UI"
+	description="Lexicon is a design language that provides a common framework for building interfaces within the Liferay product ecosystem."
+	bodyClass="lexicon-doc"
+>
+	<main id="main-content" tabindex="-1">
+		<section class="lx-hero">
+			<div class="lx-hero-nav">
+				<Navbar underlineColor="#5fe5c1" />
+			</div>
+			<div class="lx-hero-content">
+				<h1>Lexicon</h1>
+				<p>An Experience Language for Crafting Beautiful UI</p>
+				<a class="lx-cta" href="/lexicon/get-started">Get Started</a>
+			</div>
+		</section>
+
+		<section class="lx-explore">
+			<div class="lx-explore-inner">
+				<span class="lx-vertical">Explore Lexicon</span>
+				<div class="lx-cards">
+					{
+						cards.map(c => (
+							<a class="lx-card" href={c.to}>
+								<Icon name={c.icon} width="88px" height="88px" class="lx-card-icon" />
+								<h3>{c.title}</h3>
+								<p>{c.text}</p>
+								<span class="more">Learn More</span>
+							</a>
+						))
+					}
+				</div>
+				<div class="lx-socials">
+					{socials.map(s => <a href={s.url} aria-label={s.name}><Icon name={s.name} width="1.1rem" height="1.1rem" /></a>)}
+				</div>
+			</div>
+		</section>
+
+		<section class="lx-contribute">
+			<div class="lx-contribute-inner">
+				<svg viewBox="0 0 168 173" class="lx-contribute-icon" aria-hidden="true">
+					<g fill="none" fill-rule="evenodd" stroke="#0B5FFF" stroke-width="8" transform="translate(4 4)">
+						<path fill="#E1EBFF" stroke-linecap="square" d="M0 128V0h160v128h-32l-40 32v-32"></path>
+						<path fill="#E1EBFF" stroke-linecap="square" stroke-linejoin="round" d="M88 128H4"></path>
+						<path fill="#FFF" d="M40 72h32v32H40z"></path>
+						<circle cx="104" cy="40" r="16" fill="#53E6C1"></circle>
+						<g stroke-linecap="square"><path d="M56 56V28M40 40l16.26-16L72 40"></path></g>
+						<g stroke-linecap="square"><path d="M104 73v27.99M86 87l18.293 18L122 87"></path></g>
+					</g>
+				</svg>
+				<div class="lx-contribute-copy">
+					<h2>Want to contribute?</h2>
+					<span>Check out some issues in <a href="https://github.com/liferay-design/design.liferay.com/labels/lexicon" target="_blank" rel="noopener noreferrer">GitHub</a>!</span>
+				</div>
+			</div>
+		</section>
+
+		<section class="lx-clay">
+			<a class="lx-card dark" href="https://clayui.com">
+				<Icon name="clay" width="88px" height="88px" class="lx-card-icon" />
+				<h3>Clay</h3>
+				<p>A web implementation of the Lexicon Design System.</p>
+				<span class="more">Visit Clay</span>
+			</a>
+		</section>
+	</main>
+	<Footer background="#30313f" />
+</BaseLayout>
+
+<style>
+	main { background: #fff; font-family: var(--font-lexicon); }
+
+	/* hero */
+	.lx-hero {
+		background: url(/images/lexicon/home/patternbg.svg) center / cover fixed, var(--c-primary);
+		color: #fff;
+		padding-bottom: 12rem;
+	}
+	.lx-hero-nav :global(.nav-link) {
+		color: rgba(255, 255, 255, 0.8);
+	}
+	.lx-hero-nav :global(.nav-link:hover),
+	.lx-hero-nav :global(.nav-link.active) {
+		color: #fff;
+	}
+	.lx-hero-nav :global(.nav-link::after) {
+		background: #fff;
+	}
+	.lx-hero-content {
+		max-width: 1280px;
+		margin: 0 auto;
+		padding: 7rem 2rem 0;
+		text-align: center;
+	}
+	.lx-hero-content h1 {
+		font-family: var(--font-lexicon);
+		font-weight: 800;
+		/* ~15% larger */
+		font-size: clamp(3.45rem, 6.9vw, 6.3rem);
+		letter-spacing: -0.01em;
+		margin: 0 0 1.5rem;
+		color: #fff;
+	}
+	.lx-hero-content p {
+		font-size: 1.6rem;
+		font-weight: 700;
+		color: rgba(255, 255, 255, 0.7);
+		margin: 0 0 3rem;
+	}
+	.lx-cta {
+		display: inline-block;
+		background: #fff;
+		color: var(--c-primary);
+		padding: 1.05rem 3.25rem;
+		border-radius: 0.45rem;
+		font-weight: 700;
+		font-size: 1.1rem;
+		font-family: var(--font-lexicon);
+		transition: transform 0.15s ease;
+	}
+	.lx-cta:hover {
+		transform: translateY(-0.2rem);
+	}
+
+	/* explore */
+	.lx-explore {
+		background: #fff;
+		padding: 0 2rem 0;
+	}
+	.lx-explore-inner {
+		/* match documentation.module.scss .container */
+		max-width: 960px;
+		margin: 0 auto;
+		position: relative;
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 2.5rem;
+	}
+	.lx-vertical {
+		position: absolute;
+		left: -3rem;
+		/* sit lower so it clears the blue hero block above the cards */
+		top: 11rem;
+		transform: rotate(-90deg);
+		transform-origin: left;
+		text-transform: uppercase;
+		letter-spacing: 0.25ch;
+		font-size: 12px;
+		font-weight: 700;
+		color: var(--c-main-l3);
+		white-space: nowrap;
+	}
+	.lx-cards {
+		display: contents;
+	}
+	.lx-card {
+		display: block;
+		position: relative;
+		z-index: 2;
+		background: #fff;
+		border-radius: 0.75rem;
+		padding: 6rem 4rem;
+		box-shadow: var(--elev-1);
+		color: var(--c-main);
+		text-align: center;
+		transition: transform 0.2s, box-shadow 0.2s;
+		/* lift the first row to overlap the hero like the original */
+		margin-top: -6rem;
+	}
+	.lx-card:nth-child(n + 3) {
+		margin-top: 0;
+	}
+	.lx-card:hover {
+		transform: translateY(-0.5rem);
+		box-shadow: var(--elev-2);
+	}
+	.lx-card-icon {
+		margin-bottom: 1.5rem;
+	}
+	.lx-card h3 {
+		font-family: var(--font-lexicon);
+		font-weight: 800;
+		color: var(--c-main);
+		margin-bottom: 1rem;
+	}
+	.lx-card p {
+		color: var(--c-main-l3);
+		margin-bottom: 1.5rem;
+		line-height: 1.5;
+	}
+	.lx-card .more {
+		color: var(--c-main-l2);
+		font-weight: 600;
+	}
+	.lx-socials {
+		position: absolute;
+		right: -3.5rem;
+		bottom: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+	.lx-socials a {
+		width: 2.25rem;
+		height: 2.25rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: var(--c-main-l6);
+		border-radius: 50%;
+		color: #fff;
+	}
+	.lx-socials a:hover {
+		background: var(--c-primary);
+	}
+
+	/* contribute billboard */
+	.lx-contribute {
+		background: url(/images/lexicon/home/patternbg-white.svg) center / 100% fixed, #f7f7f9;
+		/* slide up behind the cards (which sit on top via z-index) so the cards
+		   tuck into the patterned section */
+		position: relative;
+		z-index: 1;
+		margin-top: -8rem;
+		padding: 20rem 0 12rem;
+	}
+	.lx-contribute-inner {
+		max-width: 960px;
+		margin: 0 auto;
+		padding: 0 1.5rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 3rem;
+	}
+	.lx-contribute-icon {
+		width: 300px;
+		height: auto;
+		flex-shrink: 0;
+	}
+	.lx-contribute-copy h2 {
+		color: var(--c-main);
+		text-align: left;
+		margin: 0 0 0.5rem;
+		font-family: var(--font-lexicon);
+		font-weight: 800;
+		font-size: 2rem;
+	}
+	.lx-contribute-copy span {
+		font-size: 1.8rem;
+		font-weight: 400;
+		color: var(--c-main-l2);
+	}
+	.lx-contribute-copy a {
+		color: var(--c-primary);
+		text-decoration: underline;
+	}
+	@media screen and (max-width: 768px) {
+		.lx-contribute-inner {
+			flex-direction: column;
+			text-align: center;
+		}
+		.lx-contribute-icon {
+			width: 160px;
+		}
+		.lx-contribute-copy h2 {
+			text-align: center;
+		}
+	}
+
+	/* clay */
+	.lx-clay {
+		background: var(--c-main-l2);
+		padding: 5rem 2rem;
+	}
+	.lx-clay .lx-card.dark {
+		max-width: 40rem;
+		margin: 0 auto;
+		background: var(--c-main-l1);
+		color: #fff;
+		border-radius: 1rem;
+	}
+	.lx-clay .lx-card.dark h3 {
+		color: #fff;
+	}
+	.lx-clay .lx-card.dark p {
+		color: var(--c-main-l5);
+	}
+	.lx-clay .lx-card.dark .more {
+		color: var(--c-primary-l1);
+	}
+
+	@media screen and (max-width: 768px) {
+		.lx-explore-inner {
+			grid-template-columns: 1fr;
+		}
+		.lx-card,
+		.lx-card:nth-child(n + 3) {
+			margin-top: 0;
+		}
+		.lx-vertical,
+		.lx-socials {
+			display: none;
+		}
+	}
+</style>

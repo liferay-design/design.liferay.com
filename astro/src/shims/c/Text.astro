@@ -1,0 +1,7 @@
+---
+import { sxToStyle } from '@lib/sx'
+const { sx, style, class: className, as } = Astro.props
+const Tag = as || 'span'
+const s = [sxToStyle(sx), style].filter(Boolean).join(';')
+---
+<Tag class={className} style={s || undefined}><slot /></Tag>

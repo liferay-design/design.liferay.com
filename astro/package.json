@@ -1,0 +1,28 @@
+{
+	"name": "liferay-design-astro",
+	"type": "module",
+	"version": "0.1.0",
+	"private": true,
+	"description": "Astro migration of design.liferay.com (live sections: Home, Articles, Events, Team, Alumni, Lexicon)",
+	"scripts": {
+		"dev": "astro dev --host 0.0.0.0 --port 4321",
+		"build": "astro build",
+		"preview": "astro preview --host 0.0.0.0 --port 4321",
+		"check": "astro check"
+	},
+	"dependencies": {
+		"@astrojs/mdx": "^6.0.3",
+		"@astrojs/react": "^5.0.7",
+		"@astrojs/sitemap": "^3.7.3",
+		"astro": "^6.4.6",
+		"react": "^18.3.1",
+		"react-dom": "^18.3.1",
+		"rehype-autolink-headings": "^7.1.0",
+		"rehype-slug": "^6.0.0",
+		"remark-gfm": "^4.0.0"
+	},
+	"devDependencies": {
+		"@types/react": "^18.3.1",
+		"@types/react-dom": "^18.3.1"
+	}
+}

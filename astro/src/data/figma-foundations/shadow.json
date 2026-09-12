@@ -1,0 +1,21 @@
+{
+	"name": "Shadow",
+	"slug": "shadow",
+	"order": 60,
+	"description": "Elevation tokens — the drop shadows applied to surfaces by role.",
+	"figma": {
+		"fileKey": "uJmaBABXsx9voFQEdn20Di",
+		"fileName": "Lexicon Foundations",
+		"pageNodeId": "1:17"
+	},
+	"tokens": {
+		"Shadow/Alert": "Effect(type: DROP_SHADOW, color: #27283333, offset: (0, 8), radius: 16, spread: 0)",
+		"Shadow/Card-Default": "Effect(type: DROP_SHADOW, color: #2728331A, offset: (0, 0), radius: 12, spread: 0)",
+		"Shadow/Card-Drag": "Effect(type: DROP_SHADOW, color: #27283329, offset: (0, 8), radius: 16, spread: 0)",
+		"Shadow/Dropdown": "Effect(type: DROP_SHADOW, color: #2728331F, offset: (0, 4), radius: 8, spread: 0)",
+		"Shadow/Modal": "Effect(type: DROP_SHADOW, color: #27283366, offset: (0, 4), radius: 16, spread: 0)",
+		"Shadow/Popover": "Effect(type: DROP_SHADOW, color: #27283329, offset: (0, 8), radius: 16, spread: 0)",
+		"Shadow/Slider": "Effect(type: DROP_SHADOW, color: #27283333, offset: (0, 1), radius: 4, spread: 0)",
+		"Shadow/Tooltip": "Effect(type: DROP_SHADOW, color: #27283333, offset: (0, 2), radius: 4, spread: 0)"
+	}
+}

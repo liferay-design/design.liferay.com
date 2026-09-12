@@ -1,0 +1,77 @@
+---
+// Port of organisms/NavItems — primary nav. Handbook intentionally omitted
+// (it lived only in the footer). Active item derived from the section prop.
+interface Props {
+	section?: string
+}
+const { section } = Astro.props
+const pages = ['Lexicon', 'Articles', 'Events', 'Team']
+---
+
+<div class="nav-items">
+	{
+		pages.map(item => (
+			<a
+				href={'/' + item.toLowerCase()}
+				class:list={['nav-link', { active: section === item }]}
+			>
+				{item}
+			</a>
+		))
+	}
+</div>
+
+<style>
+	.nav-items {
+		display: flex;
+		align-items: center;
+	}
+	.nav-link {
+		cursor: pointer;
+		min-width: max-content;
+		color: var(--c-main-l4);
+		font-weight: var(--fw-heavy);
+		font-size: var(--fs-2);
+		margin: 0;
+		padding: 1rem;
+		transition: color 0.2s ease-out;
+		position: relative;
+	}
+	.nav-link::after {
+		content: '';
+		background: var(--c-white);
+		bottom: 0;
+		right: 1rem;
+		position: absolute;
+		height: 3px;
+		width: 1.8rem;
+		transition: transform 0.4s ease;
+		transform-origin: right;
+		transform: scaleX(0);
+	}
+	.nav-link:hover,
+	.nav-link:focus,
+	.nav-link:focus-visible,
+	.nav-link.active {
+		color: var(--c-white);
+		transition: color 0.4s ease-out;
+	}
+	.nav-link:hover::after,
+	.nav-link:focus::after,
+	.nav-link.active::after {
+		transition: transform 0.2s ease;
+		transform: scaleX(1);
+	}
+	@media screen and (max-width: 800px) {
+		.nav-items {
+			overflow-x: auto;
+			position: fixed;
+			background: var(--c-black);
+			bottom: 0;
+			left: 0;
+			right: 0;
+			padding: 1rem;
+			z-index: 1000;
+		}
+	}
+</style>

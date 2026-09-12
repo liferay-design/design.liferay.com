@@ -1,0 +1,26 @@
+---
+import { sxToStyle } from '@lib/sx'
+const { src, alt, caption, circle, align, size, sx, style } = Astro.props
+const SIZES: Record<string, string> = { small: '50%', medium: '100%', large: '120%', xLarge: '160%' }
+const figStyle = [
+	size ? `width:${SIZES[size] ?? size}` : '',
+	align === 'left' ? 'float:left;margin-left:-8%' : '',
+	align === 'right' ? 'float:right;margin-right:-8%' : '',
+	!align ? 'margin-left:auto;margin-right:auto' : '',
+	sxToStyle(sx),
+	style,
+]
+	.filter(Boolean)
+	.join(';')
+---
+<figure style={figStyle} class:list={['mdx-image', { circle }]}>
+	<img src={src} alt={alt ?? caption ?? ''} loading="lazy" />
+	{caption && <figcaption>{caption}</figcaption>}
+</figure>
+
+<style>
+	.mdx-image { margin: 0 auto; }
+	.mdx-image img { width: 100%; display: block; }
+	.mdx-image.circle img { border-radius: 50%; aspect-ratio: 1; object-fit: cover; }
+	figcaption { color: var(--c-main-l3); font-size: 0.9rem; text-align: center; margin-top: 0.5rem; }
+</style>

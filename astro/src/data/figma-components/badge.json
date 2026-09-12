@@ -1,0 +1,81 @@
+{
+	"name": "Badge",
+	"slug": "badge",
+	"order": 40,
+	"description": "This frame contains the actual components and variants, any change applied to these components will propagate to the entire design system.",
+	"status": "documented",
+	"figma": {
+		"fileKey": "YNNkt9Xd6ImDtEvIz4tETF",
+		"fileName": "Lexicon Components",
+		"pageNodeId": "1:6",
+		"componentSetNodeId": "63:5098"
+	},
+	"links": {
+		"clay": "https://clayui.com/docs/components/badge.html",
+		"guidelines": "/lexicon/core-components/badges"
+	},
+	"screenshot": "/images/lexicon/figma/badge.png",
+	"properties": [
+		{
+			"name": "Type",
+			"values": [
+				"Primary",
+				"Secondary",
+				"Info",
+				"Success",
+				"Warning",
+				"Danger"
+			]
+		},
+		{
+			"name": "Translucent",
+			"values": [
+				"Off",
+				"On"
+			]
+		},
+		{
+			"name": "Dark Mode",
+			"values": [
+				"False",
+				"True"
+			]
+		}
+	],
+	"variantCount": 24,
+	"anatomy": [
+		{
+			"part": "Container",
+			"description": "Rounded shape sized to its content."
+		},
+		{
+			"part": "Value",
+			"description": "Number or short text label, semi-bold."
+		}
+	],
+	"tokens": {
+		"Color/Primary/primary": "#0b5fff",
+		"Color/Primary/primary-d1": "#0053f0",
+		"Color/Primary/primary-l1": "#80acff",
+		"Color/Secondary/secondary": "#6b6c7e",
+		"Color/Secondary/secondary-l1": "#a7a9bc",
+		"Color/Secondary/secondary-l3": "#e7e7ed",
+		"Color/Info/info": "#2e5aac",
+		"Color/Info/info-d1": "#294f98",
+		"Color/Info/info-l1": "#89a7e0",
+		"Color/Success/success": "#287d3c",
+		"Color/Success/success-d1": "#226a33",
+		"Color/Success/success-l1": "#5aca75",
+		"Color/Warning/warning": "#b95000",
+		"Color/Warning/warning-d1": "#9f4500",
+		"Color/Warning/warning-l1": "#ff8f39",
+		"Color/Danger/danger": "#da1414",
+		"Color/Danger/danger-d1": "#c31212",
+		"Color/Danger/danger-l1": "#f48989",
+		"Color/Light/white": "#ffffff",
+		"Spacing/spacing-2": "4",
+		"Border Radius/rounded-full": "999",
+		"10/Semibold": "Font(family: \"SF Pro Text\", style: Semibold, size: 10, weight: 600, lineHeight: 1.5, letterSpacing: 0)"
+	},
+	"playgroundImage": "/images/lexicon/figma/badge-playground.png"
+}

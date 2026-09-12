@@ -1,0 +1,45 @@
+{
+	"name": "Form Sheet",
+	"slug": "form-sheet",
+	"order": 160,
+	"description": "A container that holds a form or display of information. Form sheet helps identify different content blocks.",
+	"status": "documented",
+	"figma": {
+		"fileKey": "YNNkt9Xd6ImDtEvIz4tETF",
+		"fileName": "Lexicon Components",
+		"pageNodeId": "329:8940",
+		"componentSetNodeId": "368:5739"
+	},
+	"screenshot": "/images/lexicon/figma/form-sheet.png",
+	"playgroundImage": "/images/lexicon/figma/form-sheet-playground.png",
+	"variantCount": 2,
+	"properties": [
+		{
+			"name": "Variant",
+			"values": [
+				"1 Column",
+				"2 Columns"
+			]
+		}
+	],
+	"tokens": {
+		"Color/Dark/dark": "#272833",
+		"20/Bold": "Font(family: \"SF Pro Text\", style: Bold, size: 20, weight: 700, lineHeight: 1.25, letterSpacing: 0)",
+		"16/Regular": "Font(family: \"SF Pro Text\", style: Regular, size: 16, weight: 400, lineHeight: 1.5, letterSpacing: 0)",
+		"Spacing/spacing-7": "24",
+		"Border Radius/rounded-md": "4",
+		"Color/Charts/Pink/pink-l4": "#ffb2de",
+		"Color/Charts/Pink/pink": "#e50082",
+		"Spacing/spacing-3": "8",
+		"Spacing/spacing-5": "16",
+		"Border Radius/rounded-lg": "8",
+		"Color/Primary/primary": "#0b5fff",
+		"Color/Light/white": "#ffffff",
+		"Color/Secondary/secondary-l0": "#9393a4",
+		"Spacing/spacing-10": "48",
+		"Color/Secondary/secondary-l3": "#e7e7ed",
+		"Spacing/spacing-4": "12",
+		"Color/Light/light-l1": "#f7f8f9",
+		"Color/Primary/primary-l1": "#80acff"
+	}
+}

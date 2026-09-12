@@ -1,0 +1,22 @@
+{
+	"name": "Picker",
+	"slug": "picker",
+	"order": 300,
+	"description": "A select is very similar to a dropdown visually but it let users select options from the panel and then represent the selection in the button.",
+	"status": "documented",
+	"figma": {
+		"fileKey": "YNNkt9Xd6ImDtEvIz4tETF",
+		"fileName": "Lexicon Components",
+		"pageNodeId": "5982:700"
+	},
+	"playgroundImage": "/images/lexicon/figma/picker-playground.png",
+	"screenshot": "/images/lexicon/figma/picker.png",
+	"tokens": {
+		"Spacing/spacing-5": "16",
+		"Spacing/spacing-3": "8",
+		"Border Radius/rounded-lg": "8",
+		"Color/Light/white": "#ffffff",
+		"Color/Secondary/secondary-l0": "#9393a4",
+		"Spacing/spacing-2": "4"
+	}
+}

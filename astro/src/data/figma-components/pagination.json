@@ -1,0 +1,51 @@
+{
+	"name": "Pagination",
+	"slug": "pagination",
+	"order": 290,
+	"description": "Pagination provides horizontal navigation between chunks(pages) of a dataset.",
+	"status": "documented",
+	"figma": {
+		"fileKey": "YNNkt9Xd6ImDtEvIz4tETF",
+		"fileName": "Lexicon Components",
+		"pageNodeId": "1:19",
+		"componentSetNodeId": "1018:7801"
+	},
+	"links": {
+		"clay": "https://clayui.com/docs/components/pagination.html",
+		"guidelines": "/lexicon/core-components/pagination"
+	},
+	"screenshot": "/images/lexicon/figma/pagination.png",
+	"playgroundImage": "/images/lexicon/figma/pagination-playground.png",
+	"variantCount": 8,
+	"properties": [
+		{
+			"name": "Variant",
+			"values": [
+				"Text",
+				"Icon"
+			]
+		},
+		{
+			"name": "State",
+			"values": [
+				"Default",
+				"Hover",
+				"Focus",
+				"Selected"
+			]
+		}
+	],
+	"tokens": {
+		"Color/Secondary/secondary": "#6b6c7e",
+		"14/Regular": "Font(family: \"SF Pro Text\", style: Regular, size: 14, weight: 400, lineHeight: 1.5, letterSpacing: 0)",
+		"Spacing/spacing-3": "8",
+		"Border Radius/rounded-md": "4",
+		"Color/Dark/dark": "#272833",
+		"14/Semibold": "Font(family: \"SF Pro Text\", style: Semibold, size: 14, weight: 600, lineHeight: 1.5, letterSpacing: 0)",
+		"Border Radius/rounded-sm": "2",
+		"Color/Light/white": "#ffffff",
+		"Color/Primary/primary-l0": "#5791ff",
+		"Color/Light/light-l1": "#f7f8f9",
+		"Color/Primary/primary": "#0b5fff"
+	}
+}

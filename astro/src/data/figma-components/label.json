@@ -1,0 +1,85 @@
+{
+	"name": "Label",
+	"slug": "label",
+	"order": 210,
+	"description": "A label helps categorize information providing quick and easy recognition.",
+	"status": "documented",
+	"figma": {
+		"fileKey": "YNNkt9Xd6ImDtEvIz4tETF",
+		"fileName": "Lexicon Components",
+		"pageNodeId": "1:14",
+		"componentSetNodeId": "210:3634"
+	},
+	"links": {
+		"clay": "https://clayui.com/docs/components/label.html",
+		"guidelines": "/lexicon/core-components/labels"
+	},
+	"screenshot": "/images/lexicon/figma/label.png",
+	"properties": [
+		{
+			"name": "Type",
+			"values": [
+				"Secondary",
+				"Info",
+				"Success",
+				"Warning",
+				"Danger"
+			]
+		},
+		{
+			"name": "Size",
+			"values": [
+				"Regular",
+				"Small"
+			]
+		},
+		{
+			"name": "Bold",
+			"values": [
+				"No",
+				"Yes"
+			]
+		}
+	],
+	"variantCount": 20,
+	"anatomy": [
+		{
+			"part": "Container",
+			"description": "Rounded chip whose colour conveys the category."
+		},
+		{
+			"part": "Text",
+			"description": "Short categorising label."
+		}
+	],
+	"tokens": {
+		"Color/Info/info-d1": "#294f98",
+		"Color/Info/info-d2": "#234584",
+		"Color/Info/info-l1": "#89a7e0",
+		"Color/Info/info-l2": "#eef2fa",
+		"Color/Success/success-d1": "#226a33",
+		"Color/Success/success-d2": "#1c5629",
+		"Color/Success/success-l1": "#5aca75",
+		"Color/Success/success-l2": "#edf9f0",
+		"Color/Warning/warning-d1": "#9f4500",
+		"Color/Warning/warning-d2": "#863a00",
+		"Color/Warning/warning-l1": "#ff8f39",
+		"Color/Warning/warning-l2": "#fff4ec",
+		"Color/Danger/danger-d1": "#c31212",
+		"Color/Danger/danger-d2": "#ab1010",
+		"Color/Danger/danger-l1": "#f48989",
+		"Color/Danger/danger-l2": "#feefef",
+		"Color/Secondary/secondary-l2": "#cdced9",
+		"Color/Secondary/secondary-l3": "#e7e7ed",
+		"Color/Dark/dark-d2": "#111116",
+		"Color/Light/white": "#ffffff",
+		"Color/Light/light-l1": "#f7f8f9",
+		"Color/Primary/primary-l1": "#80acff",
+		"Spacing/spacing-1": "2",
+		"Spacing/spacing-2": "4",
+		"Spacing/spacing-3": "8",
+		"Border Radius/rounded-md": "4",
+		"14/Semibold": "Font(family: \"SF Pro Text\", style: Semibold, size: 14, weight: 600, lineHeight: 1.5, letterSpacing: 0)"
+	},
+	"playgroundImage": "/images/lexicon/figma/label-playground.png"
+}

@@ -1,0 +1,281 @@
+---
+import { getCollection } from 'astro:content'
+import BaseLayout from '@layouts/BaseLayout.astro'
+import LexiconSidebar from '@components/LexiconSidebar.astro'
+import Footer from '@components/Footer.astro'
+import Icon from '@components/Icon.astro'
+import { buildSidebarTree } from '@lib/lexicon'
+import { categoriseTokens, figmaNodeUrl, variantPermutations } from '@lib/figma'
+import '@styles/lexicon.css'
+
+export async function getStaticPaths() {
+	const comps = await getCollection('figmaComponents')
+	return comps.map(entry => ({ params: { slug: entry.data.slug }, props: { entry } }))
+}
+
+const { entry } = Astro.props
+const c = entry.data
+const tree = await buildSidebarTree()
+const path = `/lexicon/figma-components/${c.slug}`
+
+const figmaUrl = figmaNodeUrl(c.figma)
+const tokens = categoriseTokens(c.tokens)
+const totalVariants = c.variantCount ?? variantPermutations(c.properties)
+const tokenCount = c.tokens ? Object.keys(c.tokens).length : 0
+const hasTokens =
+	tokens.colors.length ||
+	tokens.spacing.length ||
+	tokens.radius.length ||
+	tokens.typography.length ||
+	tokens.shadow.length ||
+	tokens.opacity.length
+---
+
+<BaseLayout
+	pageTitle={`${c.name} — Figma Components on Lexicon by Design.Liferay`}
+	description={c.description}
+	previewImage="/images/resources/lexicon-cover.png"
+	contentType="article"
+	bodyClass="lexicon-doc"
+>
+	<div class="lexicon-grid lexicon-theme">
+		<LexiconSidebar tree={tree} path={path} />
+		<main id="main-content" tabindex="-1" class="lexicon-main">
+			<div class="lexicon-doc-container fc">
+				<a class="fc-back" href="/lexicon/figma-components">← Figma Components</a>
+				<h1>{c.name}</h1>
+
+				<div class="fc-labels">
+					<a class="label info-full" href={figmaUrl} target="_blank" rel="noopener">View in Figma</a>
+					{c.links?.clay && <a class="label info" href={c.links.clay} target="_blank" rel="noopener">View in Clay</a>}
+					{c.links?.guidelines && <a class="label neutral" href={c.links.guidelines}>Guidelines</a>}
+					{c.status === 'stub' && <span class="label draft">Docs pending</span>}
+				</div>
+
+				{c.description && <p class="lexicon-description">{c.description}</p>}
+
+				{/* ---- Preview ---- */}
+				{
+					c.screenshot ? (
+						<section class="fc-section">
+							<h2>Overview</h2>
+							<figure class="fc-shot">
+								<img
+									src={c.screenshot}
+									alt={
+										c.properties && c.properties.length
+											? `${c.name} component — ${c.variantCount ?? ''} variants across ${c.properties.map(p => p.name).join(', ')}`.replace('  ', ' ')
+											: `${c.name} component variants`
+									}
+									loading="lazy"
+								/>
+								<figcaption>Representative example from the Lexicon library.</figcaption>
+							</figure>
+						</section>
+					) : (
+						<section class="fc-section">
+							<div class="fc-shot placeholder">
+								<Icon name="lexicon" width="2.5rem" height="2.5rem" />
+								<p>Live preview not exported yet. Open the set <a href={figmaUrl} target="_blank" rel="noopener">in Figma</a> or regenerate with the import skill.</p>
+							</div>
+						</section>
+					)
+				}
+
+				{/* ---- Playground (contextual examples) ---- */}
+				{
+					c.playgroundImage && (
+						<section class="fc-section">
+							<h2>Playground</h2>
+							<figure class="fc-shot">
+								<img
+									src={c.playgroundImage}
+									alt={`${c.name} component playground — example ${c.name.toLowerCase()} instances in context`}
+									loading="lazy"
+								/>
+								<figcaption>The component in context, from the Figma playground.</figcaption>
+							</figure>
+						</section>
+					)
+				}
+
+				{/* ---- Anatomy ---- */}
+				{
+					c.anatomy && c.anatomy.length > 0 && (
+						<section class="fc-section">
+							<h2>Anatomy</h2>
+							<ol class="fc-anatomy">
+								{c.anatomy.map((a, i) => (
+									<li>
+										<span class="fc-num">{i + 1}</span>
+										<div>
+											<strong>{a.part}</strong>
+											{a.description && <span>{a.description}</span>}
+										</div>
+									</li>
+								))}
+							</ol>
+						</section>
+					)
+				}
+
+				{/* ---- Variants / properties ---- */}
+				{
+					c.properties && c.properties.length > 0 && (
+						<section class="fc-section">
+							<h2>Variants</h2>
+							<p class="fc-meta">
+								{c.properties.length} propert{c.properties.length === 1 ? 'y' : 'ies'} ·{' '}
+								<strong>{totalVariants}</strong> total variant{totalVariants === 1 ? '' : 's'}
+							</p>
+							<table class="fc-table">
+								<thead><tr><th>Property</th><th>Values</th></tr></thead>
+								<tbody>
+									{c.properties.map(p => (
+										<tr>
+											<td><code>{p.name}</code></td>
+											<td>
+												<span class="fc-chips">
+													{p.values.map(v => <span class="fc-chip">{v}</span>)}
+												</span>
+											</td>
+										</tr>
+									))}
+								</tbody>
+							</table>
+						</section>
+					)
+				}
+
+				{/* ---- Tokens ---- */}
+				{
+					hasTokens ? (
+						<section class="fc-section">
+							<h2>Design tokens</h2>
+							<p class="fc-meta">{tokenCount} variables consumed by this component in Figma.</p>
+
+							{tokens.colors.length > 0 && (
+								<>
+									<h3>Color</h3>
+									<div class="fc-swatches">
+										{tokens.colors.map(t => (
+											<div class="fc-swatch">
+												<span class="fc-chip-color" style={`background:${t.value}`} />
+												<code>{t.name}</code>
+												<span class="fc-val">{t.value}</span>
+											</div>
+										))}
+									</div>
+								</>
+							)}
+
+							{tokens.typography.length > 0 && (
+								<>
+									<h3>Typography</h3>
+									<table class="fc-table">
+										<thead><tr><th>Token</th><th>Family</th><th>Size</th><th>Weight</th><th>Line</th></tr></thead>
+										<tbody>
+											{tokens.typography.map(t => (
+												<tr>
+													<td><code>{t.name}</code></td>
+													<td>{t.family}</td>
+													<td>{t.size}</td>
+													<td>{t.weight}</td>
+													<td>{t.lineHeight}</td>
+												</tr>
+											))}
+										</tbody>
+									</table>
+								</>
+							)}
+
+							{(tokens.spacing.length > 0 || tokens.radius.length > 0 || tokens.opacity.length > 0 || tokens.shadow.length > 0) && (
+								<>
+									<h3>Spacing, radius &amp; effects</h3>
+									<table class="fc-table">
+										<thead><tr><th>Token</th><th>Value</th></tr></thead>
+										<tbody>
+											{[...tokens.spacing, ...tokens.radius, ...tokens.opacity, ...tokens.shadow].map(t => (
+												<tr><td><code>{t.name}</code></td><td>{t.value}</td></tr>
+											))}
+										</tbody>
+									</table>
+								</>
+							)}
+						</section>
+					) : (
+						c.status !== 'stub' && (
+							<section class="fc-section">
+								<h2>Design tokens</h2>
+								<p class="fc-meta">No bound variables found on this component set.</p>
+							</section>
+						)
+					)
+				}
+
+				{/* ---- Source ---- */}
+				<section class="fc-section fc-source">
+					<h2>Source</h2>
+					<dl>
+						<dt>Figma file</dt><dd><code>{c.figma.fileName ?? c.figma.fileKey}</code></dd>
+						{c.figma.componentSetNodeId && (<><dt>Component set</dt><dd><code>{c.figma.componentSetNodeId}</code></dd></>)}
+						<dt>Open</dt><dd><a href={figmaUrl} target="_blank" rel="noopener">{figmaUrl}</a></dd>
+					</dl>
+				</section>
+			</div>
+			<Footer markdown light />
+		</main>
+	</div>
+</BaseLayout>
+
+<style>
+	.lexicon-grid { display: grid; grid-template-columns: 20rem 1fr; min-height: 100vh; background: #fff; }
+	.lexicon-main { background: #fff; min-width: 0; overflow-x: hidden; }
+	.lexicon-doc-container { max-width: 832px; padding: 2rem 4rem 5rem; margin: 0 auto; }
+
+	.fc-back { display: inline-block; margin-bottom: 1rem; color: var(--c-main-l3); font-size: 0.85rem; text-decoration: none; }
+	.fc-back:hover { color: var(--c-primary); }
+	.fc-labels { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0 0; }
+
+	.fc-section { margin-top: 3.5rem; }
+	.fc-section h2 { font-family: var(--font-lexicon); font-weight: 800; font-size: 1.5rem; color: var(--c-main); margin-bottom: 1rem; }
+	.fc-section h3 { font-weight: 700; color: var(--c-main); margin: 2rem 0 0.75rem; font-size: 1.05rem; }
+	.fc-meta { color: var(--c-main-l3); margin-bottom: 1rem; font-size: 0.95rem; }
+
+	.fc-shot { margin: 0; border: 1px solid var(--c-main-l6); border-radius: 0.5rem; overflow: hidden; background: #fbfbfc; }
+	.fc-shot img { display: block; width: 100%; }
+	.fc-shot figcaption { padding: 0.75rem 1rem; font-size: 0.8rem; color: var(--c-main-l3); border-top: 1px solid var(--c-main-l6); }
+	.fc-shot.placeholder { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; padding: 3rem 2rem; text-align: center; color: var(--c-main-l3); }
+	.fc-shot.placeholder p { margin: 0; max-width: 32ch; }
+
+	.fc-anatomy { list-style: none; margin: 0; padding: 0; }
+	.fc-anatomy li { display: flex; gap: 1rem; align-items: flex-start; padding: 0.75rem 0; border-bottom: 1px solid var(--c-main-l6); }
+	.fc-num { flex-shrink: 0; width: 1.6rem; height: 1.6rem; border-radius: 50%; background: var(--c-primary); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; }
+	.fc-anatomy strong { display: block; color: var(--c-main); }
+	/* only the description span, NOT the numbered badge (.fc-num) */
+	.fc-anatomy div span { color: var(--c-main-l3); font-size: 0.9rem; }
+	.fc-num { color: #fff; }
+
+	.fc-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+	.fc-table th { text-align: left; padding: 0.5rem 0.75rem; border-bottom: 2px solid var(--c-main-l6); color: var(--c-main-l2); font-weight: 700; }
+	.fc-table td { padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--c-main-l6); vertical-align: top; color: var(--c-main-l2); }
+	.fc-table code { font-size: 0.85em; }
+
+	.fc-chips { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+	.fc-chip { background: var(--c-main-l6); border-radius: 0.25rem; padding: 0.15rem 0.5rem; font-size: 0.8rem; color: var(--c-main-l1); }
+
+	.fc-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: 0.5rem; }
+	.fc-swatch { display: flex; align-items: center; gap: 0.6rem; padding: 0.4rem; border: 1px solid var(--c-main-l6); border-radius: 0.4rem; }
+	.fc-chip-color { width: 1.5rem; height: 1.5rem; border-radius: 0.25rem; flex-shrink: 0; border: 1px solid rgba(0,0,0,0.08); }
+	.fc-swatch code { font-size: 0.75rem; color: var(--c-main-l2); flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+	.fc-swatch .fc-val { font-size: 0.7rem; color: var(--c-main-l3); text-transform: uppercase; }
+
+	.fc-source dl { display: grid; grid-template-columns: max-content 1fr; gap: 0.4rem 1.5rem; font-size: 0.9rem; }
+	.fc-source dt { color: var(--c-main-l3); }
+	.fc-source dd { margin: 0; color: var(--c-main-l2); overflow-wrap: anywhere; }
+
+	@media screen and (max-width: 768px) {
+		.lexicon-grid { display: block; }
+		.lexicon-doc-container { max-width: none; padding: 4rem 1.25rem 6rem; }
+	}
+</style>

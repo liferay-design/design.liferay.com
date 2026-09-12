@@ -1,0 +1,17 @@
+{
+	"name": "Border Radius",
+	"slug": "border-radius",
+	"order": 40,
+	"description": "Corner radius tokens, from subtle rounding to fully pill-shaped.",
+	"figma": {
+		"fileKey": "uJmaBABXsx9voFQEdn20Di",
+		"fileName": "Lexicon Foundations",
+		"pageNodeId": "18:176"
+	},
+	"tokens": {
+		"Border Radius/rounded-sm": "2",
+		"Border Radius/rounded-md": "4",
+		"Border Radius/rounded-lg": "8",
+		"Border Radius/rounded-full": "999"
+	}
+}

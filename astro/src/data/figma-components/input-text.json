@@ -1,0 +1,84 @@
+{
+	"name": "Input: Text",
+	"slug": "input-text",
+	"order": 190,
+	"description": "Inputs allow users to insert information and share it with the system which will be stored in databases and used in datasets.",
+	"status": "documented",
+	"figma": {
+		"fileKey": "YNNkt9Xd6ImDtEvIz4tETF",
+		"fileName": "Lexicon Components",
+		"pageNodeId": "1:12",
+		"componentSetNodeId": "334:22427"
+	},
+	"links": {
+		"clay": "https://clayui.com/docs/components/form.html"
+	},
+	"screenshot": "/images/lexicon/figma/input-text.png",
+	"playgroundImage": "/images/lexicon/figma/input-text-playground.png",
+	"variantCount": 54,
+	"properties": [
+		{
+			"name": "Size",
+			"values": [
+				"Regular",
+				"Small"
+			]
+		},
+		{
+			"name": "Type",
+			"values": [
+				"Text",
+				"Text Area",
+				"Localizable"
+			]
+		},
+		{
+			"name": "State",
+			"values": [
+				"Placeholder",
+				"Default",
+				"Active (Focus)",
+				"Disabled",
+				"Read Only",
+				"Not Localizable",
+				"Success",
+				"Error",
+				"Warning"
+			]
+		}
+	],
+	"tokens": {
+		"Color/Dark/dark": "#272833",
+		"14/Semibold": "Font(family: \"SF Pro Text\", style: Semibold, size: 14, weight: 600, lineHeight: 1.5, letterSpacing: 0)",
+		"Secondary/$secondary": "#6B6C7E",
+		"Color/Warning/warning": "#b95000",
+		"Spacing/spacing-2": "4",
+		"Color/Secondary/secondary": "#6b6c7e",
+		"16/Regular": "Font(family: \"SF Pro Text\", style: Regular, size: 16, weight: 400, lineHeight: 1.5, letterSpacing: 0)",
+		"Spacing/spacing-5": "16",
+		"Spacing/spacing-3": "8",
+		"Border Radius/rounded-lg": "8",
+		"Color/Light/light": "#f1f2f5",
+		"Color/Secondary/secondary-l3": "#e7e7ed",
+		"Spacing/spacing-4": "12",
+		"Color/Primary/primary-l0": "#5791ff",
+		"Color/Light/white": "#ffffff",
+		"Color/Primary/primary-l3": "#f0f5ff",
+		"Color/Primary/primary-l1": "#80acff",
+		"Opacity/translucent-1": "40",
+		"Color/Secondary/secondary-l0": "#9393a4",
+		"14/Regular": "Font(family: \"SF Pro Text\", style: Regular, size: 14, weight: 400, lineHeight: 1.5, letterSpacing: 0)",
+		"Color/Success/success-l2": "#edf9f0",
+		"Color/Success/success-l1": "#5aca75",
+		"Color/Danger/danger-l2": "#feefef",
+		"Color/Danger/danger-l1": "#f48989",
+		"Color/Warning/warning-l2": "#fff4ec",
+		"Color/Warning/warning-l1": "#ff8f39",
+		"12/Semibold": "Font(family: \"SF Pro Text\", style: Semibold, size: 12, weight: 600, lineHeight: 1.5, letterSpacing: 0)",
+		"Spacing/spacing-1": "2",
+		"12/Regular": "Font(family: \"SF Pro Text\", style: Regular, size: 12, weight: 400, lineHeight: 1.5, letterSpacing: 0)",
+		"Spacing/spacing-9": "40",
+		"Spacing/spacing-7": "24",
+		"Color/Light/light-l1": "#f7f8f9"
+	}
+}

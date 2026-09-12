@@ -1,0 +1,66 @@
+---
+// Port of atoms/Container — width-capped centered wrapper with an optional
+// section heading + "nice link" on the right.
+import Link from './Link.astro'
+interface Props {
+	heading?: string
+	linkText?: string
+	linkDestination?: string
+	background?: string
+	class?: string
+	style?: string
+}
+const { heading, linkText, linkDestination, background, class: className, style } = Astro.props
+const wrapperStyle = [background ? `background:${background}` : '', style].filter(Boolean).join(';')
+---
+
+<div class:list={['container-wrap', className]} style={wrapperStyle}>
+	<div class="container">
+		{
+			(heading || linkText) && (
+				<div class="container-head">
+					{heading && <h2 class="container-heading">{heading}</h2>}
+					{linkText && linkDestination && (
+						<Link to={linkDestination} class="nice-link">
+							{linkText}
+						</Link>
+					)}
+				</div>
+			)
+		}
+		<slot />
+	</div>
+</div>
+
+<style>
+	.container {
+		width: 100%;
+		max-width: 1280px;
+		padding: 3rem 1rem;
+		margin: 0 auto;
+	}
+	.container-head {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+	}
+	.container-heading {
+		color: var(--c-white);
+		padding: 3rem 0;
+	}
+	.nice-link {
+		color: var(--c-primary);
+		font-weight: var(--fw-heavy);
+	}
+	@media screen and (max-width: 1280px) {
+		.container {
+			padding: 3rem;
+		}
+	}
+	@media screen and (max-width: 768px) {
+		.container {
+			max-width: 100vw;
+			padding: 3rem 2rem;
+		}
+	}
+</style>

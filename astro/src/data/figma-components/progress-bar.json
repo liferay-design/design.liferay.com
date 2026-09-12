@@ -1,0 +1,56 @@
+{
+	"name": "Progress Bar",
+	"slug": "progress-bar",
+	"order": 320,
+	"description": "A progress bar is an indicator from the system to communicate the completion percentage to users in the interface.",
+	"status": "documented",
+	"figma": {
+		"fileKey": "YNNkt9Xd6ImDtEvIz4tETF",
+		"fileName": "Lexicon Components",
+		"pageNodeId": "1:20",
+		"componentSetNodeId": "545:228"
+	},
+	"links": {
+		"clay": "https://clayui.com/docs/components/progress-bar.html",
+		"guidelines": "/lexicon/core-components/progress-bars"
+	},
+	"screenshot": "/images/lexicon/figma/progress-bar.png",
+	"playgroundImage": "/images/lexicon/figma/progress-bar-playground.png",
+	"variantCount": 14,
+	"properties": [
+		{
+			"name": "State",
+			"values": [
+				"Loading",
+				"Striped",
+				"Warning",
+				"Completed"
+			]
+		},
+		{
+			"name": "Value",
+			"values": [
+				"0%",
+				"10%",
+				"30%",
+				"50%",
+				"70%",
+				"90%",
+				"100%"
+			]
+		}
+	],
+	"tokens": {
+		"Color/Dark/dark": "#272833",
+		"14/Semibold": "Font(family: \"SF Pro Text\", style: Semibold, size: 14, weight: 600, lineHeight: 1.5, letterSpacing: 0)",
+		"Color/Secondary/secondary-l3": "#e7e7ed",
+		"Border Radius/rounded-md": "4",
+		"Color/Primary/primary": "#0b5fff",
+		"Color/Primary/_primary": "#0b5fff",
+		"Color/Light/white": "#ffffff",
+		"Color/Warning/warning": "#b95000",
+		"Color/Success/success": "#287d3c",
+		"Color/Light/light-l1": "#f7f8f9",
+		"Color/Primary/primary-l1": "#80acff"
+	}
+}

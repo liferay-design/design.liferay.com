@@ -1,0 +1,51 @@
+{
+	"name": "Navigation Bar",
+	"slug": "navigation-bar",
+	"order": 280,
+	"description": "A navigation bar, navbar, is a horizontal bar that provides several access points to different parts of a system.",
+	"status": "documented",
+	"figma": {
+		"fileKey": "YNNkt9Xd6ImDtEvIz4tETF",
+		"fileName": "Lexicon Components",
+		"pageNodeId": "1:18",
+		"componentSetNodeId": "502:3962"
+	},
+	"links": {
+		"clay": "https://clayui.com/docs/components/navigation-bar.html",
+		"guidelines": "/lexicon/core-components/navigation"
+	},
+	"screenshot": "/images/lexicon/figma/navigation-bar.png",
+	"playgroundImage": "/images/lexicon/figma/navigation-bar-playground.png",
+	"variantCount": 10,
+	"properties": [
+		{
+			"name": "State",
+			"values": [
+				"Active",
+				"Default",
+				"Hover",
+				"Focus",
+				"Disabled"
+			]
+		},
+		{
+			"name": "Inverted",
+			"values": [
+				"False",
+				"True"
+			]
+		}
+	],
+	"tokens": {
+		"Color/Dark/dark": "#272833",
+		"14/Semibold": "Font(family: \"SF Pro Text\", style: Semibold, size: 14, weight: 600, lineHeight: 1.5, letterSpacing: 0)",
+		"Spacing/spacing-2": "4",
+		"Spacing/spacing-5": "16",
+		"Color/Primary/primary-l1": "#80acff",
+		"Color/Secondary/secondary": "#6b6c7e",
+		"Color/Light/white": "#ffffff",
+		"Opacity/translucent-1": "40",
+		"Color/Secondary/secondary-l2": "#cdced9",
+		"Color/Primary/primary": "#0b5fff"
+	}
+}

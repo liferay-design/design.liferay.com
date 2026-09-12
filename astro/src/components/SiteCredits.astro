@@ -1,0 +1,22 @@
+---
+// Port of molecules/SiteCredits
+import Link from './Link.astro'
+---
+
+<div class="credits">
+	<span>Part of <Link to="https://liferay.com">Liferay, Inc</Link></span>
+	<span>
+		<Link to="https://github.com/liferay-design/design.liferay.com/blob/master/LICENSE">Code</Link>
+		/<Link to="/resources/license">Content</Link> Licenses
+	</span>
+</div>
+
+<style>
+	.credits {
+		display: flex;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		font-size: var(--fs-1);
+		gap: 1rem;
+	}
+</style>

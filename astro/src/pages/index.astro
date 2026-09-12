@@ -1,0 +1,60 @@
+---
+import { getCollection } from 'astro:content'
+import MainLayout from '@layouts/MainLayout.astro'
+import Container from '@components/Container.astro'
+import HeroBanner from '@components/HeroBanner.astro'
+import CardDefault from '@components/CardDefault.astro'
+import { avatarPath, cleanId, minRead } from '@lib/helpers'
+
+const articles = (await getCollection('articles', ({ data }) => data.publish !== false))
+	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+	.slice(0, 3)
+---
+
+<MainLayout
+	pageTitle="Design.Liferay"
+	description="Blogs, careers, guidelines, and other resources from the Design Teams at Liferay!"
+>
+	<HeroBanner />
+
+	<Container heading="What's New">
+		<div class="grid-three">
+			{
+				articles.map(post => (
+					<CardDefault
+						avatarImage
+						imageURL={post.data.featuredImage}
+						link={`/articles/${cleanId(post.id)}`}
+						title={post.data.title}
+						subtitle={`${minRead(post.body)} Min Read`}
+						avatarImageURL={avatarPath(post.data.author)}
+					/>
+				))
+			}
+		</div>
+	</Container>
+
+	<Container
+		heading="Resources"
+		background="linear-gradient(to bottom, #fff, #fff 80%, #13141F 80%)"
+	>
+		<div class="grid-two">
+			<CardDefault
+				aspectRatio="16:9"
+				imageURL="/images/resources/lexicon-cover.png"
+				icon="lexicon"
+				title="Lexicon Design System"
+				subtitle="Our open-source system for designing enterprise software"
+				link="/lexicon"
+			/>
+			<CardDefault
+				aspectRatio="16:9"
+				imageURL="/images/resources/figma-component-library.png"
+				icon="fa_figma"
+				title="Free Figma Resources"
+				subtitle="Utilities and components to help you speed up your workflow"
+				link="/resources/figma"
+			/>
+		</div>
+	</Container>
+</MainLayout>

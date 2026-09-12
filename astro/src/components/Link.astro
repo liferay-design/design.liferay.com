@@ -1,0 +1,23 @@
+---
+// Port of src/components/atoms/Link.js — internal links render plain <a>
+// (Astro has no client router by default); external links open in a new tab.
+interface Props {
+	to: string
+	class?: string
+	[key: string]: any
+}
+const { to, class: className, ...rest } = Astro.props
+const internal = /^\/(?!\/)/.test(to) || to?.startsWith('#')
+---
+
+{
+	internal ? (
+		<a href={to} class={className} {...rest}>
+			<slot />
+		</a>
+	) : (
+		<a href={to} class={className} target="_blank" rel="noopener noreferrer" {...rest}>
+			<slot />
+		</a>
+	)
+}

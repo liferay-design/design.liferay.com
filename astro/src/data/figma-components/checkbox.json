@@ -1,0 +1,72 @@
+{
+	"name": "Checkbox",
+	"slug": "checkbox",
+	"order": 100,
+	"description": "A checkbox lets the user select the value that is written in its corresponding text label. A user can select multiple checkboxes from a group at the same time.",
+	"status": "documented",
+	"figma": {
+		"fileKey": "YNNkt9Xd6ImDtEvIz4tETF",
+		"fileName": "Lexicon Components",
+		"pageNodeId": "85:2297",
+		"componentSetNodeId": "159:2711"
+	},
+	"links": {
+		"clay": "https://clayui.com/docs/components/checkbox.html"
+	},
+	"screenshot": "/images/lexicon/figma/checkbox.png",
+	"properties": [
+		{
+			"name": "State",
+			"values": [
+				"Default",
+				"Focus",
+				"Disabled",
+				"Not Localizable"
+			]
+		},
+		{
+			"name": "Checked",
+			"values": [
+				"Off",
+				"On"
+			]
+		},
+		{
+			"name": "Indeterminate",
+			"values": [
+				"Off",
+				"On"
+			]
+		}
+	],
+	"variantCount": 12,
+	"anatomy": [
+		{
+			"part": "Selection control",
+			"description": "The square box that holds the selection state."
+		},
+		{
+			"part": "Indicator",
+			"description": "Check mark when on, dash when indeterminate."
+		},
+		{
+			"part": "Label",
+			"description": "Text describing the option."
+		}
+	],
+	"tokens": {
+		"Color/Primary/_primary": "#0b5fff",
+		"Color/Primary/primary-l1": "#80acff",
+		"Color/Secondary/secondary-l0": "#9393a4",
+		"Color/Dark/dark": "#272833",
+		"Color/Light/white": "#ffffff",
+		"Color/Light/light-l1": "#f7f8f9",
+		"Light/$light": "#F1F2F5",
+		"Spacing/spacing-3": "8",
+		"Spacing/spacing-4": "12",
+		"Border Radius/rounded-md": "4",
+		"Border Radius/rounded-full": "999",
+		"14/Regular": "Font(family: \"SF Pro Text\", style: Regular, size: 14, weight: 400, lineHeight: 1.5, letterSpacing: 0)"
+	},
+	"playgroundImage": "/images/lexicon/figma/checkbox-playground.png"
+}

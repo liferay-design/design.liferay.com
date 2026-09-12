@@ -1,0 +1,78 @@
+{
+	"name": "Color Picker",
+	"slug": "color-picker",
+	"order": 110,
+	"description": "A checkbox lets the user select the value that is written in its corresponding text label. A user can select multiple checkboxes from a group at the same time.",
+	"status": "documented",
+	"figma": {
+		"fileKey": "YNNkt9Xd6ImDtEvIz4tETF",
+		"fileName": "Lexicon Components",
+		"pageNodeId": "1:30",
+		"componentSetNodeId": "244:4282"
+	},
+	"links": {
+		"clay": "https://clayui.com/docs/components/color-picker.html"
+	},
+	"screenshot": "/images/lexicon/figma/color-picker.png",
+	"playgroundImage": "/images/lexicon/figma/color-picker-playground.png",
+	"variantCount": 16,
+	"properties": [
+		{
+			"name": "Size",
+			"values": [
+				"Regular",
+				"Small"
+			]
+		},
+		{
+			"name": "Type",
+			"values": [
+				"Color+Hex",
+				"Color"
+			]
+		},
+		{
+			"name": "State",
+			"values": [
+				"Default",
+				"Focus-Color",
+				"Focus-Hex",
+				"Disabled",
+				"Active-Hex"
+			]
+		},
+		{
+			"name": "Error",
+			"values": [
+				"No",
+				"Yes"
+			]
+		}
+	],
+	"tokens": {
+		"Color/Dark/dark": "#272833",
+		"14/Semibold": "Font(family: \"SF Pro Text\", style: Semibold, size: 14, weight: 600, lineHeight: 1.5, letterSpacing: 0)",
+		"Spacing/spacing-3": "8",
+		"Border Radius/rounded-md": "4",
+		"Color/Light/white": "#ffffff",
+		"Color/Secondary/secondary-l3": "#e7e7ed",
+		"Color/Secondary/secondary": "#6b6c7e",
+		"16/Semibold": "Font(family: \"SF Pro Text\", style: Semibold, size: 16, weight: 600, lineHeight: 1.5, letterSpacing: 0)",
+		"16/Regular": "Font(family: \"SF Pro Text\", style: Regular, size: 16, weight: 400, lineHeight: 1.5, letterSpacing: 0)",
+		"Spacing/spacing-5": "16",
+		"Color/Light/light": "#f1f2f5",
+		"Spacing/spacing-2": "4",
+		"Color/Primary/primary-l1": "#80acff",
+		"Color/Primary/primary-l3": "#f0f5ff",
+		"Color/Primary/primary-l2": "#b3cdff",
+		"Color/Primary/primary-l0": "#5791ff",
+		"Opacity/translucent-1": "40",
+		"Spacing/spacing-4": "12",
+		"Color/Danger/danger-l2": "#feefef",
+		"Color/Danger/danger-l1": "#f48989",
+		"Secondary/$secondary": "#6B6C7E",
+		"Color/Danger/danger": "#da1414",
+		"14/Regular": "Font(family: \"SF Pro Text\", style: Regular, size: 14, weight: 400, lineHeight: 1.5, letterSpacing: 0)",
+		"Color/Light/light-l1": "#f7f8f9"
+	}
+}

@@ -1,0 +1,34 @@
+{
+	"name": "Empty State",
+	"slug": "empty-state",
+	"order": 150,
+	"description": "Empty states provide users with feedback on the reasons behind the empty state and what they can do to move out of the empty state.",
+	"status": "documented",
+	"figma": {
+		"fileKey": "YNNkt9Xd6ImDtEvIz4tETF",
+		"fileName": "Lexicon Components",
+		"pageNodeId": "1:11",
+		"componentSetNodeId": "325:1278"
+	},
+	"links": {
+		"clay": "https://clayui.com/docs/components/empty-state.html",
+		"guidelines": "/lexicon/core-components/empty-state"
+	},
+	"screenshot": "/images/lexicon/figma/empty-state.png",
+	"playgroundImage": "/images/lexicon/figma/empty-state-playground.png",
+	"variantCount": 3,
+	"properties": [
+		{
+			"name": "Variant",
+			"values": [
+				"telescope",
+				"spaceship",
+				"satellite"
+			]
+		}
+	],
+	"tokens": {
+		"Color/Light/light-l1": "#f7f8f9",
+		"Color/Primary/primary-l1": "#80acff"
+	}
+}

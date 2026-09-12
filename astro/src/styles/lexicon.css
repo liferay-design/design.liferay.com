@@ -1,0 +1,325 @@
+/*
+ * Lexicon documentation theme — ported from theme/lexicon.module.scss,
+ * theme/documentation.module.scss and theme/longform.scss.
+ * Everything is scoped under .lexicon-main so the dark brand defaults
+ * (mono headings, weight 900, tight letter-spacing) don't bleed in, and the
+ * content helper classes (.example-text, .do, .image-container, …) used inside
+ * Lexicon MDX get their styling back.
+ *
+ * $base-size = 24px.  Sans-serif system font, headings weight 800.
+ */
+.lexicon-theme {
+	font-family: var(--font-lexicon);
+	color: var(--c-main-l1);
+	background: #fff;
+}
+
+/* ---- headings (override brand mono/900/-0.05em) ---- */
+.lexicon-main h1,
+.lexicon-main h2,
+.lexicon-main h3,
+.lexicon-main h4,
+.lexicon-main h5,
+.lexicon-main h6 {
+	font-family: var(--font-lexicon);
+	color: var(--c-main-l1);
+	font-weight: 800;
+	letter-spacing: 0.4px;
+	line-height: 1.25;
+	margin: 24px 0;
+	text-wrap: initial;
+}
+@media screen and (min-width: 900px) {
+	.lexicon-main h1,
+	.lexicon-main h2,
+	.lexicon-main h3 {
+		margin-top: 48px;
+		margin-bottom: 24px;
+	}
+}
+.lexicon-main h1 {
+	font-size: 28px;
+}
+@media screen and (min-width: 900px) {
+	.lexicon-main h1 {
+		font-size: 36px;
+		padding: 1.5rem 0 1rem;
+	}
+}
+.lexicon-main h2 {
+	font-size: 31.92px;
+	line-height: 1.25;
+	padding-bottom: 24px;
+}
+.lexicon-main h3 {
+	font-size: 24px;
+}
+.lexicon-main h4 {
+	font-size: 16.2px;
+	font-weight: 800;
+	padding: 24px 0 16px;
+}
+.lexicon-main h2 + h3,
+.lexicon-main h3 + h4 {
+	padding-top: 16px;
+}
+
+/* ---- body copy ---- */
+.lexicon-main p {
+	line-height: 1.75;
+	margin-bottom: 16.8px;
+	font-family: var(--font-lexicon);
+}
+.lexicon-main li {
+	line-height: 1.5;
+	margin-bottom: 12px;
+}
+.lexicon-main ul,
+.lexicon-main ol {
+	padding-left: 1.4rem;
+}
+.lexicon-main p a,
+.lexicon-main li a {
+	color: var(--c-primary);
+	text-decoration: underline;
+}
+/* never let long words/URLs force horizontal overflow on narrow screens */
+.lexicon-main p,
+.lexicon-main li,
+.lexicon-main .lexicon-description {
+	overflow-wrap: break-word;
+}
+@media screen and (max-width: 480px) {
+	.lexicon-main .lexicon-description {
+		font-size: 20px;
+	}
+}
+
+/* ---- the page intro description + accent bar ---- */
+.lexicon-main .lexicon-description {
+	color: var(--c-main-l3);
+	font-size: 28px;
+	max-width: 700px;
+	margin: -1rem 0 80px;
+	line-height: 1.25;
+	position: relative;
+}
+.lexicon-main .lexicon-description::after {
+	content: '';
+	background-color: var(--c-action);
+	display: block;
+	height: 0.25rem;
+	width: 2rem;
+	position: relative;
+	bottom: -24px;
+}
+@media screen and (max-width: 899px) {
+	.lexicon-main .lexicon-description {
+		font-size: 24px;
+		margin-top: 8px;
+	}
+}
+
+/* ---- title labels (View in Figma / Clay / Documentation / status) ---- */
+.lexicon-main .label {
+	background-color: #fff;
+	border-radius: 0.125rem;
+	border-style: solid;
+	border-width: 0.0625rem;
+	display: inline-flex;
+	align-items: center;
+	gap: 0.25rem;
+	font-size: 10px;
+	line-height: 1.5;
+	font-weight: 600;
+	letter-spacing: 0;
+	margin: 0 0.5rem 0 0;
+	padding: 1px 4px;
+	text-transform: uppercase;
+	white-space: nowrap;
+	position: relative;
+	top: -2.5rem;
+}
+.lexicon-main .label svg {
+	width: 10px;
+	height: 10px;
+}
+@media screen and (max-width: 899px) {
+	.lexicon-main .label {
+		top: 0;
+		margin-top: 1.5rem;
+	}
+}
+.lexicon-main .label.info {
+	border-color: var(--c-info-l1, #89a7e0);
+	color: var(--c-info);
+}
+.lexicon-main .label.info-full {
+	border-color: var(--c-info);
+	background-color: var(--c-info);
+	color: #fff;
+}
+.lexicon-main .label.neutral {
+	border-color: var(--c-main-l3);
+	color: var(--c-main);
+}
+.lexicon-main .label.draft {
+	border-color: var(--c-main-l4);
+	color: var(--c-main-l3);
+}
+
+/* ---- tables ---- */
+.lexicon-main table {
+	border-collapse: collapse;
+	font-size: 0.875rem;
+	margin: 1.5rem 0 4rem;
+	text-align: left;
+	width: 100%;
+}
+.lexicon-main table > tbody > tr > td,
+.lexicon-main table > thead > tr > th {
+	border-bottom: 1px solid var(--c-main-l5);
+	padding: 12px;
+	vertical-align: top;
+}
+.lexicon-main thead > tr > th {
+	border-top: 0;
+	color: var(--c-main-l2);
+	font-weight: 700;
+	vertical-align: bottom;
+	background-color: #f7f8fa;
+}
+.lexicon-main td > p {
+	display: inline;
+}
+
+/* ---- images & captions ---- */
+.lexicon-main img {
+	max-width: 100%;
+	height: auto;
+	vertical-align: top;
+}
+/* co-located example images: side-by-side pairs keep their inline width:NN% */
+.lexicon-main p img[style*='width'] {
+	display: inline-block;
+}
+.lexicon-main img + em {
+	color: var(--c-main-l3);
+	font-size: 0.9rem;
+	text-align: center;
+	display: block;
+	margin-bottom: 3rem;
+}
+
+/* ---- longform: aside divider + blockquote ---- */
+.lexicon-main aside {
+	margin: 3rem -3rem;
+	font-weight: 600;
+	color: var(--c-main-l3);
+	text-align: center;
+}
+.lexicon-main blockquote {
+	margin: 3rem;
+	position: relative;
+}
+.lexicon-main blockquote p {
+	font-size: 1.2rem;
+	color: var(--c-main-l1);
+}
+
+/* ---- content helper classes used inside Lexicon MDX (were :global) ---- */
+.lexicon-main .example-text {
+	color: var(--c-main-l3);
+	font-size: 14px;
+}
+.lexicon-main .link-false {
+	color: var(--c-primary);
+}
+.lexicon-main .image-container {
+	text-align: center;
+	margin-top: 1.5rem;
+}
+.lexicon-main .adapting-columns {
+	column-count: 3;
+}
+.lexicon-main .adapting-columns-2 {
+	column-count: 2;
+}
+.lexicon-main .tiny-text {
+	font-size: 10px;
+}
+.lexicon-main .tableSection {
+	color: var(--c-main-l3);
+	font-size: 14px;
+	font-weight: 700;
+	text-transform: uppercase;
+}
+.lexicon-main .last-update {
+	color: var(--c-success);
+	font-weight: 600;
+}
+.lexicon-main .dotDone {
+	color: var(--c-success);
+	margin-right: 0.5rem;
+}
+.lexicon-main .dotProgress {
+	color: var(--c-warning);
+	margin-right: 0.5rem;
+}
+.lexicon-main .dotWait {
+	color: var(--c-main-l4);
+	margin-right: 0.5rem;
+}
+/* do / don't / avoid blocks (top accent border) */
+.lexicon-main .do,
+.lexicon-main .dont,
+.lexicon-main .avoid {
+	border-style: solid;
+	border-width: 4px 0 0 0;
+	font-weight: 600;
+	padding-top: 0.5rem;
+}
+.lexicon-main .do {
+	border-color: var(--c-success);
+	color: var(--c-success);
+}
+.lexicon-main .dont {
+	border-color: #f48989;
+	color: var(--c-error);
+}
+.lexicon-main .avoid {
+	border-color: #ff8f39;
+	color: var(--c-warning);
+}
+/* do-text / dont-text (left accent border) */
+.lexicon-main .do-text,
+.lexicon-main .dont-text {
+	border-style: solid;
+	border-width: 0 0 0 4px;
+	padding-left: 1rem;
+	font-weight: 600;
+}
+.lexicon-main .do-text {
+	border-color: var(--c-success);
+	color: var(--c-success);
+}
+.lexicon-main .dont-text {
+	border-color: #f48989;
+	color: var(--c-error);
+}
+/* inline label tag used in tables */
+.lexicon-main .labelTag {
+	background-color: #fff;
+	border: 0.0625rem solid var(--c-main-l4);
+	border-radius: 0.125rem;
+	display: inline-flex;
+	font-size: 10px;
+	font-weight: 600;
+	padding: 1px 4px;
+	text-transform: uppercase;
+	white-space: nowrap;
+}
+.lexicon-main .labelInfo {
+	border-color: var(--c-info-l1, #89a7e0);
+	color: var(--c-info);
+}

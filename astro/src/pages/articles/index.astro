@@ -1,0 +1,77 @@
+---
+import { getCollection } from 'astro:content'
+import MainLayout from '@layouts/MainLayout.astro'
+import Container from '@components/Container.astro'
+import CardDefault from '@components/CardDefault.astro'
+import { avatarPath, cleanId, minRead } from '@lib/helpers'
+
+const HIDDEN_TAGS = ['Talks', 'Best Practices']
+const articles = (
+	await getCollection('articles', ({ data }) => {
+		if (data.publish !== true) return false
+		return !(data.tags || []).some(t => HIDDEN_TAGS.includes(t))
+	})
+).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+---
+
+<MainLayout
+	section="Articles"
+	pageTitle="Design.Liferay | Articles"
+	description="Articles, posts, best practices, how-to's and more from Liferay's Design Team"
+>
+	<Container>
+		<div class="head">
+			<h1>The Latest Posts</h1>
+			<div class="tag-links">
+				<a class="tag" href="/tags/best-practices">Best Practices</a>
+				<a class="tag" href="/tags/talks">Talks</a>
+			</div>
+		</div>
+		<div class="grid-three">
+			{
+				articles.map(post => (
+					<CardDefault
+						avatarImage
+						imageURL={post.data.featuredImage}
+						link={`/articles/${cleanId(post.id)}`}
+						title={post.data.title}
+						subtitle={`${minRead(post.body)} Min Read`}
+						avatarImageURL={avatarPath(post.data.author)}
+					/>
+				))
+			}
+		</div>
+	</Container>
+</MainLayout>
+
+<style>
+	.head {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+	}
+	.head h1 {
+		padding-bottom: 4rem;
+		color: var(--c-white);
+	}
+	.tag-links {
+		align-self: baseline;
+		margin-top: 1.8rem;
+	}
+	.tag {
+		background: var(--c-main);
+		border-radius: 0.4rem;
+		padding: 0.4rem 1rem;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: var(--c-main-l6);
+		font-weight: var(--fw-heading);
+		font-size: 0.9rem;
+		margin-left: 0.5rem;
+		display: inline-block;
+	}
+	.tag:hover {
+		background: var(--c-primary);
+		color: var(--c-white);
+	}
+</style>

@@ -1,0 +1,37 @@
+{
+	"name": "Dual Listbox",
+	"slug": "dual-listbox",
+	"order": 140,
+	"description": "A dual Listbox allows users to compare and move available and selected options between two lists.",
+	"status": "documented",
+	"figma": {
+		"fileKey": "YNNkt9Xd6ImDtEvIz4tETF",
+		"fileName": "Lexicon Components",
+		"pageNodeId": "1:10",
+		"componentSetNodeId": "305:551"
+	},
+	"links": {
+		"clay": "https://clayui.com/docs/components/dual-list-box.html"
+	},
+	"screenshot": "/images/lexicon/figma/dual-listbox.png",
+	"playgroundImage": "/images/lexicon/figma/dual-listbox-playground.png",
+	"variantCount": 3,
+	"properties": [
+		{
+			"name": "State",
+			"values": [
+				"Default",
+				"Hover",
+				"Active"
+			]
+		}
+	],
+	"tokens": {
+		"Color/Dark/dark": "#272833",
+		"14/Regular": "Font(family: \"SF Pro Text\", style: Regular, size: 14, weight: 400, lineHeight: 1.5, letterSpacing: 0)",
+		"Color/Light/white": "#ffffff",
+		"Color/Primary/primary-d2": "#004ad7",
+		"Color/Light/light-l1": "#f7f8f9",
+		"Color/Primary/primary-l1": "#80acff"
+	}
+}

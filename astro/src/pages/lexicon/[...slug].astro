@@ -1,0 +1,84 @@
+---
+import { getCollection, render } from 'astro:content'
+import BaseLayout from '@layouts/BaseLayout.astro'
+import LexiconSidebar from '@components/LexiconSidebar.astro'
+import Footer from '@components/Footer.astro'
+import Icon from '@components/Icon.astro'
+import { mdxComponents } from '@components/mdx'
+import { buildSidebarTree } from '@lib/lexicon'
+import { cleanId } from '@lib/helpers'
+import '@styles/lexicon.css'
+
+export async function getStaticPaths() {
+	const entries = await getCollection('lexicon', ({ data }) => data.draft !== true)
+	return entries.map(entry => ({ params: { slug: cleanId(entry.id) }, props: { entry } }))
+}
+
+const { entry } = Astro.props
+const { Content } = await render(entry)
+const fm = entry.data
+const tree = await buildSidebarTree()
+const path = `/lexicon/${cleanId(entry.id)}`
+const seoImage = 'https://design.liferay.com/images/resources/lexicon-cover.png'
+---
+
+<BaseLayout
+	pageTitle={`${fm.title} on Lexicon by Design.Liferay`}
+	description={fm.description}
+	previewImage="/images/resources/lexicon-cover.png"
+	contentType="article"
+	bodyClass="lexicon-doc"
+>
+	<Fragment slot="head">
+		<meta property="og:image" content={seoImage} />
+		<meta property="og:title" content={`${fm.title} — Lexicon by Design.Liferay`} />
+		<meta name="twitter:site" content="@Liferay_Lexicon" />
+		<meta name="twitter:creator" content="@Liferay_Lexicon" />
+	</Fragment>
+
+	<div class="lexicon-grid lexicon-theme">
+		<LexiconSidebar tree={tree} path={path} />
+		<main id="main-content" tabindex="-1" class="lexicon-main">
+			<div class="lexicon-doc-container">
+				<h1>{fm.title}</h1>
+
+				{fm.figmaLink && <a class="label info-full" href={fm.figmaLink}>View in Figma</a>}
+				{fm.titleLabelLink && <a class="label info" href={fm.titleLabelLink}>View in Clay</a>}
+				{
+					fm.docLink && (
+						<a class="label info" href="#">
+							<Icon name="lock" width="1em" height="1em" /> Documentation
+						</a>
+					)
+				}
+				{fm.productName && <span class="label neutral">{fm.productName}</span>}
+				{fm.devStatus && <span class="label draft">{fm.devStatus}</span>}
+
+				{fm.description && <p class="lexicon-description">{fm.description}</p>}
+
+				<div class="prose"><Content components={mdxComponents} /></div>
+			</div>
+			<Footer markdown light />
+		</main>
+	</div>
+</BaseLayout>
+
+<style>
+	.lexicon-grid {
+		display: grid;
+		grid-template-columns: 20rem 1fr;
+		min-height: 100vh;
+		background: #fff;
+	}
+	/* min-width:0 lets the grid column shrink below its content's intrinsic
+	   width (otherwise long words/images force horizontal overflow on mobile) */
+	.lexicon-main { background: #fff; min-width: 0; overflow-x: hidden; }
+	/* centered content column within the main area */
+	.lexicon-doc-container { max-width: 832px; padding: 2rem 4rem 5rem; margin: 0 auto; }
+	@media screen and (max-width: 768px) {
+		/* sidebar is position:fixed on mobile, so the grid becomes a plain
+		   full-width block — avoids any grid column overflow */
+		.lexicon-grid { display: block; }
+		.lexicon-doc-container { max-width: none; padding: 4rem 1.25rem 6rem; }
+	}
+</style>

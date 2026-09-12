@@ -1,0 +1,80 @@
+---
+// Port of organisms/HeroBanner — animated home headline.
+---
+
+<div class="hero">
+	<h1 class="headline">
+		<span class="line"><span class="word">We are <span class="accent">Liferayʼs</span></span></span>
+		<span class="line"><span class="word"><span class="accent">global team</span> of</span></span>
+		<span class="line"><span class="word">designers.<span class="bar"></span></span></span>
+	</h1>
+</div>
+
+<style>
+	.hero {
+		align-items: center;
+		display: flex;
+		justify-content: flex-start;
+		margin: 0 auto;
+		max-width: 100%;
+		min-height: 40vh;
+		min-width: 0;
+		padding: 2rem 1.5rem;
+		position: relative;
+		width: 100vw;
+	}
+	@media screen and (min-width: 448px) {
+		.hero {
+			justify-content: center;
+			min-height: 448px;
+		}
+	}
+	.headline {
+		color: var(--c-white);
+		font-size: clamp(1.85rem, 4.5vw + 1.25rem, 4.75rem);
+		font-weight: var(--fw-black);
+		letter-spacing: -0.02em;
+		line-height: 1.08;
+		margin: 0;
+		max-width: 18ch;
+	}
+	.line {
+		display: block;
+		overflow: hidden;
+		padding-bottom: 0.08em;
+	}
+	.word {
+		display: inline-block;
+		white-space: nowrap;
+		will-change: transform;
+	}
+	/* tone-on-tone: $black lightened 41% (≈ #6369a0), clears 3:1 for large text */
+	.accent {
+		color: #6369a0;
+	}
+	.bar {
+		background: var(--c-primary);
+		border-radius: 2px;
+		display: block;
+		height: 0.075em;
+		margin-top: 0.42em;
+		transform: scaleX(0);
+		transform-origin: left;
+		width: 38%;
+	}
+	@media (prefers-reduced-motion: no-preference) {
+		.word { animation: heroRise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; }
+		.line:nth-child(1) .word { animation-delay: 0.1s; }
+		.line:nth-child(2) .word { animation-delay: 0.28s; }
+		.line:nth-child(3) .word { animation-delay: 0.46s; }
+		.bar { animation: heroBar 0.7s cubic-bezier(0.22, 1, 0.36, 1) 1.05s both; }
+		@keyframes heroRise {
+			from { opacity: 0; transform: translateY(115%); }
+			to { opacity: 1; transform: translateY(0); }
+		}
+		@keyframes heroBar { to { transform: scaleX(1); } }
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.bar { transform: scaleX(1); }
+	}
+</style>

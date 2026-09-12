@@ -1,0 +1,52 @@
+---
+import { getCollection } from 'astro:content'
+import MainLayout from '@layouts/MainLayout.astro'
+import Container from '@components/Container.astro'
+import CardDefault from '@components/CardDefault.astro'
+import { authorsMap } from '@lib/content'
+import { headshotPath, makeAuthorSlug } from '@lib/helpers'
+
+const authors = await authorsMap()
+const alumni = (await getCollection('team'))
+	.map(e => ({ entry: e, author: authors.get(e.data.author) }))
+	.filter(({ author }) => author?.alumni === true)
+	.sort((a, b) => a.entry.id.localeCompare(b.entry.id))
+---
+
+<MainLayout
+	section="Alumni"
+	pageTitle="Design.Liferay | Alumni"
+	description="Meet the Design.Liferay alumni — we're all over the world!"
+>
+	<Container>
+		<div class="head">
+			<h1>Always a Liferay designer</h1>
+			<div><a class="tag" href="/team">The Squad</a></div>
+		</div>
+		<div class="grid-three">
+			{
+				alumni.map(({ author }) => (
+					<CardDefault
+						imageURL={headshotPath(author!.id)}
+						icon={author!.icon}
+						link={`/team/${makeAuthorSlug(author!.id)}`}
+						title={author!.id}
+						subtitle={author!.title ?? undefined}
+					/>
+				))
+			}
+		</div>
+	</Container>
+</MainLayout>
+
+<style>
+	.head { display: flex; justify-content: space-between; }
+	.head h1 { padding-bottom: 4rem; color: var(--c-white); }
+	.head > div { align-self: baseline; margin-top: 1.8rem; }
+	.tag {
+		background: var(--c-main); border-radius: 0.4rem; padding: 0.4rem 1rem;
+		text-transform: uppercase; letter-spacing: 0.1em; color: var(--c-main-l6);
+		font-weight: var(--fw-heading); font-size: 0.9rem;
+	}
+	.tag:hover { background: var(--c-primary); color: var(--c-white); }
+</style>

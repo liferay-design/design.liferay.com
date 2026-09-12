@@ -1,0 +1,50 @@
+{
+	"name": "Breadcrumb",
+	"slug": "breadcrumb",
+	"order": 50,
+	"description": "Breadcrumb is a secondary navigation pattern that identifies the page position inside a hierarchy.",
+	"status": "documented",
+	"figma": {
+		"fileKey": "YNNkt9Xd6ImDtEvIz4tETF",
+		"fileName": "Lexicon Components",
+		"pageNodeId": "1:29",
+		"componentSetNodeId": "114:2528"
+	},
+	"links": {
+		"clay": "https://clayui.com/docs/components/breadcrumb.html"
+	},
+	"screenshot": "/images/lexicon/figma/breadcrumb.png",
+	"playgroundImage": "/images/lexicon/figma/breadcrumb-playground.png",
+	"variantCount": 10,
+	"properties": [
+		{
+			"name": "Variant",
+			"values": [
+				"Default",
+				"Nested - Left",
+				"Nested - Right"
+			]
+		},
+		{
+			"name": "State",
+			"values": [
+				"Default",
+				"Focus",
+				"Hover",
+				"Active"
+			]
+		}
+	],
+	"tokens": {
+		"Color/Secondary/secondary": "#6b6c7e",
+		"14/Regular": "Font(family: \"SF Pro Text\", style: Regular, size: 14, weight: 400, lineHeight: 1.5, letterSpacing: 0)",
+		"Spacing/spacing-3": "8",
+		"14/Regular-Underline": "Font(family: \"SF Pro Text\", style: Regular, size: 14, weight: 400, lineHeight: 1.5, letterSpacing: 0)",
+		"Color/Primary/primary-l0": "#5791ff",
+		"Color/Light/white": "#ffffff",
+		"Color/Dark/dark": "#272833",
+		"14/Semibold": "Font(family: \"SF Pro Text\", style: Semibold, size: 14, weight: 600, lineHeight: 1.5, letterSpacing: 0)",
+		"Color/Light/light-l1": "#f7f8f9",
+		"Color/Primary/primary-l1": "#80acff"
+	}
+}

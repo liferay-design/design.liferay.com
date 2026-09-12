@@ -1,0 +1,231 @@
+---
+import { getCollection, render } from 'astro:content'
+import BaseLayout from '@layouts/BaseLayout.astro'
+import Navbar from '@components/Navbar.astro'
+import Footer from '@components/Footer.astro'
+import Container from '@components/Container.astro'
+import SocialIcons from '@components/SocialIcons.astro'
+import Icon from '@components/Icon.astro'
+import CardDefault from '@components/CardDefault.astro'
+import { mdxComponents } from '@components/mdx'
+import { authorsMap } from '@lib/content'
+import { avatarPath, buildSocials, cleanId, firstWord, makeAuthorSlug, minRead } from '@lib/helpers'
+
+export async function getStaticPaths() {
+	const team = await getCollection('team')
+	return team.map(entry => ({ params: { slug: makeAuthorSlug(entry.data.author) }, props: { entry } }))
+}
+
+const { entry } = Astro.props
+const { Content } = await render(entry)
+const authors = await authorsMap()
+const teammate = authors.get(entry.data.author)
+const name = teammate?.id ?? entry.data.author
+const socials = buildSocials(teammate?.links ?? undefined, teammate?.icon ?? undefined)
+const alumni = teammate?.alumni === true
+const startYear = teammate?.startDate ? teammate.startDate.getFullYear() : undefined
+const endYear = teammate?.endDate ? teammate.endDate.getFullYear() : undefined
+
+const recent = (await getCollection('articles', ({ data }) => data.publish !== false))
+	.filter(e => e.data.author === name)
+	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+	.slice(0, 3)
+---
+
+<BaseLayout
+	pageTitle={`${name} | Designing at Liferay since ${startYear ?? ''}`}
+	description={`${name} — designer at Liferay`}
+	previewImage={avatarPath(name)}
+	keywords="designer, profile"
+	contentType="profile"
+>
+	<div class="team-page">
+		<Navbar section={alumni ? 'Alumni' : 'Team'} />
+
+		<section class="hero">
+			<div class="portrait"><img src={avatarPath(name)} alt={name} /></div>
+			<Container>
+				<div class="hero-inner">
+					<h1>
+						<span class="since">
+							{alumni && endYear ? `${startYear} - ${endYear}` : `Since ${startYear ?? ''}`}
+						</span>
+						<span class="name">{name}</span>
+						<span class="title">{teammate?.title}</span>
+					</h1>
+					{
+						socials.length > 0 ? (
+							<SocialIcons socials={socials} class="hero-socials" />
+						) : (
+							teammate?.icon && (
+								<Icon name={teammate.icon} size="2rem" color="var(--c-main-l2)" class="hero-icon" />
+							)
+						)
+					}
+				</div>
+			</Container>
+		</section>
+
+		<div class="body-section">
+			<div class="body">
+				<div class="prose"><Content components={mdxComponents} /></div>
+				{
+					socials.length > 0 && (
+						<div class="more-socials">
+							<h3>Where else can we find you?</h3>
+							<SocialIcons socials={socials} />
+						</div>
+					)
+				}
+			</div>
+		</div>
+
+		{
+			recent.length > 0 && (
+				<Container heading={`Recent posts by ${firstWord(name)}`}>
+					<div class="grid-three">
+						{recent.map(post => (
+							<CardDefault
+								avatarImage
+								imageURL={post.data.featuredImage}
+								link={`/articles/${cleanId(post.id)}`}
+								title={post.data.title}
+								subtitle={`${minRead(post.body)} Min Read`}
+								avatarImageURL={avatarPath(post.data.author)}
+							/>
+						))}
+					</div>
+				</Container>
+			)
+		}
+
+		<Footer light />
+	</div>
+</BaseLayout>
+
+<style>
+	.team-page { background-color: var(--c-background); }
+	/* dark hero zone: portrait centered, name overlapping its lower-left */
+	.hero {
+		position: relative;
+		height: 64vh;
+		min-height: 30rem;
+		display: flex;
+		align-items: flex-end;
+	}
+	.portrait {
+		position: absolute;
+		top: 5rem;
+		left: 0;
+		right: 0;
+		margin: 0 auto;
+		width: 52%;
+		min-width: 460px;
+		max-width: 600px;
+		height: calc(64vh - 5rem + 6rem); /* dips ~6rem past the hero into the white body */
+		z-index: 2;
+	}
+	.portrait img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: top center;
+		display: block;
+	}
+	/* fade the lower 60% of the photo into the dark page background */
+	.portrait::after {
+		content: '';
+		position: absolute;
+		height: 60%;
+		width: 100%;
+		bottom: 0;
+		left: 0;
+		background-image: linear-gradient(
+			to top,
+			rgb(19, 20, 31) 0%,
+			rgba(19, 20, 31, 0.99) 8.1%,
+			rgba(19, 20, 31, 0.953) 15.5%,
+			rgba(19, 20, 31, 0.894) 22.5%,
+			rgba(19, 20, 31, 0.824) 29%,
+			rgba(19, 20, 31, 0.74) 35.3%,
+			rgba(19, 20, 31, 0.647) 41.2%,
+			rgba(19, 20, 31, 0.55) 47.1%,
+			rgba(19, 20, 31, 0.45) 52.9%,
+			rgba(19, 20, 31, 0.353) 58.8%,
+			rgba(19, 20, 31, 0.26) 64.7%,
+			rgba(19, 20, 31, 0.176) 71%,
+			rgba(19, 20, 31, 0.106) 77.5%,
+			rgba(19, 20, 31, 0.047) 84.5%,
+			rgba(19, 20, 31, 0.01) 91.9%,
+			rgba(19, 20, 31, 0) 100%
+		);
+		pointer-events: none;
+	}
+	.hero-inner {
+		position: relative;
+		z-index: 3;
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-end;
+		width: 100%;
+		padding-bottom: 2rem;
+	}
+	.hero h1 {
+		font-size: clamp(3rem, 6vw, 5rem);
+		color: var(--c-main-l4);
+		max-width: 10ch;
+		line-height: 1.05;
+		margin: 0;
+	}
+	.since { display: block; margin-bottom: 1rem; font-size: 1rem; color: var(--c-main-l3); text-transform: uppercase; letter-spacing: 0.1em; }
+	.name { display: block; color: var(--c-white); }
+	.title { display: block; font-size: 3rem; color: var(--c-main-l4); margin-top: 0.5rem; }
+	/* socials / fallback icon: right side, vertically centered (original) */
+	.hero-socials { flex-direction: column; align-self: center; }
+	.hero-icon { align-self: center; color: var(--c-main-l4); }
+
+	/* white body the portrait dips into (the css-1g9nd0h effect) */
+	.body-section {
+		position: relative;
+		z-index: 1;
+		background: #fff;
+		padding-top: 8rem;
+	}
+	.body {
+		max-width: 68ch;
+		margin: 0 auto;
+		padding: 0 1.5rem 5rem;
+		font-family: var(--font-brand);
+		color: var(--c-main-l2);
+	}
+	.more-socials h3 { color: var(--c-main); margin-top: 2rem; }
+	@media screen and (max-width: 768px) {
+		.portrait { width: 100%; min-width: 0; max-width: none; }
+		.hero { height: 56vh; }
+		.hero-inner { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+	}
+</style>
+
+<style is:global>
+	.team-page .body .prose { font-family: var(--font-brand); }
+	.team-page .body .prose h3 { color: var(--c-main); margin-top: 2.5em; font-weight: 700; }
+	.team-page .body .prose p,
+	.team-page .body .prose li {
+		color: var(--c-main-l2);
+		line-height: 1.6;
+		font-family: var(--font-brand);
+		font-size: 1.2rem;
+	}
+	/* body links: black, no underline (per the original) */
+	.team-page .body .prose a {
+		color: var(--c-main);
+		text-decoration: none;
+	}
+	.team-page .body .prose a:hover { color: var(--c-primary); }
+	/* heading anchors (rehype-autolink wrap) must not look like links */
+	.team-page .body .prose :is(h1, h2, h3, h4) a,
+	.team-page .body .prose a.nice-anchor {
+		color: inherit;
+		text-decoration: none;
+	}
+</style>

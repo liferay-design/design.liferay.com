@@ -1,0 +1,34 @@
+{
+	"name": "Language Picker",
+	"slug": "language-picker",
+	"order": 220,
+	"description": "The Language Picker lets users select languages and translations, syncing the chosen language across inputs and displaying translation status for each language.",
+	"status": "documented",
+	"figma": {
+		"fileKey": "YNNkt9Xd6ImDtEvIz4tETF",
+		"fileName": "Lexicon Components",
+		"pageNodeId": "5034:12",
+		"componentSetNodeId": "5034:6073"
+	},
+	"screenshot": "/images/lexicon/figma/language-picker.png",
+	"playgroundImage": "/images/lexicon/figma/language-picker-playground.png",
+	"variantCount": 2,
+	"properties": [
+		{
+			"name": "Variant",
+			"values": [
+				"Language Dropdown",
+				"Translation Dropdown"
+			]
+		}
+	],
+	"tokens": {
+		"Spacing/spacing-3": "8",
+		"Spacing/spacing-2": "4",
+		"Spacing/spacing-5": "16",
+		"Color/Primary/primary-l3": "#f0f5ff",
+		"Color/Light/white": "#ffffff",
+		"Border Radius/rounded-lg": "8",
+		"Shadow/Dropdown": "Effect(type: DROP_SHADOW, color: #2728331F, offset: (0, 4), radius: 8, spread: 0)"
+	}
+}

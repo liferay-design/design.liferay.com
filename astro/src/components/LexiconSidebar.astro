@@ -1,0 +1,372 @@
+---
+import SiteName from './SiteName.astro'
+import SiteCredits from './SiteCredits.astro'
+import Icon from './Icon.astro'
+import type { SidebarNode } from '@lib/lexicon'
+interface Props {
+	tree: SidebarNode[]
+	path: string
+}
+const { tree, path } = Astro.props
+
+const norm = (s?: string) => (s ? s.replace(/\/+$/, '') : '')
+const isActive = (slug?: string) => !!slug && norm(slug) === norm(path)
+const containsActive = (node: SidebarNode): boolean =>
+	isActive(node.slug) || node.children.some(containsActive)
+---
+
+<nav id="lx-sidebar" class="lx-sidebar" aria-label="Lexicon navigation">
+	<div class="lx-head"><SiteName section="Lexicon" dark /></div>
+
+	<form class="lx-search" role="search" onsubmit="return false">
+		<input type="search" id="lexicon_search" placeholder="Search" aria-label="Search Lexicon" />
+		<Icon name="search" width="1rem" height="1rem" class="lx-search-icon" />
+	</form>
+
+	<ul class="lx-nav">
+		{
+			tree.map(node =>
+				node.children.length > 0 ? (
+					<li>
+						<details open={containsActive(node)}>
+							<summary class:list={['lx-parent', { active: isActive(node.slug) }]}>
+								{node.slug ? (
+									<a href={node.slug}>{node.title}</a>
+								) : (
+									<span>{node.title}</span>
+								)}
+								<span class="chevron" aria-hidden="true" />
+							</summary>
+							<ul class="lx-sub">
+								{node.children.map(child =>
+									child.children.length > 0 ? (
+										<li>
+											<details open={containsActive(child)}>
+												<summary class:list={['lx-parent sub', { active: isActive(child.slug) }]}>
+													{child.slug ? <a href={child.slug}>{child.title}</a> : <span>{child.title}</span>}
+													<span class="chevron" aria-hidden="true" />
+												</summary>
+												<ul class="lx-sub">
+													{child.children.map(g => (
+														<li>
+															<a href={g.slug} class:list={['lx-link', { active: isActive(g.slug) }]}>{g.title}</a>
+														</li>
+													))}
+												</ul>
+											</details>
+										</li>
+									) : (
+										<li>
+											<a href={child.slug} class:list={['lx-link', { active: isActive(child.slug) }]}>{child.title}</a>
+										</li>
+									),
+								)}
+							</ul>
+						</details>
+					</li>
+				) : (
+					<li>
+						<a href={node.slug} class:list={['lx-link top', { active: isActive(node.slug) }]}>{node.title}</a>
+					</li>
+				),
+			)
+		}
+	</ul>
+
+	<div class="lx-credits"><SiteCredits /></div>
+</nav>
+
+<!-- Mobile menu bar: fixed bottom, toggles the sidebar (mobile only) -->
+<div class="lx-mobile-bar">
+	<a href="/lexicon" aria-label="Lexicon home"><Icon name="lexicon" width="1.6rem" height="1.6rem" color="#fff" /></a>
+	<button type="button" id="lx-menu-btn" aria-controls="lx-sidebar" aria-expanded="false">
+		<span class="lx-menu-label">Menu</span>
+	</button>
+</div>
+
+<script is:inline>
+	;(function () {
+		var btn = document.getElementById('lx-menu-btn')
+		var sb = document.getElementById('lx-sidebar')
+		if (!btn || !sb) return
+		btn.addEventListener('click', function () {
+			var open = sb.classList.toggle('open')
+			btn.setAttribute('aria-expanded', String(open))
+			var label = btn.querySelector('.lx-menu-label')
+			if (label) label.textContent = open ? 'Close' : 'Menu'
+			document.body.style.overflow = open ? 'hidden' : ''
+		})
+		// close the drawer after tapping a link
+		sb.addEventListener('click', function (e) {
+			if (e.target.closest('a') && sb.classList.contains('open')) {
+				sb.classList.remove('open')
+				btn.setAttribute('aria-expanded', 'false')
+				var label = btn.querySelector('.lx-menu-label')
+				if (label) label.textContent = 'Menu'
+				document.body.style.overflow = ''
+			}
+		})
+	})()
+</script>
+
+<!-- Algolia DocSearch (same credentials as the Gatsby gatsby-plugin-algolia-docsearch) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+<script is:inline src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script is:inline>
+	// The legacy Algolia index stores absolute URLs on the OLD domain
+	// (liferay.design). Strip the host so results are relative paths that work
+	// on localhost and on the current domain (design.liferay.com).
+	function lexiconRelUrl(url) {
+		if (!url) return url
+		return url.replace(/^https?:\/\/(www\.)?(liferay\.design|design\.liferay\.com)/i, '')
+	}
+	function initLexiconSearch() {
+		if (window.docsearch && document.getElementById('lexicon_search')) {
+			window.docsearch({
+				apiKey: 'e743f8519124b276f2f3325e8e126246',
+				indexName: 'liferay_design',
+				inputSelector: '#lexicon_search',
+				debug: false,
+				transformData: function (hits) {
+					hits.forEach(function (hit) {
+						hit.url = lexiconRelUrl(hit.url)
+					})
+					return hits
+				},
+				handleSelected: function (input, event, suggestion) {
+					var url = lexiconRelUrl(suggestion.url)
+					if (url) window.location.assign(url)
+				},
+			})
+		}
+	}
+	if (document.readyState !== 'loading') initLexiconSearch()
+	else window.addEventListener('DOMContentLoaded', initLexiconSearch)
+</script>
+
+<style>
+	/* sticky like the original Lexicon sidebar: stays in view while the page
+	   scrolls, capped to the viewport height */
+	.lx-sidebar {
+		background: var(--c-neutral9, #f4f6f9);
+		position: -webkit-sticky;
+		position: sticky;
+		top: 0;
+		height: 100%;
+		max-height: 100vh;
+		/* visible so the search dropdown can escape; the nav scrolls on its own */
+		overflow: visible;
+		font-family: var(--font-lexicon);
+		border-right: 1px solid var(--c-main-l6);
+		display: flex;
+		flex-direction: column;
+		font-size: 14px;
+	}
+	.lx-head {
+		padding: 2.25rem 1.5rem;
+		margin-bottom: 2rem;
+		font-size: 0.85rem;
+		flex-shrink: 0;
+	}
+	/* search */
+	.lx-search {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		margin: 0 1.25rem 1.5rem;
+		padding: 0.55rem 0.75rem;
+		background: #fff;
+		border: 1px solid var(--c-main-l6);
+		border-radius: 0.25rem;
+		color: var(--c-main-l3);
+		flex-shrink: 0;
+		position: relative;
+		z-index: 20;
+	}
+	/* DocSearch wraps the input in <span.algolia-autocomplete> (inline-block by
+	   default) — force it full width so the input fills the box */
+	.lx-search :global(.algolia-autocomplete) {
+		flex: 1;
+		display: block !important;
+		width: 100%;
+	}
+	.lx-search input {
+		border: 0;
+		outline: none;
+		background: transparent;
+		font: inherit;
+		color: var(--c-main);
+		width: 100%;
+	}
+	/* the autocomplete dropdown: drop below the box, full sidebar width, on top */
+	.lx-search :global(.ds-dropdown-menu) {
+		position: absolute;
+		top: calc(100% + 0.5rem) !important;
+		left: 0 !important;
+		min-width: 100% !important;
+		max-width: calc(100vw - 2.5rem);
+		z-index: 50;
+		box-shadow: var(--elev-2);
+		border-radius: 0.25rem;
+	}
+	.lx-search :global(.ds-dropdown-menu [class^='ds-dataset-']) {
+		border-radius: 0.25rem;
+		max-height: 60vh;
+		overflow-y: auto;
+	}
+	/* stack each result vertically (category row on top, content row below)
+	   instead of the default two-column layout — fits the narrow sidebar */
+	.lx-search :global(.algolia-docsearch-suggestion--subcategory-column),
+	.lx-search :global(.algolia-docsearch-suggestion--content) {
+		float: none !important;
+		width: 100% !important;
+		display: block !important;
+		text-align: left !important;
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+	}
+	.lx-search :global(.algolia-docsearch-suggestion--subcategory-column) {
+		opacity: 0.7;
+		font-size: 0.75rem;
+		margin-bottom: 0.15rem;
+	}
+	/* remove the vertical divider the two-column layout drew */
+	.lx-search :global(.algolia-docsearch-suggestion--subcategory-column::before) {
+		display: none !important;
+	}
+	/* nav (the only scrolling region) */
+	.lx-nav {
+		list-style: none;
+		margin: 0;
+		padding: 0 0.75rem;
+		flex: 1 1 auto;
+		min-height: 0;
+		overflow-y: auto;
+	}
+	.lx-nav li {
+		list-style: none;
+	}
+	.lx-nav details > summary {
+		list-style: none;
+	}
+	.lx-nav details > summary::-webkit-details-marker {
+		display: none;
+	}
+	.lx-parent {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		cursor: pointer;
+		padding: 0.75rem;
+		border-radius: 4px;
+		font-weight: 600;
+		color: var(--c-main);
+	}
+	.lx-parent.sub {
+		font-weight: 400;
+		color: var(--c-main-l2);
+	}
+	.lx-parent:hover {
+		background: var(--c-gray-bg);
+	}
+	.lx-parent a {
+		color: inherit;
+		flex: 1;
+	}
+	.lx-parent.active > a,
+	.lx-parent.active > span {
+		color: var(--c-primary);
+	}
+	.chevron {
+		width: 0.45rem;
+		height: 0.45rem;
+		border-right: 1.5px solid var(--c-main-l4);
+		border-bottom: 1.5px solid var(--c-main-l4);
+		transform: rotate(-45deg);
+		transition: transform 0.15s ease, border-color 0.15s ease;
+		margin-left: 0.5rem;
+		flex-shrink: 0;
+	}
+	/* open section: chevron points down and turns primary blue (matches original) */
+	details[open] > summary .chevron {
+		transform: rotate(45deg);
+		border-color: var(--c-primary);
+	}
+	.lx-sub {
+		list-style: none;
+		margin: 0;
+		padding-left: 0.75rem;
+	}
+	.lx-link {
+		display: block;
+		padding: 0.4rem 0.75rem;
+		border-radius: 4px;
+		color: var(--c-main-l2);
+		font-weight: 400;
+	}
+	.lx-link.top {
+		font-weight: 600;
+		color: var(--c-main);
+	}
+	.lx-link:hover {
+		background: var(--c-gray-bg);
+		color: var(--c-black);
+	}
+	.lx-link.active {
+		color: var(--c-primary);
+		font-weight: 600;
+	}
+	.lx-credits {
+		padding: 1.5rem;
+		font-size: 0.75rem;
+		flex-shrink: 0;
+	}
+
+	/* ---------- mobile ---------- */
+	.lx-mobile-bar {
+		display: none;
+	}
+	@media (max-width: 768px) {
+		.lx-sidebar {
+			position: fixed;
+			inset: 0;
+			width: 100%;
+			height: 100dvh;
+			max-height: 100dvh;
+			z-index: 1000;
+			transform: translateY(100%);
+			transition: transform 0.35s ease;
+			border-right: 0;
+			padding-bottom: 5rem;
+		}
+		.lx-sidebar.open {
+			transform: translateY(0);
+		}
+		.lx-mobile-bar {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			position: fixed;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			z-index: 1001;
+			background: var(--c-black);
+			padding: 0.75rem 1.25rem;
+		}
+		.lx-mobile-bar a {
+			display: inline-flex;
+			align-items: center;
+		}
+		#lx-menu-btn {
+			background: none;
+			border: 0;
+			color: #fff;
+			font: inherit;
+			font-family: var(--font-body);
+			font-weight: 600;
+			cursor: pointer;
+			padding: 0.5rem 0.75rem;
+		}
+	}
+</style>

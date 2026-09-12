@@ -1,0 +1,88 @@
+---
+// Port of organisms/Footer
+import Container from './Container.astro'
+import SocialIcons from './SocialIcons.astro'
+import SiteCredits from './SiteCredits.astro'
+interface Props {
+	light?: boolean
+	markdown?: boolean
+	background?: string
+}
+const { light, markdown, background } = Astro.props
+---
+
+<footer
+	class:list={['footer', light ? 'light' : 'dark', { markdown }]}
+	style={background ? `background:${background}` : undefined}
+>
+	<Container>
+		<div class="text-container">
+			<span class="spacer"></span>
+			<SocialIcons class="footer-socials" />
+		</div>
+		{!markdown && <SiteCredits />}
+	</Container>
+</footer>
+
+<style>
+	.footer {
+		padding: 3rem 0;
+	}
+	.footer.light {
+		background-color: var(--c-white);
+		color: var(--c-black);
+	}
+	.footer.light :global(svg) {
+		fill: var(--c-black);
+	}
+	.footer.light :global(span) {
+		color: var(--c-main-l1);
+	}
+	.footer.light :global(a) {
+		color: var(--c-main-d2);
+		text-decoration: underline;
+	}
+	.footer.dark {
+		color: var(--c-white);
+	}
+	.footer.dark :global(svg) {
+		fill: var(--c-white);
+	}
+	.footer.dark :global(a) {
+		color: var(--c-main-l5);
+		text-decoration: underline;
+	}
+	.footer.dark :global(span) {
+		color: var(--c-main-l5);
+	}
+	.footer.markdown {
+		background: inherit;
+		max-width: 48rem;
+		margin: 1rem auto 8rem;
+		border-top: 1px solid #e7e7ed;
+	}
+	.text-container {
+		display: flex;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		padding: 0 0 10vh;
+	}
+	.spacer {
+		width: 50%;
+	}
+	.footer :global(.footer-socials) {
+		justify-content: space-between;
+		width: 320px;
+		max-width: 360px;
+	}
+	@media screen and (max-width: 768px) {
+		.footer :global(.footer-socials) {
+			width: 100%;
+			order: -1;
+			margin-bottom: 3rem;
+		}
+		.spacer {
+			display: none;
+		}
+	}
+</style>

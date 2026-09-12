@@ -1,0 +1,52 @@
+{
+	"name": "Vertical Navigation",
+	"slug": "vertical-navigation",
+	"order": 460,
+	"description": "An alternative patterns that displays navigation items in a vertical menu.",
+	"status": "documented",
+	"figma": {
+		"fileKey": "YNNkt9Xd6ImDtEvIz4tETF",
+		"fileName": "Lexicon Components",
+		"pageNodeId": "478:8539",
+		"componentSetNodeId": "5118:1356"
+	},
+	"links": {
+		"clay": "https://clayui.com/docs/components/vertical-nav.html"
+	},
+	"screenshot": "/images/lexicon/figma/vertical-navigation.png",
+	"playgroundImage": "/images/lexicon/figma/vertical-navigation-playground.png",
+	"variantCount": 3,
+	"properties": [
+		{
+			"name": "Variant",
+			"values": [
+				"Null",
+				"Primary"
+			]
+		},
+		{
+			"name": "Device",
+			"values": [
+				"Desktop",
+				"Mobile"
+			]
+		}
+	],
+	"tokens": {
+		"Color/Secondary/secondary": "#6b6c7e",
+		"14/Regular": "Font(family: \"SF Pro Text\", style: Regular, size: 14, weight: 400, lineHeight: 1.5, letterSpacing: 0)",
+		"Secondary/$secondary": "#6B6C7E",
+		"Spacing/spacing-3": "8",
+		"Spacing/spacing-5": "16",
+		"Border Radius/rounded-md": "4",
+		"Spacing/spacing-2": "4",
+		"16/Semibold": "Font(family: \"SF Pro Text\", style: Semibold, size: 16, weight: 600, lineHeight: 1.5, letterSpacing: 0)",
+		"Border Radius/rounded-lg": "8",
+		"Color/Dark/dark": "#272833",
+		"14/Semibold": "Font(family: \"SF Pro Text\", style: Semibold, size: 14, weight: 600, lineHeight: 1.5, letterSpacing: 0)",
+		"Color/Primary/primary-l0": "#5791ff",
+		"Color/Light/white": "#ffffff",
+		"Shadow/Dropdown": "Effect(type: DROP_SHADOW, color: #2728331F, offset: (0, 4), radius: 8, spread: 0)",
+		"12/Semibold": "Font(family: \"SF Pro Text\", style: Semibold, size: 12, weight: 600, lineHeight: 1.5, letterSpacing: 0)"
+	}
+}

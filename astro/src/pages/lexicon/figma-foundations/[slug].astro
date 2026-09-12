@@ -1,0 +1,147 @@
+---
+import { getCollection } from 'astro:content'
+import BaseLayout from '@layouts/BaseLayout.astro'
+import LexiconSidebar from '@components/LexiconSidebar.astro'
+import Footer from '@components/Footer.astro'
+import { buildSidebarTree } from '@lib/lexicon'
+import { categoriseTokens, figmaNodeUrl } from '@lib/figma'
+import '@styles/lexicon.css'
+
+export async function getStaticPaths() {
+	const items = await getCollection('figmaFoundations')
+	return items.map(entry => ({ params: { slug: entry.data.slug }, props: { entry } }))
+}
+
+const { entry } = Astro.props
+const c = entry.data
+const tree = await buildSidebarTree()
+const path = `/lexicon/figma-foundations/${c.slug}`
+const figmaUrl = figmaNodeUrl(c.figma)
+const tokens = categoriseTokens(c.tokens)
+const tokenCount = c.tokens ? Object.keys(c.tokens).length : 0
+const flat = [...tokens.spacing, ...tokens.radius, ...tokens.opacity, ...tokens.shadow]
+
+// Group color swatches by their token path: "Color/Primary/primary-l1" → "Primary",
+// "Color/Charts/Blue/blue-d4" → "Charts / Blue". Preserves token order.
+const colorGroups: { group: string; tokens: typeof tokens.colors }[] = []
+for (const t of tokens.colors) {
+	const parts = t.name.split('/')
+	const group = parts.slice(1, -1).join(' / ') || 'Other'
+	let bucket = colorGroups.find(g => g.group === group)
+	if (!bucket) colorGroups.push((bucket = { group, tokens: [] }))
+	bucket.tokens.push(t)
+}
+const downloadHref = `/lexicon/figma-foundations/${c.slug}.json`
+---
+
+<BaseLayout
+	pageTitle={`${c.name} — Figma Foundations on Lexicon by Design.Liferay`}
+	description={c.description}
+	previewImage="/images/resources/lexicon-cover.png"
+	contentType="article"
+	bodyClass="lexicon-doc"
+>
+	<div class="lexicon-grid lexicon-theme">
+		<LexiconSidebar tree={tree} path={path} />
+		<main id="main-content" tabindex="-1" class="lexicon-main">
+			<div class="lexicon-doc-container fc">
+				<a class="fc-back" href="/lexicon/figma-foundations">← Figma Foundations</a>
+				<h1>{c.name}</h1>
+
+				<div class="fc-labels">
+					<a class="label info-full" href={figmaUrl} target="_blank" rel="noopener">View in Figma</a>
+					<a class="label download" href={downloadHref} download={`lexicon-${c.slug}-tokens.json`}>↓ Download tokens (JSON)</a>
+					<span class="fc-count">{tokenCount} tokens</span>
+				</div>
+
+				{c.description && <p class="lexicon-description">{c.description}</p>}
+
+				<section class="fc-section">
+					{colorGroups.map(g => (
+						<div class="fc-color-group">
+							<h3>{g.group}</h3>
+							<div class="fc-swatches">
+								{g.tokens.map(t => (
+									<div class="fc-swatch">
+										<span class="fc-chip-color" style={`background:${t.value}`} />
+										<code>{t.name}</code>
+										<span class="fc-val">{t.value}</span>
+									</div>
+								))}
+							</div>
+						</div>
+					))}
+
+					{tokens.typography.length > 0 && (
+						<table class="fc-table">
+							<thead><tr><th>Token</th><th>Preview</th><th>Family</th><th>Size</th><th>Weight</th><th>Line</th></tr></thead>
+							<tbody>
+								{tokens.typography.map(t => (
+									<tr>
+										<td><code>{t.name}</code></td>
+										<td style={`font-size:${Math.min(Number(t.size) || 16, 28)}px;font-weight:${t.weight};line-height:1.2`}>Ag</td>
+										<td>{t.family}</td>
+										<td>{t.size}</td>
+										<td>{t.weight}</td>
+										<td>{t.lineHeight}</td>
+									</tr>
+								))}
+							</tbody>
+						</table>
+					)}
+
+					{flat.length > 0 && (
+						<table class="fc-table">
+							<thead><tr><th>Token</th><th>Value</th></tr></thead>
+							<tbody>
+								{flat.map(t => (
+									<tr><td><code>{t.name}</code></td><td>{t.value}</td></tr>
+								))}
+							</tbody>
+						</table>
+					)}
+
+					{tokenCount === 0 && <p class="fc-meta">No tokens recorded for this group yet.</p>}
+				</section>
+			</div>
+			<Footer markdown light />
+		</main>
+	</div>
+</BaseLayout>
+
+<style>
+	.lexicon-grid { display: grid; grid-template-columns: 20rem 1fr; min-height: 100vh; background: #fff; }
+	.lexicon-main { background: #fff; min-width: 0; overflow-x: hidden; }
+	.lexicon-doc-container { max-width: 960px; padding: 2rem 4rem 5rem; margin: 0 auto; }
+	.fc-back { display: inline-block; margin-bottom: 1rem; color: var(--c-main-l3); font-size: 0.85rem; text-decoration: none; }
+	.fc-back:hover { color: var(--c-primary); }
+	.fc h1 { margin: 0; padding: 0; line-height: 1.2; }
+	.fc-labels { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin: 0.85rem 0 1.75rem; }
+	/* the global .label uses position:relative; top:-2.5rem to tuck under a title — undo it here */
+	.fc-labels .label { position: static; top: auto; margin: 0; }
+	/* Download = secondary button: white bg (from global .label) + neutral border */
+	.label.download { border-color: var(--c-main-l4, #cdced9); color: var(--c-main); }
+	.label.download:hover { border-color: var(--c-primary, #0b5fff); color: var(--c-primary, #0b5fff); }
+	/* token count = plain metadata, not interactive */
+	.fc-count { color: var(--c-main-l3); font-size: 0.8rem; }
+	.fc-color-group { margin-top: 1.5rem; }
+	.fc-color-group h3 { margin: 0 0 0.6rem; font-family: var(--font-lexicon); font-size: 0.95rem; color: var(--c-main); }
+	.fc-section { margin-top: 1.5rem; }
+	.fc-meta { color: var(--c-main-l3); font-size: 0.9rem; }
+
+	.fc-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); gap: 0.5rem; }
+	.fc-swatch { display: flex; align-items: flex-start; gap: 0.6rem; padding: 0.5rem; border: 1px solid var(--c-main-l6); border-radius: 0.4rem; }
+	.fc-chip-color { width: 1.6rem; height: 1.6rem; border-radius: 0.3rem; border: 1px solid rgba(0,0,0,0.1); flex: none; }
+	.fc-swatch code { font-size: 0.75rem; color: var(--c-main-l2); flex: 1; min-width: 0; line-height: 1.35; white-space: normal; overflow-wrap: anywhere; }
+	.fc-swatch .fc-val { font-size: 0.7rem; color: var(--c-main-l3); text-transform: uppercase; flex: none; white-space: nowrap; }
+
+	.fc-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-top: 0.5rem; }
+	.fc-table th, .fc-table td { text-align: left; padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--c-main-l6); vertical-align: middle; }
+	.fc-table th { color: var(--c-main-l3); font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; }
+	.fc-table code { font-size: 0.8rem; color: var(--c-main-l2); }
+
+	@media screen and (max-width: 768px) {
+		.lexicon-grid { display: block; }
+		.lexicon-doc-container { max-width: none; padding: 4rem 1.25rem 6rem; }
+	}
+</style>

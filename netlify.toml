@@ -1,3 +1,10 @@
+# The site is the Astro app in `astro/`. `base` points Netlify there for the
+# install + build; the full repo is still checked out, so Astro reads
+# ../src/markdown and ../static (publicDir). Output is astro/dist.
+[build]
+  base = "astro"
+  command = "npm install && npm run build"
+  publish = "dist"
+
 [build.environment]
- PYTHON_VERSION = "3.10"
- NODE_VERSION = "18"
+  NODE_VERSION = "22"

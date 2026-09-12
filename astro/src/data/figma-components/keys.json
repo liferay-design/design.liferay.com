@@ -1,0 +1,54 @@
+{
+	"name": "Keys",
+	"slug": "keys",
+	"order": 200,
+	"description": "A visual pattern used to allow users to learn how to access actions via keyboard.",
+	"status": "documented",
+	"figma": {
+		"fileKey": "YNNkt9Xd6ImDtEvIz4tETF",
+		"fileName": "Lexicon Components",
+		"pageNodeId": "1:13",
+		"componentSetNodeId": "377:8845"
+	},
+	"links": {
+		"guidelines": "/lexicon/core-components/keys"
+	},
+	"screenshot": "/images/lexicon/figma/keys.png",
+	"playgroundImage": "/images/lexicon/figma/keys-playground.png",
+	"variantCount": 8,
+	"properties": [
+		{
+			"name": "Size",
+			"values": [
+				"Regular",
+				"Small"
+			]
+		},
+		{
+			"name": "Type",
+			"values": [
+				"Flex",
+				"Fixed"
+			]
+		},
+		{
+			"name": "Dark",
+			"values": [
+				"Off",
+				"On"
+			]
+		}
+	],
+	"tokens": {
+		"Color/Secondary/secondary": "#6b6c7e",
+		"14/Semibold": "Font(family: \"SF Pro Text\", style: Semibold, size: 14, weight: 600, lineHeight: 1.5, letterSpacing: 0)",
+		"Spacing/spacing-3": "8",
+		"Border Radius/rounded-md": "4",
+		"Color/Light/white": "#ffffff",
+		"Color/Secondary/secondary-l2": "#cdced9",
+		"Color/Dark/dark-l2": "#393a4a",
+		"12/Semibold": "Font(family: \"SF Pro Text\", style: Semibold, size: 12, weight: 600, lineHeight: 1.5, letterSpacing: 0)",
+		"Color/Light/light-l1": "#f7f8f9",
+		"Color/Primary/primary-l1": "#80acff"
+	}
+}

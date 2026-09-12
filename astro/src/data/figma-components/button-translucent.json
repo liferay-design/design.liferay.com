@@ -1,0 +1,60 @@
+{
+	"name": "Button Translucent",
+	"slug": "button-translucent",
+	"order": 80,
+	"description": "An informative type of buttons that adapts to multiple background colors thanks to the opacity property.",
+	"status": "documented",
+	"figma": {
+		"fileKey": "YNNkt9Xd6ImDtEvIz4tETF",
+		"fileName": "Lexicon Components",
+		"pageNodeId": "199:2448",
+		"componentSetNodeId": "152:6087"
+	},
+	"screenshot": "/images/lexicon/figma/button-translucent.png",
+	"playgroundImage": "/images/lexicon/figma/button-translucent-playground.png",
+	"variantCount": 40,
+	"properties": [
+		{
+			"name": "Type",
+			"values": [
+				"Primary",
+				"Success",
+				"Warning",
+				"Danger",
+				"Info"
+			]
+		},
+		{
+			"name": "State",
+			"values": [
+				"Default",
+				"Hover",
+				"Active",
+				"Focus"
+			]
+		},
+		{
+			"name": "Dark-Mode",
+			"values": [
+				"Off",
+				"On"
+			]
+		}
+	],
+	"tokens": {
+		"Color/Primary/primary-d1": "#0053f0",
+		"12/Semibold": "Font(family: \"SF Pro Text\", style: Semibold, size: 12, weight: 600, lineHeight: 1.5, letterSpacing: 0)",
+		"Spacing/spacing-3": "8",
+		"Border Radius/rounded-full": "999",
+		"Color/Primary/primary-l1": "#80acff",
+		"Color/Success/success-d1": "#226a33",
+		"Color/Success/success-l1": "#5aca75",
+		"Color/Warning/warning-d1": "#9f4500",
+		"Color/Warning/warning-l1": "#ff8f39",
+		"Color/Danger/danger-d1": "#c31212",
+		"Color/Danger/danger-l1": "#f48989",
+		"Color/Info/info-d1": "#294f98",
+		"Color/Info/info-l1": "#89a7e0",
+		"Color/Light/white": "#ffffff"
+	}
+}

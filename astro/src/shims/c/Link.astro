@@ -1,0 +1,12 @@
+---
+import { sxToStyle } from '@lib/sx'
+const { to, href, sx, style, class: className } = Astro.props
+const target = to ?? href ?? '#'
+const internal = /^\/(?!\/)/.test(target) || target.startsWith('#')
+const s = [sxToStyle(sx), style].filter(Boolean).join(';')
+---
+{internal ? (
+	<a href={target} class={className} style={s || undefined}><slot /></a>
+) : (
+	<a href={target} class={className} style={s || undefined} target="_blank" rel="noopener noreferrer"><slot /></a>
+)}

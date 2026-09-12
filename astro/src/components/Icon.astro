@@ -1,0 +1,53 @@
+---
+import { getIcon } from '@lib/icons'
+
+interface Props {
+	name: string
+	size?: string
+	width?: string
+	height?: string
+	color?: string
+	class?: string
+	label?: string
+}
+
+const { name, size, width, height, color, class: className, label } = Astro.props
+const svg = getIcon(name)
+
+const w = width ?? size
+const h = height ?? size
+const style = [
+	w ? `--icon-w:${w}` : '',
+	h ? `--icon-h:${h}` : '',
+	color ? `color:${color}` : '',
+]
+	.filter(Boolean)
+	.join(';')
+---
+
+{
+	svg ? (
+		<span
+			class:list={['icon', className]}
+			style={style}
+			role={label ? 'img' : undefined}
+			aria-label={label}
+			aria-hidden={label ? undefined : 'true'}
+			set:html={svg}
+		/>
+	) : (
+		<span />
+	)
+}
+
+<style>
+	.icon {
+		display: inline-flex;
+		line-height: 0;
+	}
+	.icon :global(svg) {
+		width: var(--icon-w, 1em);
+		height: var(--icon-h, 1em);
+		fill: currentColor;
+	}
+</style>

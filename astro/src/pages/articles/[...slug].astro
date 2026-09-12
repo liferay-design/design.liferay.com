@@ -1,0 +1,233 @@
+---
+import { getCollection, render } from 'astro:content'
+import BaseLayout from '@layouts/BaseLayout.astro'
+import Navbar from '@components/Navbar.astro'
+import Footer from '@components/Footer.astro'
+import Container from '@components/Container.astro'
+import CardDefault from '@components/CardDefault.astro'
+import { mdxComponents } from '@components/mdx'
+import { avatarPath, cleanId, formatLongDate, kebab, makeAuthorSlug, minRead } from '@lib/helpers'
+
+export async function getStaticPaths() {
+	const articles = await getCollection('articles', ({ data }) => data.publish !== false)
+	return articles.map(entry => ({
+		params: { slug: cleanId(entry.id) },
+		props: { entry },
+	}))
+}
+
+const { entry } = Astro.props
+const { Content } = await render(entry)
+const fm = entry.data
+const readTime = minRead(entry.body)
+
+// "More posts by <author>"
+const more = (await getCollection('articles', ({ data }) => data.publish !== false))
+	.filter(e => e.data.author === fm.author && e.id !== entry.id)
+	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+	.slice(0, 3)
+---
+
+<BaseLayout
+	pageTitle={`${fm.title} - an article by ${fm.author} on Design.Liferay`}
+	description={fm.title}
+	previewImage={fm.featuredImage}
+	keywords={(fm.tags || []).join(', ')}
+	canonicalLink={fm.canonicalLink}
+	contentType="article"
+>
+	<div class="article-page">
+		<Navbar section="Articles" />
+
+		<Container>
+			<div class="banner">
+				<div>
+					{
+						fm.tags && (
+							<div class="tags">
+								{fm.tags.map(t => (
+									<a class="tag" href={`/tags/${kebab(t)}`}>{t}</a>
+								))}
+							</div>
+						)
+					}
+					<h1>
+						{fm.title}{' '}
+						<span class="byline">
+							by <a class="author" href={`/team/${makeAuthorSlug(fm.author)}`}>{fm.author}</a>
+							{
+								fm.contributors && fm.contributors.length > 0 && (
+									<>
+										{' '}and{' '}
+										{fm.contributors.map((c, i) => (
+											<>
+												{i > 0 && ', '}
+												<a class="author" href={`/team/${makeAuthorSlug(c)}`}>{c}</a>
+											</>
+										))}
+									</>
+								)
+							}
+							&nbsp;on {formatLongDate(fm.date)}
+						</span>
+					</h1>
+				</div>
+				<div class="role"><h2>{readTime} Min Read</h2></div>
+			</div>
+		</Container>
+
+		<div class="markdown-container">
+			{
+				fm.featuredImage && (
+					<div class="featured-image">
+						<img alt={'featured image for ' + fm.title} src={fm.featuredImage} />
+					</div>
+				)
+			}
+			<div class="prose">
+				<Content components={mdxComponents} />
+			</div>
+		</div>
+
+		{
+			more.length > 0 && (
+				<Container heading={`More posts by ${fm.author}`}>
+					<div class="grid-three">
+						{more.map(post => (
+							<CardDefault
+								avatarImage
+								imageURL={post.data.featuredImage}
+								link={`/articles/${cleanId(post.id)}`}
+								title={post.data.title}
+								subtitle={`${minRead(post.body)} Min Read`}
+								avatarImageURL={avatarPath(post.data.author)}
+							/>
+						))}
+					</div>
+				</Container>
+			)
+		}
+
+		<Footer light />
+	</div>
+</BaseLayout>
+
+<style>
+	.article-page { overflow-x: hidden; background-color: var(--c-background); }
+
+	/* tall dark hero so the featured image can pull up into it without
+	   colliding with the byline (mirrors the old Plx parallax spacing) */
+	.banner { display: flex; justify-content: space-between; gap: 2rem; padding-bottom: 10rem; }
+	.banner h1 {
+		width: 100%;
+		font-size: clamp(2.5rem, 6vw, 5rem);
+		line-height: 1.1;
+		color: var(--c-white);
+		font-weight: var(--fw-heading);
+		text-shadow: var(--elev-text-0);
+		margin: 0;
+	}
+	.banner .byline {
+		display: block;
+		margin-top: 1.5rem;
+		font-size: 1rem;
+		line-height: 1.5;
+		color: var(--c-neutral6);
+		text-shadow: none;
+		font-weight: var(--fw-regular);
+		letter-spacing: normal;
+	}
+	.banner .author { color: var(--c-primary-l1); text-decoration: underline; }
+	.role h2 {
+		text-transform: uppercase;
+		letter-spacing: 0.25ch;
+		font-weight: var(--fw-black);
+		transform: rotate(-90deg);
+		font-size: 0.8rem;
+		color: var(--c-gray);
+		width: 20ch;
+		text-align: center;
+		white-space: nowrap;
+	}
+	.tags { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
+	.tag {
+		background: var(--c-main);
+		border-radius: 0.4rem;
+		padding: 0.4rem 1rem;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: var(--c-main-l6);
+		font-weight: var(--fw-heading);
+		font-size: 0.9rem;
+	}
+	.tag:hover { background: var(--c-primary); color: var(--c-white); }
+
+	.markdown-container {
+		padding: 6rem 3rem;
+		font-family: var(--font-brand);
+		background: #fff;
+		position: relative;
+		z-index: 1;
+	}
+	.featured-image {
+		margin: -12rem auto 0;
+		max-width: 768px;
+		position: relative;
+		z-index: 2;
+		/* soft, large drop shadow (no overflow:hidden — it would clip this) */
+		box-shadow: var(--elev-3);
+		border-radius: 2px;
+	}
+	.featured-image img {
+		object-fit: cover;
+		height: 40vh;
+		max-height: 468px;
+		width: 100%;
+		display: block;
+		border-radius: 2px;
+	}
+	@media screen and (max-width: 768px) {
+		.banner h1 { font-size: 1.8rem; }
+		.markdown-container { padding: 8rem 1rem 3rem; }
+		.featured-image { margin-top: 0; }
+	}
+</style>
+
+<style is:global>
+	/* longform prose (ported from theme/longform + Articles styles) */
+	.article-page .prose {
+		max-width: 88ch;
+		margin: 3rem auto 0;
+		color: var(--c-main-l1);
+	}
+	.article-page .prose p,
+	.article-page .prose li {
+		font-size: 1.2rem;
+		line-height: 1.6;
+		font-weight: var(--fw-regular);
+		color: #30313f;
+		margin-bottom: 1rem;
+	}
+	.article-page .prose h2,
+	.article-page .prose h3 {
+		margin-top: 3em;
+		color: var(--c-main);
+	}
+	.article-page .prose h2:first-child,
+	.article-page .prose h3:first-child { margin-top: 1rem; }
+	.article-page .prose img { width: 100%; }
+	.article-page .prose img + em {
+		color: var(--c-main-l3);
+		font-size: 0.9rem;
+		text-align: center;
+		display: block;
+	}
+	.article-page .prose a { color: inherit; text-decoration: underline; }
+	.article-page .prose a:hover { color: var(--c-primary); }
+	/* heading anchors (rehype-autolink wrap) must not look like links */
+	.article-page .prose :is(h1, h2, h3, h4) a,
+	.article-page .prose a.nice-anchor {
+		color: inherit;
+		text-decoration: none;
+	}
+</style>

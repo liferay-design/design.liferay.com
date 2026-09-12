@@ -1,0 +1,64 @@
+{
+	"name": "Modal",
+	"slug": "modal",
+	"order": 250,
+	"description": "A modal is a secondary window that communicates or provides an action inside the same process.",
+	"status": "documented",
+	"figma": {
+		"fileKey": "YNNkt9Xd6ImDtEvIz4tETF",
+		"fileName": "Lexicon Components",
+		"pageNodeId": "1:17",
+		"componentSetNodeId": "470:15295"
+	},
+	"links": {
+		"clay": "https://clayui.com/docs/components/modal.html",
+		"guidelines": "/lexicon/core-components/modal"
+	},
+	"screenshot": "/images/lexicon/figma/modal.png",
+	"playgroundImage": "/images/lexicon/figma/modal-playground.png",
+	"variantCount": 6,
+	"properties": [
+		{
+			"name": "Variant",
+			"values": [
+				"Default",
+				"Info",
+				"Success",
+				"Warning",
+				"Danger",
+				"Overlay"
+			]
+		}
+	],
+	"tokens": {
+		"Color/Dark/dark": "#272833",
+		"20/Bold": "Font(family: \"SF Pro Text\", style: Bold, size: 20, weight: 700, lineHeight: 1.25, letterSpacing: 0)",
+		"Spacing/spacing-3": "8",
+		"Border Radius/rounded-lg": "8",
+		"Spacing/spacing-7": "24",
+		"Spacing/spacing-5": "16",
+		"Color/Secondary/secondary-l3": "#e7e7ed",
+		"Border Radius/rounded-md": "4",
+		"Color/Charts/Pink/pink-l4": "#ffb2de",
+		"Color/Charts/Pink/pink": "#e50082",
+		"Color/Light/white": "#ffffff",
+		"Color/Secondary/secondary-l0": "#9393a4",
+		"Color/Primary/primary": "#0b5fff",
+		"Shadow/Modal": "Effect(type: DROP_SHADOW, color: #27283366, offset: (0, 4), radius: 16, spread: 0)",
+		"Color/Info/info": "#2e5aac",
+		"Color/Info/info-l2": "#eef2fa",
+		"Color/Info/info-l1": "#89a7e0",
+		"Color/Success/success": "#287d3c",
+		"Color/Success/success-l2": "#edf9f0",
+		"Color/Success/success-l1": "#5aca75",
+		"Color/Warning/warning": "#b95000",
+		"Color/Warning/warning-l2": "#fff4ec",
+		"Color/Warning/warning-l1": "#ff8f39",
+		"Color/Danger/danger": "#da1414",
+		"Color/Danger/danger-l2": "#feefef",
+		"Color/Danger/danger-l1": "#f48989",
+		"Color/Dark/dark-l2": "#393a4a",
+		"Color/Light/light-l1": "#f7f8f9",
+		"Color/Primary/primary-l1": "#80acff"
+	}
+}

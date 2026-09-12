@@ -1,0 +1,42 @@
+{
+	"name": "Autocomplete",
+	"slug": "autocomplete",
+	"order": 30,
+	"description": "An autocomplete text field is an input that offers the user text suggestions while they type.",
+	"status": "documented",
+	"figma": {
+		"fileKey": "YNNkt9Xd6ImDtEvIz4tETF",
+		"fileName": "Lexicon Components",
+		"pageNodeId": "5906:605",
+		"componentSetNodeId": "5960:16494"
+	},
+	"screenshot": "/images/lexicon/figma/autocomplete.png",
+	"playgroundImage": "/images/lexicon/figma/autocomplete-playground.png",
+	"variantCount": 4,
+	"properties": [
+		{
+			"name": "Variant",
+			"values": [
+				"Results",
+				"No results",
+				"New Input",
+				"Loading"
+			]
+		}
+	],
+	"tokens": {
+		"Color/Secondary/secondary": "#6b6c7e",
+		"14/Regular": "Font(family: \"SF Pro Text\", style: Regular, size: 14, weight: 400, lineHeight: 1.5, letterSpacing: 0)",
+		"Spacing/spacing-2": "4",
+		"Spacing/spacing-3": "8",
+		"Spacing/spacing-5": "16",
+		"Color/Light/white": "#ffffff",
+		"Border Radius/rounded-md": "4",
+		"Shadow/Dropdown": "Effect(type: DROP_SHADOW, color: #2728331F, offset: (0, 4), radius: 8, spread: 0)",
+		"Secondary/$secondary": "#6B6C7E",
+		"Color/Primary/primary": "#0b5fff",
+		"Spacing/spacing-4": "12",
+		"Color/Secondary/secondary-l3": "#e7e7ed",
+		"Opacity/translucent-1": "40"
+	}
+}

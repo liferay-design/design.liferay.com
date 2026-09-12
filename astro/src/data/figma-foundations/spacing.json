@@ -1,0 +1,28 @@
+{
+	"name": "Spacing",
+	"slug": "spacing",
+	"order": 30,
+	"description": "The spacing scale used for padding, gaps and layout rhythm.",
+	"figma": {
+		"fileKey": "uJmaBABXsx9voFQEdn20Di",
+		"fileName": "Lexicon Foundations",
+		"pageNodeId": "1:16"
+	},
+	"tokens": {
+		"Spacing/spacing-1": "2",
+		"Spacing/spacing-2": "4",
+		"Spacing/spacing-3": "8",
+		"Spacing/spacing-4": "12",
+		"Spacing/spacing-5": "16",
+		"Spacing/spacing-6": "20",
+		"Spacing/spacing-7": "24",
+		"Spacing/spacing-8": "32",
+		"Spacing/spacing-9": "40",
+		"Spacing/spacing-10": "48",
+		"Spacing/spacing-11": "56",
+		"Spacing/spacing-12": "64",
+		"Spacing/spacing-13": "72",
+		"Spacing/spacing-14": "96",
+		"Spacing/spacing-15": "120"
+	}
+}

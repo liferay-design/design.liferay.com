@@ -1,0 +1,51 @@
+{
+	"name": "Button Group",
+	"slug": "button-group",
+	"order": 70,
+	"description": "Button groups are used to switch between complementary views.",
+	"status": "documented",
+	"figma": {
+		"fileKey": "YNNkt9Xd6ImDtEvIz4tETF",
+		"fileName": "Lexicon Components",
+		"pageNodeId": "69:1480",
+		"componentSetNodeId": "99:3594"
+	},
+	"screenshot": "/images/lexicon/figma/button-group.png",
+	"playgroundImage": "/images/lexicon/figma/button-group-playground.png",
+	"variantCount": 6,
+	"properties": [
+		{
+			"name": "Size",
+			"values": [
+				"Regular",
+				"Small",
+				"XS"
+			]
+		},
+		{
+			"name": "Type",
+			"values": [
+				"Combined",
+				"Separated"
+			]
+		}
+	],
+	"tokens": {
+		"Color/Secondary/secondary": "#6b6c7e",
+		"16/Semibold": "Font(family: \"SF Pro Text\", style: Semibold, size: 16, weight: 600, lineHeight: 1.5, letterSpacing: 0)",
+		"Spacing/spacing-5": "16",
+		"Spacing/spacing-3": "8",
+		"Border Radius/rounded-lg": "8",
+		"Color/Light/white": "#ffffff",
+		"Color/Secondary/secondary-l0": "#9393a4",
+		"Color/Dark/dark": "#272833",
+		"Color/Light/light": "#f1f2f5",
+		"Color/Primary/primary": "#0b5fff",
+		"Spacing/spacing-4": "12",
+		"Border Radius/rounded-md": "4",
+		"14/Semibold": "Font(family: \"SF Pro Text\", style: Semibold, size: 14, weight: 600, lineHeight: 1.5, letterSpacing: 0)",
+		"12/Semibold": "Font(family: \"SF Pro Text\", style: Semibold, size: 12, weight: 600, lineHeight: 1.5, letterSpacing: 0)",
+		"Color/Light/light-l1": "#f7f8f9",
+		"Color/Primary/primary-l1": "#80acff"
+	}
+}

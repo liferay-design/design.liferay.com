@@ -1,0 +1,65 @@
+---
+// Port of molecules/SocialIcons
+import Icon from './Icon.astro'
+import type { Social } from '@lib/helpers'
+
+interface Props {
+	socials?: Social[]
+	class?: string
+}
+
+const DEFAULTS: Social[] = [
+	{ url: 'https://www.dribbble.com/liferay', name: 'dribbble' },
+	{ url: 'https://figma.com/@liferay', name: 'figma' },
+	{ url: 'https://github.com/liferay-design/', name: 'github' },
+	{ url: 'https://www.instagram.com/liferaydesign/', name: 'instagram' },
+	{ url: 'https://www.medium.com/liferaydesign', name: 'medium' },
+	{ url: 'https://twitter.com/liferaydesign', name: 'twitter' },
+	{
+		url: 'https://www.youtube.com/playlist?list=PLFNUy_HrVhPsBRvotF2sj2sBaTXlIlNgm',
+		name: 'youtube',
+	},
+]
+
+const { socials = DEFAULTS, class: className } = Astro.props
+const items = socials.filter(Boolean)
+---
+
+<div class:list={['social-icons', className]}>
+	{
+		items.map(item => (
+			<a
+				class="social-link"
+				aria-label={'Design.Liferay on ' + item.name}
+				href={item.url}
+				target="_blank"
+				rel="noopener noreferrer"
+			>
+				<Icon name={item.name} />
+			</a>
+		))
+	}
+</div>
+
+<style>
+	.social-icons {
+		display: flex;
+	}
+	.social-link {
+		display: inline-flex;
+		padding: 0 0.4rem;
+		transform: translateY(0) scale(0.95);
+		transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	}
+	.social-link :global(svg) {
+		width: 1.5rem;
+		height: 1.5rem;
+	}
+	.social-link:hover {
+		transform: translateY(-0.4rem) scale(1);
+		transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	}
+	.social-link:hover :global(svg) {
+		fill: var(--c-primary);
+	}
+</style>

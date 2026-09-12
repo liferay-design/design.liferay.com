@@ -1,0 +1,161 @@
+---
+import { getCollection, render } from 'astro:content'
+import BaseLayout from '@layouts/BaseLayout.astro'
+import Navbar from '@components/Navbar.astro'
+import Footer from '@components/Footer.astro'
+import { mdxComponents } from '@components/mdx'
+import { getOffice } from '@lib/content'
+import {
+	cleanId,
+	eventDay,
+	eventMonthShort,
+	eventTime,
+	parseEventDate,
+	headshotPath,
+	makeAuthorSlug,
+} from '@lib/helpers'
+
+export async function getStaticPaths() {
+	const events = await getCollection('events', ({ data }) => data.draft !== true)
+	return events.map(entry => ({ params: { slug: cleanId(entry.id) }, props: { entry } }))
+}
+
+const { entry } = Astro.props
+const { Content } = await render(entry)
+const fm = entry.data
+const office = await getOffice(fm.office)
+const start = eventTime(fm.date)
+const end = eventTime(fm.endDateTime)
+const eventTs = parseEventDate(fm.date)?.date.valueOf() ?? 0
+const upcoming = eventTs >= Date.now()
+---
+
+<BaseLayout
+	pageTitle={`${fm.title} | Design.Liferay Event in ${fm.office ?? ''}`}
+	description={fm.summary}
+	previewImage={fm.featuredImage}
+	keywords={`event, events in ${fm.office ?? ''}`}
+	contentType="event"
+>
+	<div class="event-page">
+		<Navbar section="Events" />
+
+		<div class="banner">
+			<div class="banner-content">
+				<h1>
+					<span class="date">
+						<span class="month">{eventMonthShort(fm.date)}</span>
+						<span class="day">{eventDay(fm.date)}</span>
+					</span>
+					{fm.title}
+				</h1>
+				<h2>
+					{start && <span class="start-time">{start}</span>}
+					{end && <span class="end-time">&nbsp; – &nbsp;{end}</span>}
+					{
+						office && (
+							<span class="location">
+								<a href={office.mapURL ?? '#'}>{office.id}{office.state ? `, ${office.state}` : ''}</a>
+							</span>
+						)
+					}
+				</h2>
+				{fm.heroImage && <img class="hero-image" src={fm.heroImage} alt="" />}
+				{fm.summary && <p class="summary">{fm.summary}</p>}
+				{fm.bodyImage && <img class="body-image" src={fm.bodyImage} alt="" />}
+			</div>
+		</div>
+
+		{upcoming && fm.ctaURL && <a href={fm.ctaURL} class="cta">RSVP</a>}
+
+		<div class="markdown-container">
+			<div class="prose">
+				{
+					fm.author && (
+						<a class="event-author" href={`/team/${makeAuthorSlug(fm.author)}`}>
+							<img src={headshotPath(fm.author)} alt="" /> <span>by {fm.author}</span>
+						</a>
+					)
+				}
+				<Content components={mdxComponents} />
+			</div>
+		</div>
+
+		<Footer light />
+	</div>
+</BaseLayout>
+
+<style>
+	.event-page { background-color: var(--c-background); }
+	.banner {
+		margin: 0 auto;
+		max-width: 80rem;
+		width: 100%;
+		padding: 3rem 1rem;
+		position: relative;
+		font-family: var(--font-brand);
+	}
+	.banner-content { max-width: 768px; }
+	.banner h1 {
+		font-size: 5rem;
+		color: var(--c-white);
+		font-weight: var(--fw-heading);
+		margin: 0 0 1rem;
+		font-family: var(--font-body);
+	}
+	.date {
+		display: inline-flex;
+		flex-direction: column;
+		align-items: center;
+		margin-right: 1.5rem;
+		vertical-align: middle;
+	}
+	.month { font-size: 1.4rem; color: var(--c-main-l3); text-transform: uppercase; }
+	.day { font-size: 3rem; line-height: 1; }
+	.banner h2 .start-time,
+	.banner h2 .end-time,
+	.banner h2 .location a {
+		font-family: var(--font-brand);
+		font-weight: var(--fw-light);
+		font-size: 1.2rem;
+		color: var(--c-white);
+	}
+	.location { display: block; }
+	.location a { text-decoration: underline; }
+	.hero-image { width: 90vw; position: relative; left: calc(-50vw + 50%); max-height: 80vh; margin: 8rem 0 4rem; }
+	.summary { font-size: 1.8rem; color: var(--c-white); font-weight: var(--fw-light); }
+	.body-image { width: 90vw; position: relative; left: calc(-45vw + 50%); margin-top: 4rem; }
+	.cta {
+		position: fixed;
+		background-color: var(--c-action);
+		right: 0;
+		top: 50vh;
+		transform-origin: right;
+		transform: rotate(0.75turn) translateY(-50%);
+		padding: 1rem 3rem;
+		font-size: 1.2rem;
+		color: var(--c-white);
+		font-weight: var(--fw-heading);
+		z-index: 1;
+	}
+	.markdown-container {
+		padding: 6rem 3rem;
+		font-family: var(--font-brand);
+		background: #fff;
+	}
+	.event-author { display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 2rem; color: var(--c-main); }
+	.event-author img { width: 3rem; height: 3rem; border-radius: 50%; object-fit: cover; }
+	@media screen and (max-width: 768px) {
+		.banner h1 { font-size: 1.8rem; }
+		.markdown-container { padding: 3rem 1rem; }
+	}
+</style>
+
+<style is:global>
+	.event-page .prose { max-width: 88ch; margin: 0 auto; color: #30313f; }
+	.event-page .prose p, .event-page .prose li { font-size: 1.2rem; line-height: 1.6; color: #30313f; margin-bottom: 1rem; }
+	.event-page .prose h2, .event-page .prose h3 { margin-top: 3em; color: var(--c-main); }
+	.event-page .prose img { width: 100%; }
+	.event-page .prose a { color: inherit; text-decoration: underline; }
+	.event-page .prose a:hover { color: var(--c-primary); }
+</style>

@@ -1,0 +1,6 @@
+---
+import { sxToStyle } from '@lib/sx'
+const { sx, style, class: className } = Astro.props
+const s = ['display:flex', sxToStyle(sx), style].filter(Boolean).join(';')
+---
+<div class={className} style={s}><slot /></div>

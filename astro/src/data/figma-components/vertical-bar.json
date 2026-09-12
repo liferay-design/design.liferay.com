@@ -1,0 +1,33 @@
+{
+	"name": "Vertical Bar",
+	"slug": "vertical-bar",
+	"order": 450,
+	"description": "The Vertical Bar is a versatile navigation component that can be positioned on the left or right side of the screen, offering a expandable and collapsible panel for users to navigate through different sections.",
+	"status": "documented",
+	"figma": {
+		"fileKey": "YNNkt9Xd6ImDtEvIz4tETF",
+		"fileName": "Lexicon Components",
+		"pageNodeId": "1:28",
+		"componentSetNodeId": "914:747"
+	},
+	"links": {
+		"guidelines": "/lexicon/core-components/vertical-bar"
+	},
+	"screenshot": "/images/lexicon/figma/vertical-bar.png",
+	"playgroundImage": "/images/lexicon/figma/vertical-bar-playground.png",
+	"variantCount": 2,
+	"properties": [
+		{
+			"name": "Mode",
+			"values": [
+				"Light",
+				"Dark"
+			]
+		}
+	],
+	"tokens": {
+		"Color/Light/light": "#f1f2f5",
+		"Color/Light/light-l1": "#f7f8f9",
+		"Color/Primary/primary-l1": "#80acff"
+	}
+}

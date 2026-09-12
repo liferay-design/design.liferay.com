@@ -1,0 +1,57 @@
+---
+import { getCollection } from 'astro:content'
+import MainLayout from '@layouts/MainLayout.astro'
+import Container from '@components/Container.astro'
+import CardDefault from '@components/CardDefault.astro'
+import { cleanId, parseEventDate } from '@lib/helpers'
+
+const now = Date.now()
+const events = (await getCollection('events', ({ data }) => data.draft !== true)).sort((a, b) => {
+	const da = parseEventDate(a.data.date)?.date.valueOf() ?? 0
+	const db = parseEventDate(b.data.date)?.date.valueOf() ?? 0
+	return db - da
+})
+
+const upcoming = events.filter(e => (parseEventDate(e.data.date)?.date.valueOf() ?? 0) >= now)
+const past = events.filter(e => (parseEventDate(e.data.date)?.date.valueOf() ?? 0) < now)
+---
+
+<MainLayout
+	section="Events"
+	pageTitle="Design.Liferay | Events"
+	description="Events we're hosting or participating in"
+>
+	{
+		upcoming.length > 0 && (
+			<Container heading="Upcoming Events">
+				<div class="grid-three">
+					{upcoming.map(e => (
+						<CardDefault
+							imageURL={e.data.featuredImage}
+							icon="calendar"
+							link={`/events/${cleanId(e.id)}`}
+							title={e.data.title}
+							subtitle={e.data.office}
+						/>
+					))}
+				</div>
+			</Container>
+		)
+	}
+
+	<Container heading="Event Recaps">
+		<div class="grid-three">
+			{
+				past.map(e => (
+					<CardDefault
+						imageURL={e.data.featuredImage}
+						icon="calendar"
+						link={`/events/${cleanId(e.id)}`}
+						title={e.data.title}
+						subtitle={e.data.office}
+					/>
+				))
+			}
+		</div>
+	</Container>
+</MainLayout>

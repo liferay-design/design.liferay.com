@@ -1,0 +1,61 @@
+{
+	"name": "Popover",
+	"slug": "popover",
+	"order": 310,
+	"description": "A popover helps giving users more information when interacting with other elements in the interface.",
+	"status": "documented",
+	"figma": {
+		"fileKey": "YNNkt9Xd6ImDtEvIz4tETF",
+		"fileName": "Lexicon Components",
+		"pageNodeId": "800:20558",
+		"componentSetNodeId": "800:20561"
+	},
+	"links": {
+		"clay": "https://clayui.com/docs/components/popover.html",
+		"guidelines": "/lexicon/core-components/popovers-tooltips"
+	},
+	"screenshot": "/images/lexicon/figma/popover.png",
+	"playgroundImage": "/images/lexicon/figma/popover-playground.png",
+	"variantCount": 24,
+	"properties": [
+		{
+			"name": "Pointing",
+			"values": [
+				"Bottom ↓ Right ↘",
+				"Bottom ↓ Center ↓",
+				"Bottom ↓ Left ↙",
+				"Left ← Bottom ↙",
+				"Left ↖ Center ↓",
+				"Left ← Top ↖",
+				"Top ↑ Left ↖",
+				"Top ↑ Center ↑",
+				"Top ↑ Right ↗",
+				"Right → Top ↗",
+				"Right → Center →",
+				"Right → Bottom ↘"
+			]
+		},
+		{
+			"name": "Variant",
+			"values": [
+				"Text",
+				"Custom"
+			]
+		}
+	],
+	"tokens": {
+		"Color/Light/white": "#ffffff",
+		"Color/Dark/dark": "#272833",
+		"14/Semibold": "Font(family: \"SF Pro Text\", style: Semibold, size: 14, weight: 600, lineHeight: 1.5, letterSpacing: 0)",
+		"Color/Secondary/secondary-l3": "#e7e7ed",
+		"Color/Secondary/secondary": "#6b6c7e",
+		"14/Regular": "Font(family: \"SF Pro Text\", style: Regular, size: 14, weight: 400, lineHeight: 1.5, letterSpacing: 0)",
+		"Border Radius/rounded-lg": "8",
+		"Shadow/Popover": "Effect(type: DROP_SHADOW, color: #27283329, offset: (0, 8), radius: 16, spread: 0)",
+		"Border Radius/rounded-md": "4",
+		"Color/Charts/Pink/pink-l4": "#ffb2de",
+		"Color/Charts/Pink/pink": "#e50082",
+		"Color/Light/light-l1": "#f7f8f9",
+		"Color/Primary/primary-l1": "#80acff"
+	}
+}

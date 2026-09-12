@@ -1,0 +1,254 @@
+/*
+ * Design tokens — ported 1:1 from the Gatsby theme-ui config
+ * (src/gatsby-plugin-theme-ui/index.js) and src/theme/variables.scss.
+ * theme-ui's `sx` model is replaced by plain CSS custom properties.
+ */
+:root {
+	/* Brand / base */
+	--c-text: #fff;
+	--c-background: #13141f;
+	--c-primary: #0b5fff;
+	--c-secondary: #0084ff;
+	--c-accent: #fc3bba;
+	--c-muted: #80acff;
+
+	/* Lexicon neutral ramp */
+	--c-main: #272833;
+	--c-main-d1: #1c1c24;
+	--c-main-d2: #111116;
+	--c-main-l1: #30313f;
+	--c-main-l2: #393a4a;
+	--c-main-l3: #6b6c7e;
+	--c-main-l4: #a7a9bc;
+	--c-main-l5: #cdced9;
+	--c-main-l6: #e7e7ed;
+	--c-main-l8: #f5f5f8;
+
+	/* Primary ramp */
+	--c-primary-d2: #004ad7;
+	--c-primary-d1: #0053f0;
+	--c-primary-l1: #80acff;
+	--c-primary-l2: #b3cdff;
+	--c-primary-l3: #f0f5ff;
+
+	--c-white: #fff;
+	--c-black: #13141f;
+	--c-gray: #6d7580;
+	--c-gray-bg: #f1f2f5;
+	--c-gray-bg-l1: #f7f8f9;
+	--c-lightest-blue: #f2f6ff;
+	--c-info: #2e5aac;
+	--c-info-l1: #89a7e0;
+	--c-neutral6: #a5abb3;
+	--c-action: #0b5fff;
+
+	/* text-shadow elevations */
+	--elev-text-0: 0 0.05rem 1rem rgba(0, 0, 0, 0.5);
+	--elev-text-3: 0 0.5rem 8rem rgba(0, 0, 0, 0.16);
+
+	/* Functional */
+	--c-error: #da1414;
+	--c-success: #287d3c;
+	--c-warning: #b95000;
+
+	/* Type */
+	--font-body: 'Source Code Pro', Menlo, monospace;
+	--font-heading: 'Source Code Pro', Menlo, monospace;
+	--font-mono: 'Source Code Pro', Menlo, monospace;
+	--font-lexicon: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+		Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+	--font-brand: 'Source Sans 3', 'Source Sans Pro', Tahoma, 'Trebuchet MS', sans-serif;
+
+	--fw-body: 400;
+	--fw-light: 300;
+	--fw-regular: 400;
+	--fw-heavy: 600;
+	--fw-bold: 700;
+	--fw-black: 700;
+	/* theme-ui's root heading weight is 900; SCSS components use 600/700 */
+	--fw-heading: 900;
+
+	--lh-body: 1.4;
+	--lh-heading: 1.1;
+	--ls-heading: -0.05em;
+	--ls-caps: 0.1em;
+
+	/* fontSizes scale (theme-ui index 0..7) */
+	--fs-0: 0.8rem;
+	--fs-1: 0.9rem;
+	--fs-2: 1rem;
+	--fs-3: 1.2rem;
+	--fs-4: 1.8rem;
+	--fs-5: 2.2rem;
+	--fs-6: 3rem;
+	--fs-7: 5rem;
+
+	/* space scale (theme-ui index 0..7) */
+	--sp-0: 0;
+	--sp-1: 0.4rem;
+	--sp-2: 1rem;
+	--sp-3: 2rem;
+	--sp-4: 3rem;
+	--sp-5: 8rem;
+	--sp-6: 16rem;
+	--sp-7: 32rem;
+
+	/* elevations */
+	--elev-0: 0 0.05rem 1rem -0.5rem rgba(0, 0, 0, 0.5);
+	--elev-1: 0 0.1rem 3rem rgba(0, 0, 0, 0.08);
+	--elev-2: 0 0.5rem 5rem -1rem rgba(0, 0, 0, 0.16);
+	--elev-3: 0 0.5rem 8rem -0.5rem rgba(0, 0, 0, 0.16);
+
+	/* breakpoints (theme-ui: 40em, 48em, 64em) — used in media queries */
+	--bp-sm: 40em;
+	--bp-md: 48em;
+	--bp-lg: 64em;
+}
+
+/* ---------- Reset / base (ported from theme/global.scss) ---------- */
+html {
+	height: initial;
+	scroll-behavior: smooth;
+}
+
+body {
+	height: 100%;
+}
+
+html,
+body {
+	font-size: 16px;
+	font-family: var(--font-body);
+	margin: 0;
+	/* `clip` (not `hidden`) prevents horizontal overflow WITHOUT creating a
+	   scroll container — `overflow:hidden` on an ancestor breaks position:sticky */
+	overflow-x: clip;
+	max-width: 100%;
+	background-color: var(--c-background);
+	color: var(--c-text);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-rendering: optimizeLegibility;
+}
+
+::selection {
+	background: var(--c-primary);
+	color: #fff;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: var(--font-heading);
+	font-weight: var(--fw-heading);
+	line-height: var(--lh-heading);
+	letter-spacing: var(--ls-heading);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+	margin-bottom: 1em;
+}
+
+h1,
+h2,
+h3 {
+	text-wrap: balance;
+}
+
+h1 {
+	line-height: 1.2;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+	transition: color 0.15s ease, opacity 0.15s ease;
+}
+
+img {
+	max-width: 100%;
+	object-fit: cover;
+}
+
+/* Accessibility: "Skip to content" — first tab stop */
+.skip-link {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 10001;
+	margin: 0.5rem;
+	padding: 0.75rem 1.25rem;
+	background: var(--c-primary);
+	color: var(--c-white);
+	font-family: var(--font-body);
+	font-weight: var(--fw-heading);
+	border-radius: 4px;
+	transform: translateY(-150%);
+	transition: transform 0.2s ease-in-out;
+}
+.skip-link:focus {
+	transform: translateY(0);
+	outline: 2px solid var(--c-white);
+	outline-offset: 2px;
+}
+
+/* visible, on-brand keyboard focus */
+:focus-visible {
+	outline: 2px solid var(--c-primary);
+	outline-offset: 2px;
+	border-radius: 2px;
+}
+
+/* slim, rounded scrollbars site-wide */
+* {
+	scrollbar-width: thin;
+	scrollbar-color: var(--c-main-l5) transparent;
+}
+::-webkit-scrollbar {
+	height: 8px;
+	width: 8px;
+}
+::-webkit-scrollbar-track {
+	background: transparent;
+}
+::-webkit-scrollbar-thumb {
+	background-color: var(--c-main-l5);
+	border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+	background-color: var(--c-main-l4);
+}
+
+.nice-anchor {
+	color: inherit;
+}
+
+/* card grids (theme-ui layouts.grids.threeCards / twoCards) */
+.grid-three {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+	gap: 5rem 4rem;
+}
+.grid-two {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+	gap: 5rem 4rem;
+}
+@media screen and (min-width: 40em) {
+	.grid-two {
+		grid-template-columns: repeat(auto-fill, minmax(24rem, 1fr));
+	}
+}

@@ -1,0 +1,7 @@
+---
+import { sxToStyle } from '@lib/sx'
+const { sx, style, level, class: className } = Astro.props
+const Tag = `h${level || 2}`
+const s = [sxToStyle(sx), style].filter(Boolean).join(';')
+---
+<Tag class={className} style={s || undefined}><slot /></Tag>
