@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<style>
+			html, body { background: #ffffff; color: #1c1c24; }
+			:root { font-family: Inter, "SF Pro Text", -apple-system, sans-serif; font-size: 12px; color: #1c1c24; color-scheme: light; }
+			body { margin: 0; padding: 16px; }
+			h1 { font-size: 14px; margin: 0 0 2px; }
+			h2 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #9191a1; margin: 18px 0 8px; }
+			p.sub { margin: 0 0 8px; color: #6b6c7e; }
+			label { display: block; font-size: 11px; color: #6b6c7e; margin: 8px 0 3px; }
+			input { width: 100%; box-sizing: border-box; font: inherit; padding: 7px 9px; border: 1px solid #cdced9; border-radius: 6px; }
+			button { font: inherit; font-weight: 600; border: 0; border-radius: 6px; padding: 8px 14px; cursor: pointer; }
+			button:disabled { opacity: 0.5; cursor: default; }
+			button.primary { background: #0b5fff; color: #fff; }
+			button.primary:hover:not(:disabled) { background: #004ad7; }
+			button.ghost { background: #f1f2f5; color: #1c1c24; }
+			button.ghost:hover:not(:disabled) { background: #e2e4ea; }
+			.row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+			.meta { margin: 12px 0 6px; color: #6b6c7e; }
+			.meta b { color: #1c1c24; }
+			.cards { display: grid; gap: 6px; }
+			.card { border: 1px solid #e7e7ed; border-radius: 6px; padding: 8px 10px; }
+			.card .n { font-weight: 600; }
+			.card .d { color: #6b6c7e; font-weight: 400; }
+			.swrow { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+			.chip { background: #f1f2f5; border-radius: 4px; padding: 1px 6px; font-size: 11px; color: #393a4a; }
+			.dot { display: inline-block; width: 10px; height: 10px; border-radius: 2px; border: 1px solid rgba(0,0,0,0.1); vertical-align: -1px; margin-right: 4px; }
+			.status { margin-top: 12px; padding: 9px 11px; border-radius: 6px; font-size: 12px; display: none; }
+			.status.ok { display: block; background: #edf9f0; color: #226a33; }
+			.status.err { display: block; background: #feefef; color: #c31212; }
+			.status.busy { display: block; background: #eef2fa; color: #294f98; }
+			.status a { color: inherit; font-weight: 700; }
+			hr { border: 0; border-top: 1px solid #e7e7ed; margin: 16px 0; }
+		</style>
+	</head>
+	<body>
+		<h1>Lexicon Docs Sync</h1>
+		<p class="sub">Pushes the Lexicon tokens from this Figma file to the docs site as a pull request.</p>
+
+		<h2>Connection</h2>
+		<label for="endpoint">Sync endpoint URL</label>
+		<input id="endpoint" placeholder="https://liferaydesign.netlify.app/.netlify/functions/figma-sync" />
+		<label for="secret">Sync secret</label>
+		<input id="secret" type="password" placeholder="shared secret" />
+		<div class="row" style="margin-top:8px">
+			<button class="ghost" id="save">Save connection</button>
+			<span id="savedMsg" style="color:#226a33;display:none">Saved ✓</span>
+		</div>
+
+		<hr />
+
+		<h2>Publish</h2>
+		<p class="sub">Run this in the <b>Lexicon Foundations</b> file to update the token docs.</p>
+		<div class="row">
+			<button class="primary" id="sync">↑ Sync Foundations → open PR</button>
+			<button class="ghost" id="preview">Preview</button>
+		</div>
+		<div class="status" id="status"></div>
+		<div id="out"></div>
+
+		<script>
+			const $ = id => document.getElementById(id)
+			const post = m => parent.postMessage({ pluginMessage: m }, '*')
+			let endpoint = '', secret = '', syncing = false
+
+			post({ type: 'init' })
+
+			$('save').onclick = () => {
+				endpoint = $('endpoint').value.trim()
+				secret = $('secret').value.trim()
+				post({ type: 'save-config', endpoint, secret })
+			}
+			$('preview').onclick = () => post({ type: 'extract' })
+			$('sync').onclick = () => {
+				endpoint = $('endpoint').value.trim()
+				secret = $('secret').value.trim()
+				if (!endpoint || !secret) return setStatus('err', 'Set the endpoint URL and secret first.')
+				setStatus('busy', 'Reading variables from Figma…')
+				syncing = true
+				$('sync').disabled = true
+				post({ type: 'build-foundations' })
+			}
+
+			function setStatus(kind, html) {
+				const el = $('status')
+				el.className = 'status ' + kind
+				el.innerHTML = html
+			}
+
+			async function sendFiles(files, fileName) {
+				try {
+					setStatus('busy', 'Opening a pull request for ' + files.length + ' files…')
+					const res = await fetch(endpoint, {
+						method: 'POST',
+						headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + secret },
+						body: JSON.stringify({
+							title: 'Sync Foundations tokens from Figma',
+							branchPrefix: 'figma-sync/foundations',
+							body: 'Token docs generated from “' + fileName + '” by the Lexicon Docs Sync plugin.',
+							files: files.map(f => ({ path: f.path, content: f.content })),
+						}),
+					})
+					const data = await res.json().catch(() => ({}))
+					if (!res.ok || !data.ok) throw new Error(data.error || ('HTTP ' + res.status))
+					setStatus('ok', 'Pull request opened — <a href="' + data.prUrl + '" target="_blank">review it ↗</a>')
+				} catch (e) {
+					setStatus('err', 'Sync failed: ' + (e.message || e))
+				} finally {
+					syncing = false
+					$('sync').disabled = false
+				}
+			}
+
+			onmessage = event => {
+				const msg = event.data.pluginMessage
+				if (!msg) return
+				if (msg.type === 'config') {
+					endpoint = msg.endpoint || ''
+					secret = msg.secret || ''
+					$('endpoint').value = endpoint
+					$('secret').value = secret
+				} else if (msg.type === 'saved') {
+					$('savedMsg').style.display = ''
+					setTimeout(() => ($('savedMsg').style.display = 'none'), 1500)
+				} else if (msg.type === 'error') {
+					setStatus('err', msg.message)
+					syncing = false
+					$('sync').disabled = false
+				} else if (msg.type === 'foundation-files') {
+					$('out').innerHTML = '<p class="meta"><b>' + msg.files.length + '</b> files from “' + msg.fileName + '”: ' + msg.files.map(f => f.path.split('/').pop() + ' (' + f.tokenCount + ')').join(', ') + '</p>'
+					sendFiles(msg.files, msg.fileName)
+				} else if (msg.type === 'preview') {
+					renderPreview(msg)
+				}
+			}
+
+			function renderPreview(msg) {
+				const t = msg.tokens
+				const groups = Object.entries(t.groups)
+				let html = '<p class="meta"><b>' + msg.fileName + '</b> · page “' + msg.page + '” · <b>' + t.count + '</b> variables</p><div class="cards">'
+				for (const [g, items] of groups) {
+					html += '<div class="card"><div class="n">' + g + ' <span class="d">· ' + items.length + '</span></div><div class="swrow">'
+					for (const it of items.slice(0, 12)) {
+						const isColor = /^#/.test(it.value)
+						html += '<span class="chip">' + (isColor ? '<span class="dot" style="background:' + it.value + '"></span>' : '') + it.name.split('/').slice(-1)[0] + '</span>'
+					}
+					if (items.length > 12) html += '<span class="chip">+' + (items.length - 12) + '</span>'
+					html += '</div></div>'
+				}
+				html += '</div>'
+				if (msg.componentSets.length) {
+					html += '<p class="meta"><b>' + msg.componentSets.length + '</b> component sets on this page</p>'
+				}
+				$('out').innerHTML = html
+			}
+		</script>
+	</body>
+</html>

@@ -1,3 +1,8 @@
 [build.environment]
  PYTHON_VERSION = "3.10"
  NODE_VERSION = "18"
+
+# Serverless functions (the Figma Docs Sync endpoint lives here).
+[functions]
+ directory = "netlify/functions"
+ node_bundler = "esbuild"

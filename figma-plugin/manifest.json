@@ -1,0 +1,12 @@
+{
+	"name": "Lexicon Docs Sync (PoC)",
+	"id": "lexicon-docs-sync-poc",
+	"api": "1.0.0",
+	"main": "code.js",
+	"ui": "ui.html",
+	"editorType": ["figma"],
+	"networkAccess": {
+		"allowedDomains": ["https://*.netlify.app", "https://design.liferay.com"],
+		"reasoning": "Sends the generated docs JSON to the figma-sync Netlify function, which opens a PR."
+	}
+}
