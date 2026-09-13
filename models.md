@@ -110,7 +110,6 @@ Templates currently include at least:
 
 - `generateEnv.js`
 - `generateIcons.js`
-- `generateTracks`
 - `logRocket.js`
 - `typography.js`
 - `index.js`

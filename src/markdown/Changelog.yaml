@@ -6,13 +6,11 @@
 #   icon: Optional icon to represent something
 #   longSummary: Optional longer description of the updates (500 char or less)
 #   contributors: Other people who helped
-#   buildPreview: link to Netlify preview
 - id: '2019-10-29'
   gitUrl: '/pull/584'
   author: Paul Hanaoka
   title: Upgrade to Node 12
   longSummary: Design.Liferay is now using the latest stable versions of Node and NPM!
-  buildPreview: 'https://deploy-preview-584--happy-jackson-1b6bb8.netlify.com/'
   icon: fa_terminal
   contributors: ['James Lyons']
 - id: '2019-10-19'
@@ -21,7 +19,6 @@
   title: Design.Liferay/Handbook
   titleUrl: '/handbook'
   longSummary: Publish the handbook for Liferay's Global Design Department
-  buildPreview: 'https://deploy-preview-571--happy-jackson-1b6bb8.netlify.com/'
   icon: desicon
   contributors:
       ['Juan Hidalgo', 'Victor Valle', 'Ryan Connolly', 'Emily Young', 'Felipe Pires']
@@ -30,7 +27,6 @@
   author: Victor Valle
   title: SEO Improvements II
   longSummary: Make changes to metadata so that url previews are nicer and the content is better indexed.
-  buildPreview: 'https://deploy-preview-541--happy-jackson-1b6bb8.netlify.com/'
   icon: fa_terminal
 - id: '2019-08-02'
   gitUrl: '/pull/494'
@@ -38,7 +34,6 @@
   title: Launch Design Best Practices
   titleUrl: '/tags/best-practices'
   longSummary: Migrate best-practice content from our intranet to our public-facing site!
-  buildPreview: 'https://5d452465d0218c000898d624--happy-jackson-1b6bb8.netlify.com'
   icon: desicon
   contributors: ['Ryan Connolly', 'Abel Hancock', 'Naoki Hisamoto']
 - id: '2019-07-23'

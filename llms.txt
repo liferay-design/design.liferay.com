@@ -29,7 +29,7 @@ Purpose: Legacy Gatsby site for Liferay Design, including editorial content, tea
 - src/pages contains page entry points and historical sections, including yearly directories 2018, 2019, 2020, 2021, plus pages like index.js, team.js, articles.js, changelog.js, careers.js, tags.js, alumni.js, lexicon.js, and lexicon-1.js.
 - src/components follows atomic design structure: atoms, molecules, organisms, templates.
 - src/components/templates contains template folders such as Articles, Blueprints, Careers, Events, Handbook, Lexicon, Lexicon-1, Newsletters, Resources, Tags, Team, MainLayout, and PrivatePage.
-- src/utils contains repo-specific scripts and helpers like generateEnv.js, generateIcons.js, logRocket.js, typography.js, and generateTracks.
+- src/utils contains repo-specific scripts and helpers like generateEnv.js, generateIcons.js, logRocket.js, and typography.js.
 - static stores public assets like admin, files, images, video content, and redirects.
 
 ## Routing and page generation

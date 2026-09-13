@@ -26,7 +26,6 @@ export default function ChangelogFeed({ items, ...props }) {
         contributors {
           id: yamlId
         }
-        buildPreview
       }
     }
   }
