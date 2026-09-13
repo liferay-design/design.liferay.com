@@ -235,4 +235,4 @@ _See our [GitHub Setup Guide](https://design.liferay.com/handbook/tools/github)_
 
 1. **Pushing work to any of the branches will automagically build the site**
 
-1. You can check the progress of current and past builds by checking our [Netlify Deploys page](https://app.netlify.com/sites/happy-jackson-1b6bb8/deploys).
+1. You can check the progress of current and past builds by checking our [Netlify Deploys page](https://app.netlify.com/projects/liferaydesign/deploys).
