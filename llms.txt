@@ -1,69 +1,74 @@
 # Liferay Design, repository guide for LLMs
 
-Project: liferay-design/liferay.design
-Repo: https://github.com/liferay-design/liferay.design
-Purpose: Legacy Gatsby site for Liferay Design, including editorial content, team pages, events, newsletters, resources, handbook content, and historical yearly pages.
+Project: liferay-design/design.liferay.com
+Repo: https://github.com/liferay-design/design.liferay.com
+Site: https://design.liferay.com
+Purpose: Public website for Liferay Design. Content-driven Gatsby site with articles, Lexicon design system docs, events, and team pages.
+
+Note: the canonical, more detailed guide is CLAUDE.md at the repo root. Keep this file in sync with it.
 
 ## Critical compatibility constraints
-- Treat this as a legacy stack.
-- Use Node 12.x for local work. The repo README explicitly says it only works with Node v12, recommends Node v12.14.1, and Netlify is pinned to NODE_VERSION="12".
-- Gatsby is pinned to v2.32.13 and React to v16.14.0.
-- The project still depends on node-sass 4.14.1 and other Gatsby 2-era plugins, so do not assume modern Node, modern Sass, or Gatsby 4/5 conventions are safe.
-- Prefer minimal, surgical changes over framework upgrades.
+- Node 18.x (18.20.8, pinned in .nvmrc). Gatsby 5 needs Node >= 18. Run `nvm use` inside the repo.
+- Gatsby 5.16, React 18.3, MDX v2. Do not assume Gatsby 2/3/4, React 16, or MDX v1 patterns.
+- MDX v2: templates render page content with `{children}`; the `MDXRenderer`/`body` field no longer exists. HTML comments are invalid in MDX, stray `<` must be escaped, and `style` must be an object.
+- YAML/JSON data `id` is exposed as `yamlId`/`jsonId` (Gatsby 4+).
+- GraphQL sort uses the Gatsby 5 shape: `sort: { field: DESC }`.
+- `timeToRead` is a custom resolver in gatsby-node.js (Gatsby 5 dropped the built-in field).
+- theme-ui 0.17: use `Themed` from `@theme-ui/mdx`, `ThemeUIProvider`, and `@emotion/react`.
+- sass (dart-sass) ~1.32 is pinned so node-sass-era SCSS keeps compiling without warnings.
+- CSS modules use default exports (`import styles from '*.module.scss'`), preserved via `cssLoaderOptions` in gatsby-plugin-sass.
+- .npmrc sets `legacy-peer-deps=true`; keep it for local installs and Netlify.
+- Stability over modernization. Do not upgrade Gatsby, React, Node, or sass as part of a small task.
 
 ## Start-up and local development
-- Install dependencies with npm install.
-- Start dev with npm run dev.
-- The dev script first runs src/utils/generateEnv.js, then launches Gatsby on host 0.0.0.0 and port 7777, opening a browser automatically.
-- Local URL is intended to be http://0.0.0.0:7777 and is also reachable on the LAN.
+- `nvm use`, then `npm install`, then `npm run dev`.
+- Dev server runs on http://0.0.0.0:7777.
+- src/utils/generateEnv.js auto-creates a placeholder .env.development if it is missing.
+- Some sections need API keys (Google APIs, Firebase). The site degrades gracefully without them; do not remove code that looks odd if it protects no-key builds.
 
-## Secrets and external data
-- The repo expects a .env.development file for API keys and other secrets.
-- generateEnv.js auto-creates a placeholder .env.development file if it does not exist.
-- README warns that the site may not build fully without API keys, and some sections may be missing.
-- Mailchimp-backed newsletter data is special-cased in gatsby-node.js: if MAILCHIMP_KEY is missing, Gatsby schema stubs are created so newsletter queries resolve to an empty collection instead of crashing.
-- The dependency list also indicates integrations or data dependencies around Firebase, Google APIs, Mailchimp, Netlify CMS, Algolia DocSearch, and a custom plugin called plugins/gatsby-source-sheets.
+## Deployment
+- Netlify, pinned to Node 18 via netlify.toml (`NODE_VERSION = "18"`).
+- Redirect rules live in static/_redirects. Keep only rules that point at Liferay-controlled hosts.
+
+## Live vs deprecated scope
+- The build only includes the core sections: Home, Articles, Events, Team, Alumni, Lexicon, plus Tags and Changelog.
+- Everything else (handbook, blueprints, resources, careers, newsletter, yearly reports 2018-2021, office-hours, design-week, lexicon-1) is parked under deprecated/ and does not build. Gatsby only sources ./src.
+- One exception: /resources/license is still live, served by src/pages/resources/license.js.
+- Before adding content or fixing a page, confirm it belongs to a live section.
 
 ## High-level structure
-- src/markdown contains most of the site content, plus YAML data such as Authors.yaml, Changelog.yaml, Countries.yaml, and Offices.yaml.
-- src/pages contains page entry points and historical sections, including yearly directories 2018, 2019, 2020, 2021, plus pages like index.js, team.js, articles.js, changelog.js, careers.js, tags.js, alumni.js, lexicon.js, and lexicon-1.js.
-- src/components follows atomic design structure: atoms, molecules, organisms, templates.
-- src/components/templates contains template folders such as Articles, Blueprints, Careers, Events, Handbook, Lexicon, Lexicon-1, Newsletters, Resources, Tags, Team, MainLayout, and PrivatePage.
-- src/utils contains repo-specific scripts and helpers like generateEnv.js, generateIcons.js, logRocket.js, and typography.js.
-- static stores public assets like admin, files, images, video content, and redirects.
+- src/markdown: site content for the live sections, plus YAML data (Authors, Changelog, Countries, Offices).
+- src/components: atomic design (atoms, molecules, organisms, templates).
+- src/pages: page entry points (home, articles, team, alumni, lexicon, events, tags, changelog). Every .js under src/pages becomes a page, including colocated components/ files.
+- src/utils: helpers (generateEnv, generateIcons, typography, logRocket).
+- static: public assets (images, icons, files, videos, admin, _redirects).
+- deprecated: outdated sections kept out of the build. Restore by moving a folder back under src/.
 
 ## Routing and page generation
-- MDX pages get a slug field from Gatsby's createFilePath, with /markdown/ stripped out.
-- Template selection is convention-based: the first path segment after the leading slash is capitalized and mapped to src/components/templates/<Template>/index.js.
+- MDX/Markdown files in src/markdown/{section}/ get slugs via createFilePath() with /markdown/ stripped.
+- The first slug segment maps to a template: /articles/... -> src/components/templates/Articles/index.js.
+- Pages are created with `component: \`${template}?__contentFilePath=${node.internal.contentFilePath}\``.
 - Tag pages are generated at /tags/<kebab-case-tag>/.
-- Newsletter archive pages are generated at /newsletter/YYYY-MM.
-- There is an attempt to configure client-only routes for gated sections like blueprints and handbook in gatsby-node.js. Be careful when editing this area because it is legacy code and may already contain brittle logic.
 
-## Content model assumptions
-- Most editorial work should happen under src/markdown, not by hardcoding content into React pages.
-- New MDX content should match an existing template slug unless you are intentionally adding a new template and updating the generation flow.
-- YAML files in src/markdown likely act as supporting datasets for authors, changelog items, offices, and countries.
+## Content model
+- Editorial work happens under src/markdown; do not move content from markdown into React components.
+- Content changes: check src/markdown first, then the YAML data files, and only then React components if content is hardcoded.
+- New MDX content should match an existing template slug unless you are intentionally adding a new template and updating gatsby-node.js and navigation.
 
 ## Styling and theming
-- Global styles are loaded from theme/global.scss via gatsby-browser.js.
-- Typography is configured in src/utils/typography.js.
-- A custom Theme UI folder exists at src/gatsby-plugin-theme-ui.
-- Do not introduce modern styling assumptions without checking the existing SCSS and Gatsby 2 stack first.
+- Mixed model; check the local area before changing it.
+- gatsby-browser.js imports theme/global.scss.
+- SCSS modules (.module.scss) per component.
+- Theme UI config in src/gatsby-plugin-theme-ui.
+- Typography in src/utils/typography.js.
 
 ## Icons and assets
-- SVG icons in static/images/icons are transformed into a React icon map by src/utils/generateIcons.js.
-- The generated output is written to src/components/atoms/Icon/icons.js.
-- If icons change, keep the generation workflow intact instead of hand-editing generated icon output.
-
-## Code style and tooling
-- JavaScript-first codebase with TypeScript config used mainly for path aliases and allowJs, not for TS emission.
-- tsconfig.json defines path aliases for components/*, images/*, and theme/*.
-- ESLint uses babel-eslint, react rules, prettier, and liferay/react config.
-- Preserve the existing module style and project conventions when possible.
+- SVGs in static/images/icons are turned into a React map by `npm run icons`, written to src/components/atoms/Icon/icons.js.
+- Do not hand-edit the generated icon file.
 
 ## Guidance for AI assistants
-- Do not casually upgrade Gatsby, React, Node, node-sass, or major plugins as part of a small task.
-- Assume backward compatibility is more important than modernization unless the task is explicitly a migration.
+- Read CLAUDE.md first; it is the source of truth for constraints and workflow.
 - Prefer content changes in src/markdown and small component fixes over architectural refactors.
 - Check whether a page is driven by MDX + template before editing a page component directly.
-- Be cautious with build-time data integrations, because missing keys may make parts of the site appear broken locally.
+- Do not apply Gatsby 2/3/4, React 16, or MDX v1 patterns.
+- Do not commit secrets, API keys, or OAuth client credentials. Use .env.development locally and Netlify environment variables in production.
