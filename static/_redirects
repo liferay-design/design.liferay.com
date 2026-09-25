@@ -2,7 +2,6 @@
 
 # https://blueprints.design.liferay.com/* https://design.liferay.com/blueprints/:splat 301!
 # http://blueprints.design.liferay.com/* https://design.liferay.com/blueprints/:splat 301!
-/sign-in https://accounts.google.com/signin/oauth/oauthchooseaccount?client_id=241599564418-5i6erkpokpvd6nmmmme9g0j33uhn741h.apps.googleusercontent.com&as=NRqDmXUNk0tt8bTUrA6upQ&destination=https%3A%2F%2Fauth-liferaydotdesign.wedeploy.io&approval_state=!ChR4YWYyUkZfSld1T0VSazgycXo3NhIfRTlXYV9qVFNSYnNkSU5vbEVpbVNxcUdsVElJOW9CWQ%E2%88%99AJDr988AAAAAXK5VobEypox47Cz7fEyTDgogUYHfo7EQ&oauthgdpr=1&xsrfsig=ChkAeAh8T4q-CD6bwI2ahUTHxjnWXvqUC_ylEg5hcHByb3ZhbF9zdGF0ZRILZGVzdGluYXRpb24SBXNvYWN1Eg9vYXV0aHJpc2t5c2NvcGU&flowName=GeneralOAuthFlow 301!
 https://design.liferay.com/team/fransisco-marleny https://design.liferay.com/team/francisco-marleny 301!
 https://design.liferay.com/lexicon/docs/* https://design.liferay.com/lexicon/:splat 301
 
